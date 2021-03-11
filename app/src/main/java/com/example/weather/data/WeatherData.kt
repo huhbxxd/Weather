@@ -3,10 +3,13 @@ package com.example.weather.data
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Weather {
+class WeatherData {
 
     @SerializedName("name")
     val name: String? = null
+
+    @SerializedName("dt")
+    val date: Long? = null
 
     @SerializedName("lon")
     val positionLon: Double? = null
