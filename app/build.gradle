@@ -74,4 +74,7 @@ dependencies {
     //NavGraph
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
+    //Google service
+    implementation "com.google.android.gms:play-services-location:15.0.1"
 }

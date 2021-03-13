@@ -4,6 +4,7 @@ import com.example.weather.utils.Workers
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 abstract class BaseInteractor(private val workers: Workers) {
 
