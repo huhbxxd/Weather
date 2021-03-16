@@ -18,8 +18,6 @@ class MainInteractor(workers: Workers,
                      private val coordRepository: CoordRepository
 ): BaseInteractor(workers) {
 
-    val coordinate = coordRepository.getLocation()
-
     fun getCoordinates(onSuccess: (Location) -> Unit, onError: (Throwable) -> Unit){
         disposable.add(coordRepository.getLocation()
             .schedule()
