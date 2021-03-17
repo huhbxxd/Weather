@@ -1,10 +1,9 @@
-package com.example.weather.screens
+package com.example.weather.screens.main
 
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weather.data.WeatherData
-import com.example.weather.data.repository.WeatherRepository
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
@@ -12,10 +11,12 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
         private val NULL_POSITION = 0.0
     }
 
+    private val listWeatherData = mutableListOf<WeatherData>()
+
     private lateinit var geoPosition: Pair<Double, Double>
 
     val weatherLiveData by lazy {
-        interactor.subscribeOnWeatherByCoord(geoPosition.first, geoPosition.second, ::weatherLoadedSuccess, ::weatherLoadedError)
+        interactor.subscribeOnWeatherByCoord(53.54628, 49.35037, ::weatherLoadedSuccess, ::weatherLoadedError)
         return@lazy MutableLiveData<List<WeatherData>>()
     }
 
@@ -24,15 +25,18 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
     }
 
     private fun weatherLoadedSuccess(data: List<WeatherData>) {
-        weatherLiveData.postValue(data)
+        listWeatherData.addAll(data)
+        weatherLiveData.postValue(listWeatherData)
     }
 
     private fun weatherLoadedError(throwable: Throwable) {
-//        event to error
+        listWeatherData.clear()
+
+//        weatherLiveData.postValue(listWeatherData)
     }
 
     private fun locationSuccess(location: Location) {
-        geoPosition = location.latitude to location.longitude
+        geoPosition = Pair(location.latitude, location.longitude)
     }
 
     private fun locationError(throwable: Throwable) {

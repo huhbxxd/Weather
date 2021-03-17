@@ -16,7 +16,7 @@ abstract class BaseInteractor(private val workers: Workers) {
 
     fun <T>Single<T>.schedule() = apply {
         observeOn(workers.observe)
-        subscribeOn(workers.observe)
+        subscribeOn(workers.subscribe)
     }
 
     fun <T>Observable<T>.schedule() = apply {

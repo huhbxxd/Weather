@@ -1,4 +1,4 @@
-package com.example.weather.screens
+package com.example.weather.screens.main
 
 import android.location.Location
 import com.example.weather.core.base.BaseInteractor

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.weather.App
 import com.example.weather.data.WeatherApi
+import com.example.weather.utils.Workers
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +18,6 @@ interface AppComponent {
     fun provideWeatherApi(): WeatherApi
 
     fun provideApplicationContext(): Context
+
+    fun provideWorkers(): Workers
 }

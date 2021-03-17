@@ -1,15 +1,21 @@
-package com.example.weather.screens.UI
+package com.example.weather.screens.main.UI
 
-import android.text.style.TtsSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.WeatherData
+import kotlinx.android.synthetic.main.recyclerview_item.*
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class MainRecyclerViewAdapter(private val list: List<WeatherData>): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+class MainRecyclerViewAdapter(): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+
+    var list = listOf<WeatherData>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,8 +31,7 @@ class MainRecyclerViewAdapter(private val list: List<WeatherData>): RecyclerView
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(weatherData: WeatherData) = with(itemView) {
-            temperatureText.text = weatherData.temperature.toString()
+            textViewTemp.text = weatherData.temperature.toString()
         }
     }
-
 }

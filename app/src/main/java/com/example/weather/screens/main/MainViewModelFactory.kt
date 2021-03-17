@@ -1,8 +1,7 @@
-package com.example.weather.screens
+package com.example.weather.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weather.data.repository.WeatherRepository
 import java.lang.IllegalArgumentException
 
 class MainViewModelFactory(val interactor: MainInteractor): ViewModelProvider.Factory {
