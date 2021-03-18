@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.data.WeatherData
-import kotlinx.android.synthetic.main.recyclerview_item.*
+import com.example.weather.data.weather.Weather
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class MainRecyclerViewAdapter(): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
 
-    var list = listOf<WeatherData>()
+    var list = listOf<Weather>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,8 +29,8 @@ class MainRecyclerViewAdapter(): RecyclerView.Adapter<MainRecyclerViewAdapter.Vi
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(weatherData: WeatherData) = with(itemView) {
-            textViewTemp.text = weatherData.temperature.toString()
+        fun bind(weather: Weather) = with(itemView) {
+            textViewTemp.text = weather.temperature.toString()
         }
     }
 }

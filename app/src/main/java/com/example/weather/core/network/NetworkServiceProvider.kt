@@ -17,5 +17,4 @@ class NetworkServiceProvider: ServiceProvider {
     override fun <T> createService(service: Class<T>): T {
         return retrofit.create(service)
     }
-
 }
