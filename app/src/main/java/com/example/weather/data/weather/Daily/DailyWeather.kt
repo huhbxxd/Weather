@@ -14,7 +14,7 @@ class DailyWeather {
     val sunset: Int? = null
 
     @SerializedName("temp")
-    val temp: DailyWeatherTemp? = null
+    val temperature: DailyWeatherTemp? = null
 
     @SerializedName("feels_like")
     val feels_like: DailyWeatherFeelsLike? = null
@@ -44,6 +44,6 @@ class DailyWeather {
     val pop: Double? = null
 
     @SerializedName("uvi")
-    val uvi: Int? = null
+    val uvi: Double? = null
 
 }

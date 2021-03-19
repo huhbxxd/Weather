@@ -4,6 +4,7 @@ import android.location.Location
 import com.example.weather.core.base.BaseInteractor
 import com.example.weather.data.repository.CoordRepository
 import com.example.weather.data.repository.WeatherRepository
+import com.example.weather.data.weather.Daily.DailyWeatherMain
 import com.example.weather.data.weather.Today.TodayWeather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,6 +30,13 @@ class MainInteractor(/* workers: Workers, */
 
     fun subscribeOnWeatherTodayByCoord(lat: Double, lon: Double, onSuccess: (weatherToday: TodayWeather) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(repository.loadWeatherTodayByCoord(lat, lon)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(onSuccess, onError))
+    }
+
+    fun subscribeOnWeatherDailyByCoord(lat: Double, lon: Double, onSuccess: (weatherDaily: DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
+        disposable.add(repository.loadWeatherDailyByCoord(lat, lon)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(onSuccess, onError))

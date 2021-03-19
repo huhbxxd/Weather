@@ -9,7 +9,7 @@ class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository 
 
     private companion object {
         val API_KEY = "31cc76a1f3f18df21c60f3e30f9eae8f"
-        val DAILY = "daily"
+        val EXCLUDE = "minutely,hourly"
     }
 
     override fun loadWeatherTodayByName(cityName: String): Single<TodayWeather> {
@@ -21,7 +21,7 @@ class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository 
     }
 
     override fun loadWeatherDailyByCoord(lat: Double, lon: Double): Single<DailyWeatherMain> {
-        return service.getWeatherDailyByCoord(lat, lon, DAILY, API_KEY)
+        return service.getWeatherDailyByCoord(lat, lon, EXCLUDE, API_KEY)
     }
 
 
