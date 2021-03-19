@@ -1,12 +1,15 @@
 package com.example.weather.data.repository
 
-import com.example.weather.data.weather.Weather
+import com.example.weather.data.weather.Daily.DailyWeatherMain
+import com.example.weather.data.weather.Today.TodayWeather
 import io.reactivex.Single
 
 interface WeatherRepository {
 
-    fun loadWeatherByName(cityName: String): Single<List<Weather>>
+    fun loadWeatherTodayByName(cityName: String): Single<TodayWeather>
 
-    fun loadWeatherByCoord(lat: Double, lon: Double): Single<List<Weather>>
+    fun loadWeatherTodayByCoord(lat: Double, lon: Double): Single<TodayWeather>
+
+    fun loadWeatherDailyByCoord(lat: Double, lon: Double): Single<DailyWeatherMain>
 
 }

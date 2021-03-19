@@ -1,8 +1,8 @@
-package com.example.weather.data.weather
+package com.example.weather.data.weather.Today
 
 import com.google.gson.annotations.SerializedName
 
-class Sys {
+class TodaySys {
 
     @SerializedName("type")
     val type: Int? = null

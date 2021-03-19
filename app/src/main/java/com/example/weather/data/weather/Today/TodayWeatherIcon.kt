@@ -1,8 +1,8 @@
-package com.example.weather.data.weather
+package com.example.weather.data.weather.Today
 
 import com.google.gson.annotations.SerializedName
 
-class WeatherIcon {
+class TodayWeatherIcon {
 
     @SerializedName("id")
     private val id: Int? = null
@@ -15,5 +15,6 @@ class WeatherIcon {
 
     @SerializedName("icon")
     private val icon: String? = null
+
 
 }

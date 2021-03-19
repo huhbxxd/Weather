@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.data.weather.Weather
+import com.example.weather.data.weather.Today.TodayWeatherMain
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class MainRecyclerViewAdapter(): RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+class MainRecyclerViewAdapter: RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
 
-    var list = listOf<Weather>()
-        set(value) {
+    var listWeatherMain = listOf<TodayWeatherMain>()
+         set(value) {
             field = value
             notifyDataSetChanged()
-         }
+          }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -22,15 +22,15 @@ class MainRecyclerViewAdapter(): RecyclerView.Adapter<MainRecyclerViewAdapter.Vi
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = listWeatherMain.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(listWeatherMain[position])
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(weather: Weather) = with(itemView) {
-            textViewTemp.text = weather.temperature.toString()
+        fun bind(item: TodayWeatherMain) = with(itemView) {
+            textViewTemp.text = item.temperature.toString()
         }
     }
 }

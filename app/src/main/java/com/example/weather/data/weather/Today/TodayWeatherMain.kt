@@ -1,8 +1,8 @@
-package com.example.weather.data.weather
+package com.example.weather.data.weather.Today
 
 import com.google.gson.annotations.SerializedName
 
-class Main {
+class TodayWeatherMain {
 
     @SerializedName("temp")
     val temperature: Double? = null
@@ -15,9 +15,6 @@ class Main {
 
     @SerializedName("temp_max")
     val tempMax: Double? = null
-
-    @SerializedName("coord")
-    val coord: Coord? = null
 
     @SerializedName("pressure")
     val pressure: Int? = null
