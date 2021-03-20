@@ -1,7 +1,7 @@
 package com.example.weather.data.repository
 
 import com.example.weather.data.WeatherApi
-import com.example.weather.data.weather.Daily.DailyWeatherMain
+import com.example.weather.data.weather.DailyDay.DailyWeatherMain
 import com.example.weather.data.weather.Today.TodayWeather
 import io.reactivex.Single
 

@@ -1,6 +1,6 @@
 package com.example.weather.data
 
-import com.example.weather.data.weather.Daily.DailyWeatherMain
+import com.example.weather.data.weather.DailyDay.DailyWeatherMain
 import com.example.weather.data.weather.Today.TodayWeather
 import io.reactivex.Single
 import retrofit2.http.GET

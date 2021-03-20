@@ -6,17 +6,16 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
-import com.example.weather.screens.main.UI.MainRecyclerViewAdapter
+import com.example.weather.screens.main.UI.MainAdapterDailyDay
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.recyclerview_item.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: MainRecyclerViewAdapter
+    private lateinit var adapterDailyDay: MainAdapterDailyDay
 
     private val component by lazy {
         DaggerMainComponent.builder()
@@ -39,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.loadGeoPosition()
         viewModel.weatherDailyLiveData.observe(this, Observer {
-            adapter.listWeatherDaily = it
+            adapterDailyDay.listWeatherDaily = it
         })
 
-        adapter = MainRecyclerViewAdapter()
-        recyclerView.adapter = adapter
+        adapterDailyDay = MainAdapterDailyDay()
+        recyclerView.adapter = adapterDailyDay
 
 
     }
