@@ -4,8 +4,8 @@ import android.location.Location
 import com.example.weather.core.base.BaseInteractor
 import com.example.weather.data.repository.CoordRepository
 import com.example.weather.data.repository.WeatherRepository
-import com.example.weather.data.weather.DailyDay.DailyWeatherMain
-import com.example.weather.data.weather.Today.TodayWeather
+import com.example.weather.data.weather.daily_day.DailyWeatherMain
+import com.example.weather.data.weather.today.TodayWeather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

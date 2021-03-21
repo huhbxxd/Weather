@@ -1,8 +1,8 @@
 package com.example.weather.data.repository
 
 import com.example.weather.data.WeatherApi
-import com.example.weather.data.weather.DailyDay.DailyWeatherMain
-import com.example.weather.data.weather.Today.TodayWeather
+import com.example.weather.data.weather.daily_day.DailyWeatherMain
+import com.example.weather.data.weather.today.TodayWeather
 import io.reactivex.Single
 
 class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository {

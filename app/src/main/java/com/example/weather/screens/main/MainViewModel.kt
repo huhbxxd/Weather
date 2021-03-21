@@ -3,9 +3,8 @@ package com.example.weather.screens.main
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weather.data.weather.DailyDay.DailyWeather
-import com.example.weather.data.weather.DailyDay.DailyWeatherMain
-import com.example.weather.data.weather.Today.TodayWeather
+import com.example.weather.data.weather.daily_day.DailyWeather
+import com.example.weather.data.weather.daily_day.DailyWeatherMain
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 

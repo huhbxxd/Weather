@@ -1,22 +1,14 @@
 package com.example.weather.screens.main.UI
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
 import com.example.weather.R
-import com.example.weather.data.weather.DailyDay.DailyWeather
-import com.example.weather.data.weather.DailyDay.DailyWeatherIcon
+import com.example.weather.data.weather.daily_day.DailyWeather
 import kotlinx.android.synthetic.main.recyclerview_item_daily_day.view.*
-import java.io.InputStream
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
