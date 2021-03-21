@@ -25,7 +25,7 @@ class DailyWeatherMain {
     @SerializedName("daily")
     val daily: List<DailyDayWeather>? = null
 
-    @SerializedName("houtly")
+    @SerializedName("hourly")
     val hourly: List<HourlyWeather>? = null
 
 }

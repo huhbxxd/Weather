@@ -40,7 +40,7 @@ class MainAdapterDailyHour: RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(item: HourlyWeather) = with(itemView) {
             dailyHour.text = dateFormatter(item.dt!!)
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageWeatherDaily)
+            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageHourlyIcon)
             dailyHourTemp.text = item.temperature.toString()
         }
     }

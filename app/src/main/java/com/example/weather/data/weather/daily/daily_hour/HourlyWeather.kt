@@ -25,7 +25,7 @@ class HourlyWeather {
     val dewPoint: Double? = null
 
     @SerializedName("uvi")
-    val uvi: Int? = null
+    val uvi: Double? = null
 
     @SerializedName("clouds")
     val clouds: Int? = null
