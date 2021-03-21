@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
-import com.example.weather.data.weather.daily_day.DailyWeather
+import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
 import kotlinx.android.synthetic.main.recyclerview_item_daily_day.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,7 +19,7 @@ class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder
         val ICON_URL = "http://openweathermap.org/img/wn/"
     }
 
-    var listWeatherDaily = listOf<DailyWeather>()
+    var listDailyDay = listOf<DailyDayWeather>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -31,14 +31,14 @@ class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listWeatherDaily.size
+    override fun getItemCount(): Int = listDailyDay.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listWeatherDaily[position])
+        holder.bind(listDailyDay[position])
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(item: DailyWeather) = with(itemView) {
+        fun bind(item: DailyDayWeather) = with(itemView) {
             dayWeek.text = dateFormatter(item.dt!!)
             tempDayWeek.text = item.temperature?.day.toString()
             tempNightWeek.text = item.temperature?.night.toString()

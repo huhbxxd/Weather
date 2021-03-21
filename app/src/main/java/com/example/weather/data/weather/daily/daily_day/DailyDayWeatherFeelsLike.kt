@@ -1,8 +1,8 @@
-package com.example.weather.data.weather.daily_day
+package com.example.weather.data.weather.daily.daily_day
 
 import com.google.gson.annotations.SerializedName
 
-class DailyWeatherFeelsLike {
+class DailyDayWeatherFeelsLike {
 
     @SerializedName("day")
     val day: Double? = null

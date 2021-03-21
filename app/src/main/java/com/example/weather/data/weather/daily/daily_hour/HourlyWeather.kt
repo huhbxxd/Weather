@@ -1,35 +1,31 @@
-package com.example.weather.data.weather.daily_day
+package com.example.weather.data.weather.daily.daily_hour
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class DailyWeatherCurrent {
+
+class HourlyWeather {
 
     @SerializedName("dt")
     val dt: Int? = null
 
-    @SerializedName("sunrise")
-    val sunrise: Int? = null
-
-    @SerializedName("sunset")
-    val sunset: Int? = null
-
     @SerializedName("temp")
-    val temp: Double? = null
+    val temperature: Double? = null
 
     @SerializedName("feels_like")
-    val feels_like: Double? = null
+    val feelsLike: Double? = null
 
     @SerializedName("pressure")
-    val pressure: Double? = null
+    val pressure: Int? = null
 
     @SerializedName("humidity")
     val humidity: Int? = null
 
     @SerializedName("dew_point")
-    val dew_point: Double? = null
+    val dewPoint: Double? = null
 
     @SerializedName("uvi")
-    val uvi: Double? = null
+    val uvi: Int? = null
 
     @SerializedName("clouds")
     val clouds: Int? = null
@@ -38,12 +34,18 @@ class DailyWeatherCurrent {
     val visibility: Int? = null
 
     @SerializedName("wind_speed")
-    val wind_speed: Double? = null
+    val windSpeed: Double? = null
 
     @SerializedName("wind_deg")
-    val wind_deg: Int? = null
+    val windDeg: Int? = null
+
+    @SerializedName("wind_gust")
+    val windGust: Double? = null
 
     @SerializedName("weather")
-    val weatherIcon: List<DailyWeatherIcon>? = null
+    val weather: List<HourlyWeatherIcon>? = null
+
+    @SerializedName("pop")
+    val pop: Double? = null
 
 }

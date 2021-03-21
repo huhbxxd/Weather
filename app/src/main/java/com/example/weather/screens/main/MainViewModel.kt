@@ -3,8 +3,8 @@ package com.example.weather.screens.main
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weather.data.weather.daily_day.DailyWeather
-import com.example.weather.data.weather.daily_day.DailyWeatherMain
+import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
+import com.example.weather.data.weather.DailyWeatherMain
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
@@ -14,23 +14,14 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
     private lateinit var geoPosition: Pair<Double, Double>
 
-//    val weatherTodayLiveData by lazy {
-//        interactor.subscribeOnWeatherTodayByCoord(53.54628, 49.35037, ::weatherTodayLoadedSuccess, ::weatherLoadedError)
-//        return@lazy MutableLiveData<TodayWeather>()
-//    }
-
     val weatherDailyLiveData by lazy {
         interactor.subscribeOnWeatherDailyByCoord(53.54628, 49.35037, ::weatherDailyLoadedSuccess, ::weatherLoadedError)
-        return@lazy MutableLiveData<List<DailyWeather>>()
+        return@lazy MutableLiveData<DailyWeatherMain>()
     }
 
     private fun weatherDailyLoadedSuccess(weatherDaily: DailyWeatherMain) {
-        weatherDailyLiveData.postValue(weatherDaily.daily)
+        weatherDailyLiveData.postValue(weatherDaily)
     }
-
-//    private fun weatherTodayLoadedSuccess(weather: TodayWeather) {
-//        weatherTodayLiveData.postValue(weather)
-//    }
 
     private fun weatherLoadedError(throwable: Throwable) {
 

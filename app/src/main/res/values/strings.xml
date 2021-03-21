@@ -7,4 +7,6 @@
     <string name="tempday">tempDay</string>
     <string name="tempnight">tempNight</string>
     <string name="dayweek">dayWeek</string>
+    <string name="hour">hour</string>
+    <string name="temphour">tempHour</string>
 </resources>
