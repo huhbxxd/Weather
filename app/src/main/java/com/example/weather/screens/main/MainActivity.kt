@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
             pressureValue.text = current.pressure.toString()
             humidityValue.text = current.humidity.toString()
             feelsLikeValue.text = current.feelsLike.toString()
+            cloudinessValue.text = current.clouds.toString()
+            windSpeedValue.text = current.windSpeed.toString()
+            uvIndexValue.text = current.uvi.toString()
             }
         })
 
