@@ -82,13 +82,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/frameSunrise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/viewLong3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/sunrise"
             android:layout_width="wrap_content"
@@ -97,16 +90,18 @@
             android:layout_marginTop="3dp"
             android:text="@string/sunrise"
             android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/viewLong3"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
         <TextView
             android:id="@+id/sunriseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="17dp"
             android:text="@string/sunriseTime"
-            android:textSize="14sp" />
-    </FrameLayout>
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/sunrise"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
     <View
         android:id="@+id/viewLong4"
@@ -114,35 +109,30 @@
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/frameSunrise"
+        app:layout_constraintTop_toBottomOf="@id/sunriseTime"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/frameSunset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/viewLong4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/sunset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
-            android:text="@string/sunrise"
+            android:text="@string/sunset"
             android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/viewLong4"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
         <TextView
             android:id="@+id/sunsetTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="17dp"
             android:text="@string/sunsetTime"
-            android:textSize="14sp" />
-    </FrameLayout>
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/sunset"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
     <View
         android:id="@+id/viewLong5"
@@ -150,17 +140,10 @@
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/frameSunset"
+        app:layout_constraintTop_toBottomOf="@id/sunsetTime"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/framePressure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/viewLong5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
@@ -169,23 +152,78 @@
             android:layout_marginTop="3dp"
             android:text="@string/pressure"
             android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/viewLong5"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
         <TextView
             android:id="@+id/pressureValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="17dp"
             android:text="@string/pressureValue"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/pressure"
+            app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
             android:id="@+id/hPa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="2dp"
             android:text="@string/hpa"
-            android:textSize="12sp"/>
-    </FrameLayout>
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/pressure"
+            app:layout_constraintLeft_toRightOf="@id/pressureValue"/>
+
+    <View
+        android:id="@+id/viewLong6"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/pressureValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/humidity"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/viewLong6"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/humidityValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@string/humidityValue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/humidity"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:id="@+id/percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/percent"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/humidity"
+            app:layout_constraintLeft_toRightOf="@id/humidityValue"/>
+
+    <View
+        android:id="@+id/viewLong7"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/humidityValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

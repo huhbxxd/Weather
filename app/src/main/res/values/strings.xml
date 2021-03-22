@@ -19,4 +19,7 @@
     <string name="pressure">Pressure</string>
     <string name="pressureValue">847</string>
     <string name="hpa">hPa</string>
+    <string name="humidity">humidity</string>
+    <string name="humidityValue">60</string>
+    <string name="percent">%</string>
 </resources>
