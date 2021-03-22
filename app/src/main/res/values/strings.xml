@@ -9,4 +9,14 @@
     <string name="dayweek">dayWeek</string>
     <string name="hour">hour</string>
     <string name="temphour">tempHour</string>
+    <string name="city">City</string>
+    <string name="description">description</string>
+    <string name="tempCur">5</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunriseTime">06:59</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunsetTime">18:59</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressureValue">847</string>
+    <string name="hpa">hPa</string>
 </resources>

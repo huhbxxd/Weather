@@ -19,12 +19,14 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
         return@lazy MutableLiveData<DailyWeatherMain>()
     }
 
+    val weatherThrowable = MutableLiveData<Throwable>()
+
     private fun weatherDailyLoadedSuccess(weatherDaily: DailyWeatherMain) {
         weatherDailyLiveData.postValue(weatherDaily)
     }
 
     private fun weatherLoadedError(throwable: Throwable) {
-
+        weatherThrowable.postValue(throwable)
     }
 
     fun loadGeoPosition() {
@@ -36,7 +38,7 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
     }
 
     private fun locationError(throwable: Throwable) {
-        geoPosition = NULL_POSITION to NULL_POSITION // change event to handle error
+        weatherThrowable.postValue(throwable)
     }
 
     override fun onCleared() {
