@@ -168,7 +168,7 @@
             android:id="@+id/hPa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="2dp"
             android:text="@string/hpa"
             android:textSize="12sp"
@@ -210,7 +210,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:text="@string/percent"
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@id/humidity"
@@ -225,5 +225,46 @@
         app:layout_constraintTop_toBottomOf="@id/humidityValue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/feelsLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/feelslike"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewLong7"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/feelsLikeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@string/feelsLikeValue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/feelsLike"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:id="@+id/degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@string/degree"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/feelsLike"
+            app:layout_constraintLeft_toRightOf="@id/feelsLikeValue"/>
+
+    <View
+        android:id="@+id/viewLong8"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/feelsLikeValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

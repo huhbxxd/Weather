@@ -22,4 +22,8 @@
     <string name="humidity">humidity</string>
     <string name="humidityValue">60</string>
     <string name="percent">%</string>
+    <string name="feelslike">Feels like</string>
+    <string name="feelsLikeValue">7</string>
+    <!--celsius - \u00B0-->
+    <string name="degree">°</string>
 </resources>
