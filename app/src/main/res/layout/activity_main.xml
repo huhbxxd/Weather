@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.main.MainActivity">
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/cityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:textSize="28sp"
         android:text="@string/city"
-        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/description"
@@ -33,29 +37,41 @@
         android:layout_height="wrap_content"
         android:textSize="44sp"
         android:text="@string/tempCur"
+        app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"/>
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/degreeCurrentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/degree"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintLeft_toRightOf="@id/currentTemp"/>
 
     <View
-        android:id="@+id/viewLong2"
+        android:id="@+id/viewLong"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@id/recyclerViewDailyHour"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDailyHour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/recyclerViewDailyDay"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:id="@+id/viewLong"
+        android:id="@+id/viewLong2"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
@@ -69,6 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -82,7 +99,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
+    <TextView
             android:id="@+id/sunrise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +110,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewLong3"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
-        <TextView
+    <TextView
             android:id="@+id/sunriseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +130,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
+    <TextView
             android:id="@+id/sunset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +141,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewLong4"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
-        <TextView
+    <TextView
             android:id="@+id/sunsetTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,7 +161,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
+    <TextView
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -155,7 +172,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewLong5"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
-        <TextView
+    <TextView
             android:id="@+id/pressureValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +181,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/pressure"
             app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
+    <TextView
             android:id="@+id/hPa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -185,7 +202,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
+    <TextView
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -196,7 +213,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewLong6"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
-        <TextView
+    <TextView
             android:id="@+id/humidityValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -205,7 +222,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/humidity"
             app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
+    <TextView
             android:id="@+id/percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -226,7 +243,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
+    <TextView
             android:id="@+id/feelsLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -237,7 +254,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/viewLong7"
             tools:ignore="SmallSp" />
-        <TextView
+    <TextView
             android:id="@+id/feelsLikeValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -246,7 +263,7 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/feelsLike"
             app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
+    <TextView
             android:id="@+id/degree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -266,5 +283,88 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <TextView
+        android:id="@+id/cloudiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/cloudiness"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@id/viewLong8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="SmallSp" />
+    <TextView
+        android:id="@+id/cloudinessValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:text="@string/cloudinessValue"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/cloudiness"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView
+        android:id="@id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/percent"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/cloudiness"
+        app:layout_constraintLeft_toRightOf="@id/cloudinessValue"/>
+
+    <View
+        android:id="@+id/viewLong9"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/cloudinessValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/windSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/windSpeed"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@id/viewLong9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="SmallSp" />
+    <TextView
+        android:id="@+id/windSpeedValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:text="@string/windSpeedValue"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/windSpeed"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView
+        android:id="@+id/metreSec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/metreSec"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/windSpeed"
+        app:layout_constraintLeft_toRightOf="@id/windSpeedValue"/>
+
+    <View
+        android:id="@+id/viewLong10"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/cloudinessValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
