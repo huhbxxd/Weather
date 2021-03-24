@@ -1,5 +1,6 @@
 package com.example.weather.screens.main
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -11,6 +12,8 @@ import com.example.weather.screens.main.UI.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -42,17 +45,37 @@ class MainActivity : AppCompatActivity() {
         component.inject(this)
 
         viewModel.loadGeoPosition()
-        viewModel.weatherDailyLiveData.observe(this, Observer {
-            adapterDailyDay.listDailyDay = it.daily!!
-            adapterDailyHour.listDailyHour = it.hourly!!
-        })
-
         adapterDailyDay = MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
         adapterDailyHour = MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
-
-
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.weatherDailyLiveData.observe(this, Observer { with(it) {
+            adapterDailyDay.listDailyDay = daily!!
+            adapterDailyHour.listDailyHour = hourly!!
+
+            cityName.text = timezone
+            description.text = current?.weatherIcon?.get(0)?.description
+            currentTemp.text = current?.temp.toString()
+
+            sunriseTime.text = dateFormatter(current?.sunrise!!)
+            sunsetTime.text = dateFormatter(current.sunset!!)
+            pressureValue.text = current.pressure.toString()
+            humidityValue.text = current.humidity.toString()
+            feelsLikeValue.text = current.feelsLike.toString()
+            cloudinessValue.text = current.clouds.toString()
+            windSpeedValue.text = current.windSpeed.toString()
+            uvIndexValue.text = current.uvi.toString()
+          }
+        })
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun dateFormatter(unix: Int): String {
+        return SimpleDateFormat("HH:mm") // "HH:mm" hours:minutes from table of SimpleDateFormat
+            .format(Date(unix.toLong() * 1000))
+    }
 }

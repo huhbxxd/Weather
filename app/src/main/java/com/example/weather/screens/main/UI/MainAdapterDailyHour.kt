@@ -40,14 +40,14 @@ class MainAdapterDailyHour: RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(item: HourlyWeather) = with(itemView) {
             dailyHour.text = dateFormatter(item.dt!!)
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageWeatherDaily)
+            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageHourlyIcon)
             dailyHourTemp.text = item.temperature.toString()
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun dateFormatter(unix: Int): String {
-        return SimpleDateFormat("k") // "EEEE" it's full name day of week from table of SimpleDateFormat
+        return SimpleDateFormat("k") // "k" it's number of hours from table of SimpleDateFormat
             .format(Date(unix.toLong() * 1000))
     }
 

@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageHourlyIcon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         app:layout_constraintTop_toBottomOf="@id/dailyHour"
@@ -30,10 +30,23 @@
         android:id="@+id/dailyHourTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:textSize="16sp"
-        android:text="@string/temphour"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        android:text="@string/tempHour"
+        app:layout_constraintTop_toBottomOf="@id/imageHourlyIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/degree"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/dailyHourTemp"
+        app:layout_constraintTop_toBottomOf="@id/imageHourlyIcon"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

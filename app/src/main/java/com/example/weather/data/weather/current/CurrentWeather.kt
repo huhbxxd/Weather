@@ -17,7 +17,7 @@ class CurrentWeather {
     val temp: Double? = null
 
     @SerializedName("feels_like")
-    val feels_like: Double? = null
+    val feelsLike: Double? = null
 
     @SerializedName("pressure")
     val pressure: Double? = null
@@ -26,7 +26,7 @@ class CurrentWeather {
     val humidity: Int? = null
 
     @SerializedName("dew_point")
-    val dew_point: Double? = null
+    val dewPoint: Double? = null
 
     @SerializedName("uvi")
     val uvi: Double? = null
@@ -38,10 +38,10 @@ class CurrentWeather {
     val visibility: Int? = null
 
     @SerializedName("wind_speed")
-    val wind_speed: Double? = null
+    val windSpeed: Double? = null
 
     @SerializedName("wind_deg")
-    val wind_deg: Int? = null
+    val windDeg: Int? = null
 
     @SerializedName("weather")
     val weatherIcon: List<CurrentWeatherIcon>? = null
