@@ -31,6 +31,6 @@
     <string name="windSpeed">Wind speed</string>
     <string name="windSpeedValue">14</string>
     <string name="metreSec">m/s</string>
-    <string name="uv_index">UV index</string>
+    <string name="uv_index">UV-index</string>
     <string name="uvIndexValue">3.3</string>
 </resources>

@@ -45,6 +45,14 @@ class MainActivity : AppCompatActivity() {
         component.inject(this)
 
         viewModel.loadGeoPosition()
+        adapterDailyDay = MainAdapterDailyDay()
+        recyclerViewDailyDay.adapter = adapterDailyDay
+        adapterDailyHour = MainAdapterDailyHour()
+        recyclerViewDailyHour.adapter = adapterDailyHour
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.weatherDailyLiveData.observe(this, Observer { with(it) {
             adapterDailyDay.listDailyDay = daily!!
             adapterDailyHour.listDailyHour = hourly!!
@@ -61,15 +69,8 @@ class MainActivity : AppCompatActivity() {
             cloudinessValue.text = current.clouds.toString()
             windSpeedValue.text = current.windSpeed.toString()
             uvIndexValue.text = current.uvi.toString()
-            }
+          }
         })
-
-        adapterDailyDay = MainAdapterDailyDay()
-        recyclerViewDailyDay.adapter = adapterDailyDay
-        adapterDailyHour = MainAdapterDailyHour()
-        recyclerViewDailyHour.adapter = adapterDailyHour
-
-
     }
 
     @SuppressLint("SimpleDateFormat")

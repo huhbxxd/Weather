@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.MainActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:layoutDescription="@xml/activity_main_scene">
 
     <TextView
         android:id="@+id/cityName"
@@ -105,7 +107,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
             android:text="@string/sunrise"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/viewLong3"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
@@ -115,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/sunriseTime"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/sunrise"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -136,7 +138,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
             android:text="@string/sunset"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/viewLong4"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
@@ -146,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/sunsetTime"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/sunset"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -167,7 +169,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
             android:text="@string/pressure"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/viewLong5"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
@@ -177,7 +179,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/pressureValue"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/pressure"
             app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
@@ -187,7 +189,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginStart="2dp"
             android:text="@string/hpa"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/pressure"
             app:layout_constraintLeft_toRightOf="@id/pressureValue"/>
 
@@ -208,7 +210,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
             android:text="@string/humidity"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/viewLong6"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="SmallSp" />
@@ -218,7 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/humidityValue"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/humidity"
             app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
@@ -228,7 +230,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
             android:text="@string/percent"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/humidity"
             app:layout_constraintLeft_toRightOf="@id/humidityValue"/>
 
@@ -249,7 +251,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="3dp"
             android:text="@string/feelslike"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/viewLong7"
             tools:ignore="SmallSp" />
@@ -259,7 +261,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:text="@string/feelsLikeValue"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/feelsLike"
             app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
@@ -268,7 +270,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="@string/degree"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/feelsLike"
             app:layout_constraintLeft_toRightOf="@id/feelsLikeValue"/>
 
@@ -289,7 +291,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="3dp"
         android:text="@string/cloudiness"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/viewLong8"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="SmallSp" />
@@ -299,7 +301,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:text="@string/cloudinessValue"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/cloudiness"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
@@ -309,7 +311,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="2dp"
         android:text="@string/percent"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/cloudiness"
         app:layout_constraintLeft_toRightOf="@id/cloudinessValue"/>
 
@@ -330,7 +332,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="3dp"
         android:text="@string/windSpeed"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/viewLong9"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="SmallSp" />
@@ -340,7 +342,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:text="@string/windSpeedValue"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/windSpeed"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
@@ -350,7 +352,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="2dp"
         android:text="@string/metreSec"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/windSpeed"
         app:layout_constraintLeft_toRightOf="@id/windSpeedValue"/>
 
@@ -371,7 +373,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="3dp"
         android:text="@string/uv_index"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/viewLong10"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="SmallSp" />
@@ -381,9 +383,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:text="@string/uvIndexValue"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/uvIndex"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
 </ScrollView>
