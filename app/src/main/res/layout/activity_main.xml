@@ -98,7 +98,7 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/recyclerViewDailyDay"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
             android:id="@+id/sunrise"
@@ -123,13 +123,14 @@
 
     <View
         android:id="@+id/viewLong4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/sunriseTime"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929"/>
 
     <TextView
             android:id="@+id/sunset"
@@ -154,13 +155,14 @@
 
     <View
         android:id="@+id/viewLong5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/sunsetTime"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929"/>
 
     <TextView
             android:id="@+id/pressure"
@@ -195,13 +197,14 @@
 
     <View
         android:id="@+id/viewLong6"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/pressureValue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929" />
 
     <TextView
             android:id="@+id/humidity"
@@ -236,13 +239,14 @@
 
     <View
         android:id="@+id/viewLong7"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/humidityValue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929" />
 
     <TextView
             android:id="@+id/feelsLike"
@@ -276,13 +280,14 @@
 
     <View
         android:id="@+id/viewLong8"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/feelsLikeValue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929"/>
 
     <TextView
         android:id="@+id/cloudiness"
@@ -305,7 +310,7 @@
         app:layout_constraintTop_toBottomOf="@id/cloudiness"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
-        android:id="@id/percent"
+        android:id="@+id/percent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -317,13 +322,14 @@
 
     <View
         android:id="@+id/viewLong9"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/cloudinessValue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929"/>
 
     <TextView
         android:id="@+id/windSpeed"
@@ -358,13 +364,14 @@
 
     <View
         android:id="@+id/viewLong10"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="3dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/windSpeedValue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.929"/>
 
     <TextView
         android:id="@+id/uvIndex"
