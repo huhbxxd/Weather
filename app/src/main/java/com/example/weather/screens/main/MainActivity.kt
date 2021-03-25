@@ -13,6 +13,7 @@ import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.motion_layout.*
+import kotlinx.android.synthetic.main.scroll_content.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

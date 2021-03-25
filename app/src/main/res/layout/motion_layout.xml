@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.weather.screens.main.UI.CollapsibleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="146dp"
     app:layoutDescription="@xml/motion_layout_scene"
     app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
-    app:motionDebug="SHOW_ALL"
     android:fitsSystemWindows="false">
 
     <TextView
@@ -36,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="44sp"
-        android:text="@string/tempCur"
+        android:text="@string/temp_cur"
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
