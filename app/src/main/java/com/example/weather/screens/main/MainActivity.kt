@@ -7,11 +7,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
-import com.example.weather.screens.main.UI.MainAdapterDailyDay
-import com.example.weather.screens.main.UI.MainAdapterDailyHour
+import com.example.weather.screens.main.UI.adapter.MainAdapterDailyDay
+import com.example.weather.screens.main.UI.adapter.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.motion_layout.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -40,14 +41,17 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManagerDailyDay = LinearLayoutManager(this)
         linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewDailyDay.layoutManager = linearLayoutManagerDailyDay
+        recyclerViewDailyDay.suppressLayout(true)
         recyclerViewDailyHour.layoutManager = linearLayoutManagerDailyHour
 
         component.inject(this)
 
         viewModel.loadGeoPosition()
-        adapterDailyDay = MainAdapterDailyDay()
+        adapterDailyDay =
+            MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
-        adapterDailyHour = MainAdapterDailyHour()
+        adapterDailyHour =
+            MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
     }
 

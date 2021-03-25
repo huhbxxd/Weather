@@ -1,4 +1,4 @@
-package com.example.weather.screens.main.UI
+package com.example.weather.screens.main.UI.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
-import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
+import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
 import kotlinx.android.synthetic.main.recyclerview_item_daily_day.view.*
-import kotlinx.android.synthetic.main.recyclerview_item_hourly.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainAdapterDailyHour: RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder>() {
+
+class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
 
     private companion object {
         val ICON_URL = "http://openweathermap.org/img/wn/"
     }
 
-    var listDailyHour = listOf<HourlyWeather>()
+    var listDailyDay = listOf<DailyDayWeather>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -27,27 +27,28 @@ class MainAdapterDailyHour: RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recyclerview_item_hourly, parent, false)
+            .inflate(R.layout.recyclerview_item_daily_day, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listDailyHour.size
+    override fun getItemCount(): Int = listDailyDay.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listDailyHour[position])
+        holder.bind(listDailyDay[position])
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(item: HourlyWeather) = with(itemView) {
-            dailyHour.text = dateFormatter(item.dt!!)
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageHourlyIcon)
-            dailyHourTemp.text = item.temperature.toString()
+        fun bind(item: DailyDayWeather) = with(itemView) {
+            dayWeek.text = dateFormatter(item.dt!!)
+            tempDayWeek.text = item.temperature?.day.toString()
+            tempNightWeek.text = item.temperature?.night.toString()
+            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageWeatherDaily)
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun dateFormatter(unix: Int): String {
-        return SimpleDateFormat("k") // "k" it's number of hours from table of SimpleDateFormat
+        return SimpleDateFormat("EEEE") // "EEEE" it's full name day of week from table of SimpleDateFormat
             .format(Date(unix.toLong() * 1000))
     }
 

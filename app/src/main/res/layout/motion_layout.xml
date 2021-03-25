@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.weather.screens.main.UI.CollapsibleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="146dp"
+    app:layoutDescription="@xml/motion_layout_scene"
+    app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
+    app:motionDebug="SHOW_ALL"
+    android:fitsSystemWindows="false">
+
+    <TextView
+        android:id="@+id/cityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textSize="28sp"
+        android:text="@string/city"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/description"
+        app:layout_constraintTop_toBottomOf="@id/cityName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/currentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="44sp"
+        android:text="@string/tempCur"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/degreeCurrentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/degree"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintLeft_toRightOf="@id/currentTemp"/>
+
+    <View
+        android:id="@+id/viewLong"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/currentTemp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDailyHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/viewLong"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <View
+        android:id="@+id/viewLong2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewDailyHour"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</com.example.weather.screens.main.UI.CollapsibleToolbar>
