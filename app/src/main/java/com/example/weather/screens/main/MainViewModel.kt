@@ -1,23 +1,28 @@
 package com.example.weather.screens.main
 
 import android.location.Location
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
 import com.example.weather.data.weather.DailyWeatherMain
+import kotlin.properties.Delegates
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
-    private companion object {
-        private val NULL_POSITION = 0.0
-    }
-
-    private lateinit var geoPosition: Pair<Double, Double>
+    var latitude by Delegates.notNull<Double>()
+    var longitude by Delegates.notNull<Double>()
 
     val weatherDailyLiveData by lazy {
-        interactor.subscribeOnWeatherDailyByCoord(53.54628, 49.35037, ::weatherDailyLoadedSuccess, ::weatherLoadedError)
+        interactor.subscribeOnWeatherDailyByCoord(latitude, longitude, ::weatherDailyLoadedSuccess, ::weatherLoadedError)
         return@lazy MutableLiveData<DailyWeatherMain>()
     }
+
+    val serviceLocation by lazy {
+        interactor.getCoordinates(::locationSuccess, ::locationError)
+        return@lazy MutableLiveData<Location>()
+    }
+
 
     val weatherThrowable = MutableLiveData<Throwable>()
 
@@ -29,12 +34,8 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
         weatherThrowable.postValue(throwable)
     }
 
-    fun loadGeoPosition() {
-        interactor.getCoordinates(::locationSuccess, ::locationError)
-    }
-
     private fun locationSuccess(location: Location) {
-        geoPosition = Pair(location.latitude, location.longitude)
+        serviceLocation.postValue(location)
     }
 
     private fun locationError(throwable: Throwable) {

@@ -1,25 +1,37 @@
 package com.example.weather.data.repository
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
+import android.util.Log
+import androidx.activity.result.ActivityResultCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.example.weather.screens.main.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationServices
 import io.reactivex.Single
 
 
-class CoordRepositoryImpl(context: Context) : CoordRepository {
+class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCompatActivity() {
 
-    private val fusedLocation = FusedLocationProviderClient(context)
+    private lateinit var fusedLocation: FusedLocationProviderClient
 
     @SuppressLint("MissingPermission")
-
     override fun getLocation(): Single<Location> {
-        return Single.create { emitter ->
-            fusedLocation.lastLocation.addOnSuccessListener { location ->
-                emitter.onSuccess(location)
+        fusedLocation = LocationServices.getFusedLocationProviderClient(context)
+
+        return Single.create<Location> { emitter ->
+                fusedLocation.lastLocation.addOnSuccessListener { location ->
+                    emitter.onSuccess(location)
+                fusedLocation.lastLocation.addOnFailureListener {
+                    emitter.onError(it)
+                }
             }
         }
     }
+
+
 }

@@ -7,9 +7,9 @@ import com.example.weather.data.repository.WeatherRepository
 import com.example.weather.data.weather.DailyWeatherMain
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
-class MainInteractor(/* workers: Workers, */
-                     private val repository: WeatherRepository,
+class MainInteractor(private val repository: WeatherRepository,
                      private val coordRepository: CoordRepository
 ): BaseInteractor() {
 
@@ -22,13 +22,6 @@ class MainInteractor(/* workers: Workers, */
 
 //    fun subscribeOnWeatherTodayByName(cityName: String, onSuccess: (weatherToday: TodayWeather) -> Unit, onError: (Throwable) -> Unit) {
 //        disposable.add(repository.loadWeatherDailyByName(cityName)
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .subscribe(onSuccess, onError))
-//    }
-
-//    fun subscribeOnWeatherTodayByCoord(lat: Double, lon: Double, onSuccess: (weatherToday: TodayWeather) -> Unit, onError: (Throwable) -> Unit) {
-//        disposable.add(repository.loadWeatherTodayByCoord(lat, lon)
 //            .observeOn(AndroidSchedulers.mainThread())
 //            .subscribeOn(Schedulers.io())
 //            .subscribe(onSuccess, onError))
