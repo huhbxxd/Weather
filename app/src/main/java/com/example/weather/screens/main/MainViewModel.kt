@@ -13,16 +13,15 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()
 
-    val weatherDailyLiveData by lazy {
-        interactor.subscribeOnWeatherDailyByCoord(latitude, longitude, ::weatherDailyLoadedSuccess, ::weatherLoadedError)
-        return@lazy MutableLiveData<DailyWeatherMain>()
-    }
-
     val serviceLocation by lazy {
-        interactor.getCoordinates(::locationSuccess, ::locationError)
+        interactor.getCoordinates(::locationSuccess, ::loadedError)
         return@lazy MutableLiveData<Location>()
     }
 
+    val weatherDailyLiveData by lazy {
+        interactor.subscribeOnWeatherDailyByCoord(55.22, 43.22, ::weatherDailyLoadedSuccess, ::loadedError)
+        return@lazy MutableLiveData<DailyWeatherMain>()
+    }
 
     val weatherThrowable = MutableLiveData<Throwable>()
 
@@ -30,15 +29,11 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
         weatherDailyLiveData.postValue(weatherDaily)
     }
 
-    private fun weatherLoadedError(throwable: Throwable) {
-        weatherThrowable.postValue(throwable)
-    }
-
     private fun locationSuccess(location: Location) {
         serviceLocation.postValue(location)
     }
 
-    private fun locationError(throwable: Throwable) {
+    private fun loadedError(throwable: Throwable) {
         weatherThrowable.postValue(throwable)
     }
 

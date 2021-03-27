@@ -2,6 +2,7 @@ package com.example.weather.screens.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +29,7 @@ import javax.inject.Inject
 class MainActivity: BaseActivity(R.layout.activity_main) {
 
     private companion object {
-        val REQUES_CODE = 1 // random value for dev
+        val REQUEST_CODE = 1 // random value for permission
     }
 
     private lateinit var linearLayoutManagerDailyDay: LinearLayoutManager
@@ -48,7 +49,6 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         linearLayoutManagerDailyDay = LinearLayoutManager(this)
         linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewDailyDay.layoutManager = linearLayoutManagerDailyDay
@@ -65,7 +65,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
             })
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION), REQUES_CODE)
+                Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
         }
 
         adapterDailyDay =
