@@ -15,20 +15,17 @@ import com.google.android.gms.location.LocationServices
 import io.reactivex.Single
 
 
-class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCompatActivity() {
+class CoordRepositoryImpl(private val context: Context) : CoordRepository {
 
     private lateinit var fusedLocation: FusedLocationProviderClient
+
 
     @SuppressLint("MissingPermission")
     override fun getLocation(): Single<Location> {
         fusedLocation = LocationServices.getFusedLocationProviderClient(context)
-
         return Single.create<Location> { emitter ->
                 fusedLocation.lastLocation.addOnSuccessListener { location ->
                     emitter.onSuccess(location)
-                fusedLocation.lastLocation.addOnFailureListener {
-                    emitter.onError(it)
-                }
             }
         }
     }

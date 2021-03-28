@@ -40,9 +40,4 @@ class MainModule(private val activity: MainActivity) {
     fun provideWeatherRepository(api: WeatherApi): WeatherRepository =
         WeatherRepositoryImpl(api)
 
-//    @Provides
-//    @ActivityScope
-//    fun provideWokers(): Workers =
-//        Workers(AndroidSchedulers.mainThread(), Schedulers.io())
-
 }

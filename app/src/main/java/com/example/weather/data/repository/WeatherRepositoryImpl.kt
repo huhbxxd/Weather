@@ -1,8 +1,11 @@
 package com.example.weather.data.repository
 
+import android.location.Location
 import com.example.weather.data.WeatherApi
 import com.example.weather.data.weather.DailyWeatherMain
+import io.reactivex.Scheduler
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository {
 
@@ -17,8 +20,8 @@ class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository 
     }
 
 
-    override fun loadWeatherDailyByCoord(lat: Double, lon: Double): Single<DailyWeatherMain> {
-        return service.getWeatherDailyByCoord(lat, lon, EXCLUDE, UNITS, API_KEY)
+    override fun loadWeatherDailyByCoord(location: Location): Single<DailyWeatherMain> {
+        return service.getWeatherDailyByCoord(location.latitude, location.longitude, EXCLUDE, UNITS, API_KEY)
     }
 
 

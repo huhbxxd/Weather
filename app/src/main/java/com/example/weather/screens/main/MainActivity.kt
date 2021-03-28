@@ -22,9 +22,12 @@ import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity(R.layout.activity_main) {
 
@@ -32,6 +35,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
         val REQUEST_CODE = 1 // random value for permission
     }
 
+    private var permissionState by Delegates.notNull<Int>()
     private lateinit var linearLayoutManagerDailyDay: LinearLayoutManager
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
@@ -49,6 +53,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         linearLayoutManagerDailyDay = LinearLayoutManager(this)
         linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewDailyDay.layoutManager = linearLayoutManagerDailyDay
@@ -57,46 +62,41 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
 
         component.inject(this)
 
-        val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        if (permissionState == PackageManager.PERMISSION_GRANTED) {
-            viewModel.serviceLocation.observe(this, Observer {
-                viewModel.latitude = it.latitude
-                viewModel.longitude = it.longitude
-            })
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+        permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (permissionState != PackageManager.PERMISSION_GRANTED && android.os.Build.VERSION.SDK_INT >= 26) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
         }
-
         adapterDailyDay =
             MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
         adapterDailyHour =
             MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
+
     }
 
     override fun onResume() {
         super.onResume()
+            viewModel.weatherDailyLiveData.observe(this, Observer {
+                with(it) {
+                    adapterDailyDay.listDailyDay = daily!!
+                    adapterDailyHour.listDailyHour = hourly!!
 
-        viewModel.weatherDailyLiveData.observe(this, Observer { with(it) {
-            adapterDailyDay.listDailyDay = daily!!
-            adapterDailyHour.listDailyHour = hourly!!
+                    cityName.text = timezone
+                    description.text = current?.weatherIcon?.get(0)?.description
+                    currentTemp.text = current?.temp.toString()
 
-            cityName.text = timezone
-            description.text = current?.weatherIcon?.get(0)?.description
-            currentTemp.text = current?.temp.toString()
-
-            sunriseTime.text = dateFormatter(current?.sunrise!!)
-            sunsetTime.text = dateFormatter(current.sunset!!)
-            pressureValue.text = current.pressure.toString()
-            humidityValue.text = current.humidity.toString()
-            feelsLikeValue.text = current.feelsLike.toString()
-            cloudinessValue.text = current.clouds.toString()
-            windSpeedValue.text = current.windSpeed.toString()
-            uvIndexValue.text = current.uvi.toString()
-          }
-        })
+                    sunriseTime.text = dateFormatter(current?.sunrise!!)
+                    sunsetTime.text = dateFormatter(current.sunset!!)
+                    pressureValue.text = current.pressure.toString()
+                    humidityValue.text = current.humidity.toString()
+                    feelsLikeValue.text = current.feelsLike.toString()
+                    cloudinessValue.text = current.clouds.toString()
+                    windSpeedValue.text = current.windSpeed.toString()
+                    uvIndexValue.text = current.uvi.toString()
+                }
+            })
     }
 
     @SuppressLint("SimpleDateFormat")
