@@ -20,6 +20,7 @@ import com.example.weather.screens.main.ui.adapter.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapter.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
+import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
 import java.sql.Time
@@ -78,6 +79,8 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
+
+
             viewModel.weatherDailyLiveData.observe(this, Observer {
                 with(it) {
                     adapterDailyDay.listDailyDay = daily!!
@@ -104,6 +107,4 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
         return SimpleDateFormat("HH:mm") // "HH:mm" hours:minutes from table of SimpleDateFormat
             .format(Date(unix.toLong() * 1000))
     }
-
-
 }

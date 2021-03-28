@@ -19,8 +19,9 @@ class MainInteractor(private val repository: WeatherRepository,
 
     fun subscribeOnWeatherDailyByCoord(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(Single.fromCallable { coordRepository.getLocation()
+            .flatMap { repository.loadWeatherDailyByCoord(it)
+                .subscribeOn(Schedulers.io())} } // network call must not be in a main thread
             .subscribeOn(Schedulers.io())
-            .flatMap { repository.loadWeatherDailyByCoord(it).subscribeOn(Schedulers.io())} }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({it.subscribe(onSuccess, onError)}, onError))
     }

@@ -3,9 +3,7 @@ package com.example.weather.data.repository
 import android.location.Location
 import com.example.weather.data.WeatherApi
 import com.example.weather.data.weather.DailyWeatherMain
-import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 
 class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository {
 
