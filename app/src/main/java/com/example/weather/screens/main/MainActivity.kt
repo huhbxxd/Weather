@@ -86,7 +86,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
                     adapterDailyDay.listDailyDay = daily!!
                     adapterDailyHour.listDailyHour = hourly!!
 
-                    cityName.text = timezone
+                    cityName.text = locationFormatter(timezone!!)
                     description.text = current?.weatherIcon?.get(0)?.description
                     currentTemp.text = current?.temp.toString()
 
@@ -106,5 +106,9 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
     private fun dateFormatter(unix: Int): String {
         return SimpleDateFormat("HH:mm") // "HH:mm" hours:minutes from table of SimpleDateFormat
             .format(Date(unix.toLong() * 1000))
+    }
+
+    private fun locationFormatter(s: String): String {
+        return s.substringAfter("/").replace("_", " ")
     }
 }

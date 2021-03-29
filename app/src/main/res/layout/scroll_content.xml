@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="45dp"
+    android:clipToPadding="false"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +26,7 @@
         <View
             android:id="@+id/viewLong3"
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -55,7 +57,7 @@
         <View
             android:id="@+id/viewLong4"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -88,7 +90,7 @@
         <View
             android:id="@+id/viewLong5"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -132,7 +134,7 @@
         <View
             android:id="@+id/viewLong6"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -176,7 +178,7 @@
         <View
             android:id="@+id/viewLong7"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -219,7 +221,7 @@
         <View
             android:id="@+id/viewLong8"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -263,7 +265,7 @@
         <View
             android:id="@+id/viewLong9"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -307,7 +309,7 @@
         <View
             android:id="@+id/viewLong10"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/viewLongHeight"
             android:layout_marginTop="3dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintLeft_toLeftOf="parent"
