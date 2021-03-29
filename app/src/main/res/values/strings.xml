@@ -33,4 +33,7 @@
     <string name="metre_sec">m/s</string>
     <string name="uv_index">UV-index</string>
     <string name="uv_index_value">3.3</string>
+    <string name="by_city_name">By city name</string>
+    <string name="by_location">Continue</string>
+    <string name="text_location_perm">Allow weather to provide you with the most accurate forecast by allowing us to use your device location</string>
 </resources>

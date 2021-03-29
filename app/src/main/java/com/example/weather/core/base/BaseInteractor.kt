@@ -10,14 +10,4 @@ abstract class BaseInteractor {
         disposable.clear()
     }
 
-//    fun <T>Single<T>.schedule() = apply {
-//        observeOn(workers.observe)
-//        subscribeOn(workers.subscribe)
-//    }
-//
-//    fun <T>Observable<T>.schedule() = apply {
-//        observeOn(workers.observe)
-//        subscribeOn(workers.subscribe)
-//    }
-
 }

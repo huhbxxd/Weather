@@ -32,11 +32,9 @@ import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity(R.layout.activity_main) {
 
-    private companion object {
-        val REQUEST_CODE = 1 // random value for permission
-    }
 
-    private var permissionState by Delegates.notNull<Int>()
+
+
     private lateinit var linearLayoutManagerDailyDay: LinearLayoutManager
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
@@ -63,11 +61,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
 
         component.inject(this)
 
-        permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        if (permissionState != PackageManager.PERMISSION_GRANTED && android.os.Build.VERSION.SDK_INT >= 26) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
-        }
+
         adapterDailyDay =
             MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
@@ -109,6 +103,7 @@ class MainActivity: BaseActivity(R.layout.activity_main) {
     }
 
     private fun locationFormatter(s: String): String {
-        return s.substringAfter("/").replace("_", " ")
+        return s.substringAfter("/") // from: America/Los_Angeles
+            .replace("_", " ") // to: Los Angeles
     }
 }

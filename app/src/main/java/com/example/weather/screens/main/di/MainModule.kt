@@ -25,8 +25,7 @@ class MainModule(private val activity: MainActivity) {
 
     @Provides
     @ActivityScope
-    fun provideInteractor(/* workers: Workers ,*/
-                          repositoryWeather: WeatherRepository,
+    fun provideInteractor(repositoryWeather: WeatherRepository,
                           repositoryCoord: CoordRepository) =
         MainInteractor(repositoryWeather, repositoryCoord)
 
