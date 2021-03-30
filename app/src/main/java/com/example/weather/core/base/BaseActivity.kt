@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.weather.screens.main.MainActivity
 
-abstract class BaseActivity(@LayoutRes private val layout: Int): AppCompatActivity() {
+abstract class BaseActivity(): AppCompatActivity() {
+
+    abstract val layout: Int
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout)

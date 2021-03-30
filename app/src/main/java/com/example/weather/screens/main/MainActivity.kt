@@ -30,10 +30,10 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class MainActivity: BaseActivity(R.layout.activity_main) {
+class MainActivity: BaseActivity() {
 
-
-
+    override val layout: Int
+        get() = R.layout.activity_main
 
     private lateinit var linearLayoutManagerDailyDay: LinearLayoutManager
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
