@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:textSize="28sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Constraint
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/cityName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <Constraint
+            android:id="@+id/currentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="44sp"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Constraint
+            android:id="@+id/degreeCurrentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/degree"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintLeft_toRightOf="@id/currentTemp" />
+        <Constraint
+            android:id="@+id/viewLong"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="60dp"
+            app:layout_constraintTop_toBottomOf="@id/currentTemp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Constraint
+            android:id="@+id/recyclerViewDailyHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@id/viewLong"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Constraint
+            android:id="@+id/viewLong2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewDailyHour"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="11dp"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <Constraint
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintBottom_toTopOf="@id/viewLong"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <Constraint
+            android:id="@+id/currentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/viewLong"
+            app:layout_constraintRight_toLeftOf="@id/degreeCurrentTemp"/>
+        <Constraint
+            android:id="@+id/degreeCurrentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="14dp"
+            app:layout_constraintBottom_toTopOf="@id/viewLong"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Constraint
+            android:id="@+id/viewLong"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/recyclerViewDailyHour"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Constraint
+            android:id="@+id/recyclerViewDailyHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <Constraint
+            android:id="@+id/viewLong2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewDailyHour"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start" />
+</MotionScene>

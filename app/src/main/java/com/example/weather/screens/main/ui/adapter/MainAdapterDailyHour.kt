@@ -1,4 +1,4 @@
-package com.example.weather.screens.main.UI
+package com.example.weather.screens.main.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
 import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
-import kotlinx.android.synthetic.main.recyclerview_item_daily_day.view.*
 import kotlinx.android.synthetic.main.recyclerview_item_hourly.view.*
 import java.text.SimpleDateFormat
 import java.util.*

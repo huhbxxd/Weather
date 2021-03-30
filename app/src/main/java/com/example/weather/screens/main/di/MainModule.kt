@@ -25,8 +25,7 @@ class MainModule(private val activity: MainActivity) {
 
     @Provides
     @ActivityScope
-    fun provideInteractor(/* workers: Workers ,*/
-                          repositoryWeather: WeatherRepository,
+    fun provideInteractor(repositoryWeather: WeatherRepository,
                           repositoryCoord: CoordRepository) =
         MainInteractor(repositoryWeather, repositoryCoord)
 
@@ -39,10 +38,5 @@ class MainModule(private val activity: MainActivity) {
     @ActivityScope
     fun provideWeatherRepository(api: WeatherApi): WeatherRepository =
         WeatherRepositoryImpl(api)
-
-//    @Provides
-//    @ActivityScope
-//    fun provideWokers(): Workers =
-//        Workers(AndroidSchedulers.mainThread(), Schedulers.io())
 
 }
