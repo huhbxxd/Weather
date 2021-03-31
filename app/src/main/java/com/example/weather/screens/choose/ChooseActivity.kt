@@ -3,8 +3,10 @@ package com.example.weather.screens.choose
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -25,12 +27,16 @@ class ChooseActivity: BaseActivity() {
         get() = R.layout.activity_choose
 
     private companion object {
-
         val TITLE_ALLERT = "Allow Weather to access your location?"
         val TEXT_ALERT = "Allow Weather to access to provide local content"
         val NEGATIVE_ALLERT = "DON\'T ALLOW"
         val POSITIVE_ALLERT = "ALLOW"
-        val REQUEST_CODE = 1
+        val startedBefore = "startedBefore"
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     @SuppressLint("ShowToast")
@@ -45,9 +51,11 @@ class ChooseActivity: BaseActivity() {
             ) { isGranted ->
                 if (isGranted) {
                     startActivity(intentToMain)
+                    finish()
                 } else {
                     Toast.makeText(this, "Location denied", Toast.LENGTH_SHORT).show()
                     startActivity(intentToCities)
+                    finish()
                 }
             }
 
@@ -57,6 +65,7 @@ class ChooseActivity: BaseActivity() {
                 ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
                     startActivity(intentToMain)
+                    finish()
                 }
 
                 else -> {
@@ -71,6 +80,7 @@ class ChooseActivity: BaseActivity() {
                         .setNegativeButton(NEGATIVE_ALLERT, object : DialogInterface.OnClickListener {
                             override fun onClick(dialog: DialogInterface?, which: Int) {
                                 startActivity(intentToCities)
+                                finish()
                             }
                         })
                         .show()
@@ -79,35 +89,5 @@ class ChooseActivity: BaseActivity() {
             }
         }
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when (requestCode) {
-//            REQUEST_CODE -> {
-//                if (grantResults.isNotEmpty() &&
-//                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    startActivity(Intent(this, MainActivity::class.java))
-//                }
-//            }
-//        }
-//    }
-
-/*
-
-                                                        ActivityCompat.requestPermissions(
-                                    this@ChooseActivity,
-                                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION),
-                                    REQUEST_CODE)
-
-
-
-
-
-                        */
 
 }

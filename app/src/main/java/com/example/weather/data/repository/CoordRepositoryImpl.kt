@@ -2,12 +2,17 @@ package com.example.weather.data.repository
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 import io.reactivex.Single
+import java.util.jar.Manifest
 
 
-class CoordRepositoryImpl(private val context: Context) : CoordRepository {
+class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCompatActivity() {
 
     private companion object {
         val DISTANCE = 5000 // in meters
@@ -25,14 +30,12 @@ class CoordRepositoryImpl(private val context: Context) : CoordRepository {
                         locationCallback = object : LocationCallback() {
                             override fun onLocationResult(locationResult: LocationResult?) {
                                 locationResult ?: return
-                                for (location in locationResult.locations) {
+                                for (it in locationResult.locations) {
                                     emitter.onSuccess(location)
                                 }
                             }
                         }
-                        fusedLocation.requestLocationUpdates(locationRequest(), locationCallback, null)
-                        emitter.onSuccess(location)
-                        stopLocationUpdate()
+
                     } else {
                         emitter.onSuccess(location)
                     }
@@ -52,5 +55,24 @@ class CoordRepositoryImpl(private val context: Context) : CoordRepository {
         fusedLocation.removeLocationUpdates(locationCallback)
     }
 
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdate() {
+        fusedLocation.requestLocationUpdates(locationRequest(),
+            locationCallback,
+            Looper.getMainLooper())
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        if (ContextCompat.checkSelfPermission(context,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED) startLocationUpdate()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopLocationUpdate()
+    }
 
 }
