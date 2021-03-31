@@ -1,6 +1,7 @@
 package com.example.weather.screens.choose
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,80 +13,101 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
+import com.example.weather.screens.cities.CitiesActivity
 import com.example.weather.screens.main.MainActivity
-import kotlinx.android.synthetic.main.choose_activity.*
-import kotlin.properties.Delegates
+import kotlinx.android.synthetic.main.activity_choose.*
+import java.security.Permissions
 
 
 class ChooseActivity: BaseActivity() {
 
     override val layout: Int
-        get() = R.layout.choose_activity
+        get() = R.layout.activity_choose
 
     private companion object {
-        val POSITIVE = "ALLOW"
-        val TITLE_FIRST = "Allow Weather to access your location?"
-        val TEXT_FIRST = "Weather will use location in the background and follow" +
-                " the location change to change the weather information of the notification bar"
-        val NEGATIVE_FIRST = "NO, THANKS"
-        val TEXT_SECOND = "Allow Weather to access to provide local content"
-        val NEGATIVE_SECOND = "DON\'T ALLOW"
+
+        val TITLE_ALLERT = "Allow Weather to access your location?"
+        val TEXT_ALERT = "Allow Weather to access to provide local content"
+        val NEGATIVE_ALLERT = "DON\'T ALLOW"
+        val POSITIVE_ALLERT = "ALLOW"
         val REQUEST_CODE = 1
     }
-    private var permissionState by Delegates.notNull<Int>()
 
-
-    private val requestPermission =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) {
-            isGranted ->
-                if (isGranted) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    Toast.makeText(this, "requestPermission", Toast.LENGTH_SHORT).show()
-                }
-        }
-
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val intentToCities = Intent(this, CitiesActivity::class.java)
+        val intentToMain = Intent(this, MainActivity::class.java)
 
-
-
-//        permissionState = && android.os.Build.VERSION.SDK_INT >= 26
-//        if (permissionState != PackageManager.PERMISSION_GRANTED && android.os.Build.VERSION.SDK_INT >= 26) {
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
-//        } else {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
+        val  requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                if (isGranted) {
+                    startActivity(intentToMain)
+                } else {
+                    Toast.makeText(this, "Location denied", Toast.LENGTH_SHORT).show()
+                    startActivity(intentToCities)
+                }
+            }
 
         byLocation.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle(TITLE_FIRST)
-                .setMessage(TEXT_FIRST)
-                .setPositiveButton(POSITIVE, object : DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
-                        when {
-                            ContextCompat.checkSelfPermission(
-                                this@ChooseActivity,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            ) == PackageManager.PERMISSION_GRANTED -> {
-                                startActivity(Intent(this@ChooseActivity, MainActivity::class.java))
+
+            when {
+                ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+                    startActivity(intentToMain)
+                }
+
+                else -> {
+                    AlertDialog.Builder(this)
+                        .setTitle(TITLE_ALLERT)
+                        .setMessage(TEXT_ALERT)
+                        .setPositiveButton(POSITIVE_ALLERT, object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                             }
-                            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) -> {
-
+                        })
+                        .setNegativeButton(NEGATIVE_ALLERT, object : DialogInterface.OnClickListener {
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                                startActivity(intentToCities)
                             }
-                        }
+                        })
+                        .show()
+                }
 
-
-                    }
-
-                })
-
+            }
         }
     }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when (requestCode) {
+//            REQUEST_CODE -> {
+//                if (grantResults.isNotEmpty() &&
+//                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    startActivity(Intent(this, MainActivity::class.java))
+//                }
+//            }
+//        }
+//    }
+
+/*
+
+                                                        ActivityCompat.requestPermissions(
+                                    this@ChooseActivity,
+                                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION),
+                                    REQUEST_CODE)
+
+
+
+
+
+                        */
 
 }
