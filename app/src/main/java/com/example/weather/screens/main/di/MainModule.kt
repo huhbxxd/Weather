@@ -3,10 +3,10 @@ package com.example.weather.screens.main.di
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather.data.WeatherApi
-import com.example.weather.data.repository.CoordRepository
-import com.example.weather.data.repository.CoordRepositoryImpl
-import com.example.weather.data.repository.WeatherRepository
-import com.example.weather.data.repository.WeatherRepositoryImpl
+import com.example.weather.data.repositories.CoordRepository
+import com.example.weather.data.repositories.CoordRepositoryImpl
+import com.example.weather.data.repositories.WeatherRepository
+import com.example.weather.data.repositories.WeatherRepositoryImpl
 import com.example.weather.di.ActivityScope
 import com.example.weather.screens.main.MainActivity
 import com.example.weather.screens.main.MainInteractor

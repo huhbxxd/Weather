@@ -1,4 +1,4 @@
-package com.example.weather.data.repository
+package com.example.weather.data.repositories
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -21,6 +21,13 @@ class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCo
     private lateinit var fusedLocation: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
 
+    override fun onResume() {
+        super.onResume()
+        if (ContextCompat.checkSelfPermission(context,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED) startLocationUpdate()
+    }
+
     @SuppressLint("MissingPermission")
     override fun getLocation(): Single<Location> {
         fusedLocation = LocationServices.getFusedLocationProviderClient(context)
@@ -35,7 +42,6 @@ class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCo
                                 }
                             }
                         }
-
                     } else {
                         emitter.onSuccess(location)
                     }
@@ -62,17 +68,10 @@ class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCo
             Looper.getMainLooper())
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        if (ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED) startLocationUpdate()
-    }
-
     override fun onStop() {
         super.onStop()
         stopLocationUpdate()
     }
+
 
 }

@@ -36,7 +36,20 @@ class ChooseActivity: BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-
+        // later dont forget about check list of cities and check Package Granted to need
+        //  to move activity
+/*
+        val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        if (!sharedPreferences.getBoolean(startedBefore, false)) {
+            sharedPreferences.edit()
+                .apply {
+                    putBoolean(startedBefore, true)
+                    apply()
+                }
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } */
     }
 
     @SuppressLint("ShowToast")
@@ -60,14 +73,12 @@ class ChooseActivity: BaseActivity() {
             }
 
         byLocation.setOnClickListener {
-
             when {
                 ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
                     startActivity(intentToMain)
                     finish()
                 }
-
                 else -> {
                     AlertDialog.Builder(this)
                         .setTitle(TITLE_ALLERT)
@@ -85,7 +96,6 @@ class ChooseActivity: BaseActivity() {
                         })
                         .show()
                 }
-
             }
         }
     }

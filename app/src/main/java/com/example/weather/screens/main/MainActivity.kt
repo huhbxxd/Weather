@@ -1,34 +1,21 @@
 package com.example.weather.screens.main
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Application
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.data.repository.CoordRepositoryImpl
 import com.example.weather.screens.main.ui.adapter.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapter.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
-import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
-import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity() {
 

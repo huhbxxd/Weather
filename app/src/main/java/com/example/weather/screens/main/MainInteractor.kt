@@ -1,17 +1,12 @@
 package com.example.weather.screens.main
 
-import android.location.Location
 import com.example.weather.core.base.BaseInteractor
-import com.example.weather.data.repository.CoordRepository
-import com.example.weather.data.repository.WeatherRepository
+import com.example.weather.data.repositories.CoordRepository
+import com.example.weather.data.repositories.WeatherRepository
 import com.example.weather.data.weather.DailyWeatherMain
 import io.reactivex.Maybe
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 class MainInteractor(private val repository: WeatherRepository,
                      private val coordRepository: CoordRepository
