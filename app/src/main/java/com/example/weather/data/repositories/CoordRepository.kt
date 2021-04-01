@@ -1,4 +1,4 @@
-package com.example.weather.data.repository
+package com.example.weather.data.repositories
 
 import android.location.Location
 import io.reactivex.Single

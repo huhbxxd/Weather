@@ -1,4 +1,4 @@
-package com.example.weather.data.repository
+package com.example.weather.data.repositories
 
 import android.location.Location
 import com.example.weather.data.WeatherApi
@@ -13,9 +13,9 @@ class WeatherRepositoryImpl(private val service: WeatherApi): WeatherRepository 
         val UNITS = "metric"
     }
 
-    override fun loadWeatherDailyByName(cityName: String): Single<DailyWeatherMain> {
-        return service.getWeatherDailyByName(cityName, UNITS, API_KEY)
-    }
+//    override fun loadWeatherDailyByName(cityName: String): Single<DailyWeatherMain> {
+//        return service.getWeatherDailyByName(cityName, UNITS, API_KEY)
+//    }
 
 
     override fun loadWeatherDailyByCoord(location: Location): Single<DailyWeatherMain> {

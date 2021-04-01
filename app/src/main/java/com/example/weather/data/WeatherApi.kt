@@ -7,20 +7,12 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("/data/2.5/weather")
-    fun getWeatherDailyByName(
-        @Query("q") q: String,
-        @Query("units") units: String,
-        @Query("appid") appid: String
-    ): Single<DailyWeatherMain>
-
 //    @GET("/data/2.5/weather")
-//    fun getWeatherTodayByCoord(
-//        @Query("lat") lat: Double,
-//        @Query("lon") lon: Double,
+//    fun getWeatherDailyByName(
+//        @Query("q") q: String,
 //        @Query("units") units: String,
 //        @Query("appid") appid: String
-//    ): Single<TodayWeather>
+//    ): Single<DailyWeatherMain>
 
     @GET("/data/2.5/onecall")
     fun getWeatherDailyByCoord(
