@@ -11,6 +11,7 @@ interface CitiesApi {
     fun getCities(
         @Query("dataset") dataset: String,
         @Query("q") query: String,
+        @Query("start") page: Int,
         @Query("rows") rows: Int
     ): Single<Cities>
 
