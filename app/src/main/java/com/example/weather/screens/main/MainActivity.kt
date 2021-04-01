@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.screens.main.ui.adapter.MainAdapterDailyDay
-import com.example.weather.screens.main.ui.adapter.MainAdapterDailyHour
+import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
+import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.motion_layout.*

@@ -1,4 +1,4 @@
-package com.example.weather.screens.main.ui.adapter
+package com.example.weather.screens.main.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
