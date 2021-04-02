@@ -1,13 +1,12 @@
 package com.example.weather.core.network
 
-import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkServiceProvider: ServiceProvider {
+class CitiesNetworkWeatherServiceProvider: CitiesServiceProvider {
 
-    private val BASE_URL = "http://api.openweathermap.org"
+    private val BASE_URL = "https://public.opendatasoft.com/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -18,4 +17,5 @@ class NetworkServiceProvider: ServiceProvider {
     override fun <T> createService(service: Class<T>): T {
         return retrofit.create(service)
     }
+
 }

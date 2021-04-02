@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.cities.Cities
+import com.example.weather.data.cities.CitiesRecord
 import kotlinx.android.synthetic.main.recyclerview_item_cities.view.*
 
-class CitiesAdapter(): RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
+class CitiesAdapter: RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
 
-    var listCities = listOf<Cities>()
+    var listCities = listOf<CitiesRecord>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -29,9 +30,9 @@ class CitiesAdapter(): RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(item: Cities) = with(itemView) {
-            cityNameItem.text = item.citiesRecords!![0].cityFields?.cityName
-            countyNameItem.text = item.citiesRecords[0].cityFields?.countryCity
+        fun bind(item: CitiesRecord) = with(itemView) {
+            cityNameItem.text = item.cityFields?.cityName.toString()
+            countyNameItem.text = item.cityFields?.countryCity.toString()
         }
     }
 

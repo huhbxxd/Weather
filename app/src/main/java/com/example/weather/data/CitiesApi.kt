@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CitiesApi {
 
-    @GET("/api/records/1.0/search")
+    @GET("/api/records/1.0/search/")
     fun getCities(
         @Query("dataset") dataset: String,
         @Query("q") query: String,

@@ -1,4 +1,4 @@
-package com.example.weather.data.repositories
+package com.example.weather.data.repositories.cities
 
 import com.example.weather.data.cities.Cities
 import io.reactivex.Single

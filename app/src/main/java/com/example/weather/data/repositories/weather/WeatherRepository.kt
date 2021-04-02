@@ -1,4 +1,4 @@
-package com.example.weather.data.repositories
+package com.example.weather.data.repositories.weather
 
 import android.location.Location
 import com.example.weather.data.weather.DailyWeatherMain

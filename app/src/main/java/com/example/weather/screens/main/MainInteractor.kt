@@ -1,8 +1,8 @@
 package com.example.weather.screens.main
 
 import com.example.weather.core.base.BaseInteractor
-import com.example.weather.data.repositories.CoordRepository
-import com.example.weather.data.repositories.WeatherRepository
+import com.example.weather.data.repositories.coord.CoordRepository
+import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.weather.DailyWeatherMain
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers

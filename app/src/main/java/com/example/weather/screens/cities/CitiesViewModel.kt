@@ -8,6 +8,8 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
 
     private var page = 1
 
+//    val citiesList = mutableListOf<>()
+
     val citiesViewModel by lazy {
         interactor.subscribeOnCitiesSearch(::onSuccessCities, ::onError)
         return@lazy MutableLiveData<Cities>()
@@ -29,5 +31,9 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
 
     private fun onError(t: Throwable) {
         // some events
+    }
+
+    override fun onCleared() {
+        interactor.clear()
     }
 }

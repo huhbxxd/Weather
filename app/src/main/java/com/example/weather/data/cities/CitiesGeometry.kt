@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 class CitiesGeometry {
 
     @SerializedName("coordinates")
-    val cityCoordinate: ArrayList<Double>? = null
+    val cityCoordinate: List<Double>? = null
 
 }
