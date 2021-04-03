@@ -1,4 +1,4 @@
-package com.example.weather.data.repositories.coord
+package com.example.weather.data.repositories.location
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,7 @@ import com.google.android.gms.location.*
 import io.reactivex.Single
 
 
-class CoordRepositoryImpl(private val context: Context) : CoordRepository, AppCompatActivity() {
+class LocationRepositoryImpl(private val context: Context) : LocationRepository, AppCompatActivity() {
 
     private companion object {
         val DISTANCE = 5000 // in meters

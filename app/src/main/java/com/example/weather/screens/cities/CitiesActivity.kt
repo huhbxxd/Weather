@@ -16,6 +16,7 @@ import com.example.weather.data.cities.CitiesRecord
 import com.example.weather.screens.cities.di.CitiesModule
 import com.example.weather.screens.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.cities.ui.CitiesAdapter
+import com.example.weather.screens.main.MainActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
@@ -72,7 +73,7 @@ class CitiesActivity: BaseActivity(){
 
         component.inject(this)
 
-        adapterCities = CitiesAdapter()
+        adapterCities = CitiesAdapter(::onItemClick)
         recyclerViewCities.adapter = adapterCities
 
     }
@@ -86,5 +87,11 @@ class CitiesActivity: BaseActivity(){
 
     }
 
+    private fun onItemClick(list: List<Double>) {
+        val intent = Intent(this, MainActivity::class.java)
+            .apply { putExtra("latitude", list[0])
+                     putExtra("lontitude", list[1])}
+        startActivity(intent)
+    }
 
 }

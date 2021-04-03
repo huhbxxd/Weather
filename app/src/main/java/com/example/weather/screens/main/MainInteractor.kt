@@ -1,7 +1,7 @@
 package com.example.weather.screens.main
 
 import com.example.weather.core.base.BaseInteractor
-import com.example.weather.data.repositories.coord.CoordRepository
+import com.example.weather.data.repositories.location.LocationRepository
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.weather.DailyWeatherMain
 import io.reactivex.Maybe
@@ -9,12 +9,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainInteractor(private val repository: WeatherRepository,
-                     private val coordRepository: CoordRepository
+                     private val locationRepository: LocationRepository
 ): BaseInteractor() {
 
-    fun subscribeOnWeatherDailyByCoord(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(Maybe.fromCallable { coordRepository.getLocation()
-            .flatMap { repository.loadWeatherDailyByCoord(it)
+    fun subscribeOnWeatherDailyByLocation(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
+        disposable.add(Maybe.fromCallable { locationRepository.getLocation()
+            .flatMap { repository.loadWeatherDailyByLocation(it)
                 .subscribeOn(Schedulers.io())} } // network call must not be in a main thread
             .subscribeOn(Schedulers.io())
             .doOnError(onError)
@@ -22,11 +22,11 @@ class MainInteractor(private val repository: WeatherRepository,
             .subscribe {it.subscribe(onSuccess, onError)})
     }
 
-    /*    fun subscribeOnWeatherTodayByName(cityName: String, onSuccess: (weatherToday: TodayWeather) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(repository.loadWeatherDailyByName(cityName)
+    fun subscribeOnWeatherDailyByCoord(lat: Double, lon: Double, onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
+        disposable.add(repository.loadWeatherDailyByCoord(lat, lon)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(onSuccess, onError))
-    } */
+    }
 
 }

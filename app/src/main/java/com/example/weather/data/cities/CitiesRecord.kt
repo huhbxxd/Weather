@@ -7,7 +7,4 @@ class CitiesRecord {
     @SerializedName("fields")
     val cityFields: CitiesFields? = null
 
-    @SerializedName("geometry")
-    val cityGeometry: CitiesGeometry? = null
-
 }

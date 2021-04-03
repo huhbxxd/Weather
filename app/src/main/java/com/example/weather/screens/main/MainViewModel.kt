@@ -10,10 +10,18 @@ import kotlin.properties.Delegates
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
+    var permissionState = false
+
     val weatherThrowable = MutableLiveData<Throwable>()
+    var lat by Delegates.notNull<Double>()
+    var lon by Delegates.notNull<Double>()
 
     val weatherDailyLiveData by lazy {
-        interactor.subscribeOnWeatherDailyByCoord(::weatherDailyLoadedSuccess, ::loadedError)
+        when(permissionState) {
+            true -> interactor.subscribeOnWeatherDailyByLocation(::weatherDailyLoadedSuccess, ::loadedError)
+            false -> interactor.subscribeOnWeatherDailyByCoord(lat, lon, ::weatherDailyLoadedSuccess, ::loadedError)
+        }
+
         return@lazy MutableLiveData<DailyWeatherMain>()
     }
 

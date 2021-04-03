@@ -10,4 +10,7 @@ class CitiesFields {
     @SerializedName("country")
     val countryCity: String? = null
 
+    @SerializedName("coordinates")
+    val coordCity: List<Double>? = null
+
 }

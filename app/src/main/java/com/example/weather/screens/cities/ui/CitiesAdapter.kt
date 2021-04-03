@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.cities.Cities
+import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.cities.CitiesRecord
 import kotlinx.android.synthetic.main.recyclerview_item_cities.view.*
 
-class CitiesAdapter: RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
+class CitiesAdapter(
+    private val onItemClick: (list: List<Double>) -> Unit
+): RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
 
     var listCities = listOf<CitiesRecord>()
     set(value) {
@@ -27,6 +30,7 @@ class CitiesAdapter: RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listCities[position])
+        holder.itemView.setOnClickListener { onItemClick(listCities[position].cityFields?.coordCity!!) }
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {

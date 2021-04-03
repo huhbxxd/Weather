@@ -3,8 +3,8 @@ package com.example.weather.screens.main.di
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather.data.WeatherApi
-import com.example.weather.data.repositories.coord.CoordRepository
-import com.example.weather.data.repositories.coord.CoordRepositoryImpl
+import com.example.weather.data.repositories.location.LocationRepository
+import com.example.weather.data.repositories.location.LocationRepositoryImpl
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.repositories.weather.WeatherRepositoryImpl
 import com.example.weather.di.ActivityScope
@@ -26,14 +26,14 @@ class MainModule(private val activity: MainActivity) {
     @Provides
     @ActivityScope
     fun provideInteractor(repositoryWeather: WeatherRepository,
-                          repositoryCoord: CoordRepository
+                          repositoryLocation: LocationRepository
     ) =
-        MainInteractor(repositoryWeather, repositoryCoord)
+        MainInteractor(repositoryWeather, repositoryLocation)
 
     @Provides
     @ActivityScope
-    fun provideCoordRepository(applicationContext: Context): CoordRepository =
-        CoordRepositoryImpl(
+    fun provideCoordRepository(applicationContext: Context): LocationRepository =
+        LocationRepositoryImpl(
             applicationContext
         )
 

@@ -35,6 +35,6 @@
     <string name="by_location">Continue</string>
     <string name="text_location_perm">Allow weather to provide you with the most accurate forecast by allowing us to use your device location</string>
     <!-- searchable -->
-    <string name="search_hint">Search cities</string>
+    <string name="search_hint">Search city</string>
     <string name="country">country</string>
 </resources>

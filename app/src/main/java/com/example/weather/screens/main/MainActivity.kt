@@ -1,7 +1,9 @@
 package com.example.weather.screens.main
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
@@ -15,9 +17,16 @@ import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.jar.Manifest
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity() {
+
+    companion object {
+        const val LATITUDE = "latitude"
+        const val LONTITUDE = "lontitude"
+    }
 
     override val layout: Int
         get() = R.layout.activity_main
@@ -48,7 +57,6 @@ class MainActivity: BaseActivity() {
 
         component.inject(this)
 
-
         adapterDailyDay =
             MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
@@ -56,31 +64,41 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
 
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED) {
+            with(intent) {
+                viewModel.lat = getDoubleExtra(LATITUDE, 0.0)
+                viewModel.lon = getDoubleExtra(LONTITUDE, 0.0)
+            }
+        } else {
+            viewModel.permissionState = true
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
+        viewModel.weatherDailyLiveData.observe(this, Observer {
+            with(it) {
+                adapterDailyDay.listDailyDay = daily!!
+                adapterDailyHour.listDailyHour = hourly!!
 
+                cityName.text = locationFormatter(timezone!!)
+                description.text = current?.weatherIcon?.get(0)?.description
+                currentTemp.text = current?.temp.toString()
 
-            viewModel.weatherDailyLiveData.observe(this, Observer {
-                with(it) {
-                    adapterDailyDay.listDailyDay = daily!!
-                    adapterDailyHour.listDailyHour = hourly!!
-
-                    cityName.text = locationFormatter(timezone!!)
-                    description.text = current?.weatherIcon?.get(0)?.description
-                    currentTemp.text = current?.temp.toString()
-
-                    sunriseTime.text = dateFormatter(current?.sunrise!!)
-                    sunsetTime.text = dateFormatter(current.sunset!!)
-                    pressureValue.text = current.pressure.toString()
-                    humidityValue.text = current.humidity.toString()
-                    feelsLikeValue.text = current.feelsLike.toString()
-                    cloudinessValue.text = current.clouds.toString()
-                    windSpeedValue.text = current.windSpeed.toString()
-                    uvIndexValue.text = current.uvi.toString()
-                }
-            })
+                sunriseTime.text = dateFormatter(current?.sunrise!!)
+                sunsetTime.text = dateFormatter(current.sunset!!)
+                pressureValue.text = current.pressure.toString()
+                humidityValue.text = current.humidity.toString()
+                feelsLikeValue.text = current.feelsLike.toString()
+                cloudinessValue.text = current.clouds.toString()
+                windSpeedValue.text = current.windSpeed.toString()
+                uvIndexValue.text = current.uvi.toString()
+            }
+        })
     }
 
     @SuppressLint("SimpleDateFormat")

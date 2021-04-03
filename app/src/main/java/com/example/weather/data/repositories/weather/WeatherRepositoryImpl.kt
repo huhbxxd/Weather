@@ -14,13 +14,17 @@ class WeatherRepositoryImpl(private val service: WeatherApi):
         val UNITS = "metric"
     }
 
-//    override fun loadWeatherDailyByName(cityName: String): Single<DailyWeatherMain> {
-//        return service.getWeatherDailyByName(cityName, UNITS, API_KEY)
-//    }
+    override fun loadWeatherDailyByCoord(lat: Double, lon: Double): Single<DailyWeatherMain> {
+        return service.getWeatherDailyByCoord(lat, lon,
+            EXCLUDE,
+            UNITS,
+            API_KEY
+        )
+    }
 
 
-    override fun loadWeatherDailyByCoord(location: Location): Single<DailyWeatherMain> {
-        return service.getWeatherDailyByCoord(location.latitude, location.longitude,
+    override fun loadWeatherDailyByLocation(location: Location): Single<DailyWeatherMain> {
+        return service.getWeatherDailyByLocation(location.latitude, location.longitude,
             EXCLUDE,
             UNITS,
             API_KEY
