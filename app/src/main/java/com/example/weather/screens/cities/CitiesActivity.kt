@@ -63,7 +63,6 @@ class CitiesActivity: BaseActivity(){
                 viewModel.onSearch(query)
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryText = newText!!
                 viewModel.onSearch(newText)
@@ -96,24 +95,21 @@ class CitiesActivity: BaseActivity(){
                 }
             }
         })
-
     }
 
     override fun onResume() {
         super.onResume()
-
         viewModel.citiesViewModel.observe(this, Observer {
             adapterCities.hasLoading = it.second
             adapterCities.listCities = it.first
         })
-
     }
 
     private fun onItemClick(city: CitiesFields) {
         val list = city.coordCity!!
         val intent = Intent(this, MainActivity::class.java)
-            .apply { putExtra(MainActivity.LATITUDE, list[0])
-                     putExtra(MainActivity.LONTITUDE, list[1])
+            .apply { putExtra(MainActivity.LATITUDE_EXTRA, list[0])
+                     putExtra(MainActivity.LONTITUDE_EXTRA, list[1])
                      putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
         startActivity(intent)
     }

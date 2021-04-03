@@ -23,8 +23,8 @@ import kotlin.properties.Delegates
 class MainActivity: BaseActivity() {
 
     companion object {
-        const val LATITUDE = "latitude"
-        const val LONTITUDE = "lontitude"
+        const val LATITUDE_EXTRA = "latitude"
+        const val LONTITUDE_EXTRA = "lontitude"
         const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
         const val defaultValue = 0.0
     }
@@ -73,8 +73,8 @@ class MainActivity: BaseActivity() {
 
         if (!permissionState) {
             with(intent) {
-                viewModel.lat = getDoubleExtra(LATITUDE, defaultValue)
-                viewModel.lon = getDoubleExtra(LONTITUDE, defaultValue)
+                viewModel.lat = getDoubleExtra(LATITUDE_EXTRA, defaultValue)
+                viewModel.lon = getDoubleExtra(LONTITUDE_EXTRA, defaultValue)
             }
         } else {
             viewModel.permissionState = permissionState
