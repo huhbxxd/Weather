@@ -9,9 +9,11 @@ import android.view.MenuItem
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
+import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.cities.CitiesRecord
 import com.example.weather.screens.cities.di.CitiesModule
 import com.example.weather.screens.cities.di.DaggerCitiesComponent
@@ -23,11 +25,16 @@ import javax.inject.Inject
 
 class CitiesActivity: BaseActivity(){
 
+    companion object {
+        const val DIRECTION_BOT = 1
+    }
+
     override val layout: Int
         get() = R.layout.activity_cities
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapterCities: CitiesAdapter
+    private lateinit var queryText: String
 
     private val component by lazy {
         DaggerCitiesComponent.builder()
@@ -52,12 +59,14 @@ class CitiesActivity: BaseActivity(){
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.onSearch(query!!)
+                queryText = query!!
+                viewModel.onSearch(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.onSearch(newText!!)
+                queryText = newText!!
+                viewModel.onSearch(newText)
                 return true
             }
 
@@ -76,21 +85,36 @@ class CitiesActivity: BaseActivity(){
         adapterCities = CitiesAdapter(::onItemClick)
         recyclerViewCities.adapter = adapterCities
 
+        recyclerViewCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(DIRECTION_BOT)
+                    && newState == RecyclerView.SCROLL_STATE_IDLE
+                    && adapterCities.hasLoading) {
+                    viewModel.onNextPage(queryText)
+                    adapterCities.hasLoading = false
+                }
+            }
+        })
+
     }
 
     override fun onResume() {
         super.onResume()
 
         viewModel.citiesViewModel.observe(this, Observer {
-            adapterCities.listCities = it.citiesRecords!!
+            adapterCities.hasLoading = it.second
+            adapterCities.listCities = it.first
         })
 
     }
 
-    private fun onItemClick(list: List<Double>) {
+    private fun onItemClick(city: CitiesFields) {
+        val list = city.coordCity!!
         val intent = Intent(this, MainActivity::class.java)
-            .apply { putExtra("latitude", list[0])
-                     putExtra("lontitude", list[1])}
+            .apply { putExtra(MainActivity.LATITUDE, list[0])
+                     putExtra(MainActivity.LONTITUDE, list[1])
+                     putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
         startActivity(intent)
     }
 

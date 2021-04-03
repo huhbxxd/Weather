@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.jar.Manifest
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -26,6 +25,8 @@ class MainActivity: BaseActivity() {
     companion object {
         const val LATITUDE = "latitude"
         const val LONTITUDE = "lontitude"
+        const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
+        const val defaultValue = 0.0
     }
 
     override val layout: Int
@@ -35,6 +36,7 @@ class MainActivity: BaseActivity() {
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
     private lateinit var adapterDailyHour: MainAdapterDailyHour
+    private var permissionState by Delegates.notNull<Boolean>()
 
     private val component by lazy {
         DaggerMainComponent.builder()
@@ -48,6 +50,11 @@ class MainActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        permissionState = ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
 
         linearLayoutManagerDailyDay = LinearLayoutManager(this)
         linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -64,16 +71,13 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED) {
+        if (!permissionState) {
             with(intent) {
-                viewModel.lat = getDoubleExtra(LATITUDE, 0.0)
-                viewModel.lon = getDoubleExtra(LONTITUDE, 0.0)
+                viewModel.lat = getDoubleExtra(LATITUDE, defaultValue)
+                viewModel.lon = getDoubleExtra(LONTITUDE, defaultValue)
             }
         } else {
-            viewModel.permissionState = true
+            viewModel.permissionState = permissionState
         }
 
     }
@@ -85,7 +89,11 @@ class MainActivity: BaseActivity() {
                 adapterDailyDay.listDailyDay = daily!!
                 adapterDailyHour.listDailyHour = hourly!!
 
-                cityName.text = locationFormatter(timezone!!)
+                when(permissionState) {
+                    true -> cityName.text = locationFormatter(timezone!!)
+                    false -> cityName.text = intent.getStringExtra(CITY_NAME_EXTRA)
+                }
+
                 description.text = current?.weatherIcon?.get(0)?.description
                 currentTemp.text = current?.temp.toString()
 
