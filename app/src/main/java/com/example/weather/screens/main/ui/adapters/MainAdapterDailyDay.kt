@@ -14,10 +14,12 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
+class MainAdapterDailyDay(
+    private val onItemClick: (DailyDayWeather) -> Unit
+): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
 
     private companion object {
-        val ICON_URL = "http://openweathermap.org/img/wn/"
+        const val ICON_URL = "http://openweathermap.org/img/wn/"
     }
 
     var listDailyDay = listOf<DailyDayWeather>()
@@ -36,6 +38,7 @@ class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listDailyDay[position])
+        holder.itemView.setOnClickListener { onItemClick(listDailyDay[position]) }
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -43,7 +46,11 @@ class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder
             dayWeek.text = dateFormatter(item.dt!!)
             tempMax.text = item.temperature?.max?.roundToInt().toString()
             tempMin.text = item.temperature?.min?.roundToInt().toString()
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageWeatherDaily)
+            Glide.with(context)
+                .load(ICON_URL
+                    + item.weather!![0].icon!!
+                    + ".png")
+                .into(imageWeatherDaily)
         }
     }
 
