@@ -14,7 +14,9 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
+class MainAdapterDailyDay(
+    private val onItemClick: (DailyDayWeather) -> Unit
+): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
 
     private companion object {
         val ICON_URL = "http://openweathermap.org/img/wn/"
@@ -36,6 +38,7 @@ class MainAdapterDailyDay(): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listDailyDay[position])
+        holder.itemView.setOnClickListener { onItemClick(listDailyDay[position]) }
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {

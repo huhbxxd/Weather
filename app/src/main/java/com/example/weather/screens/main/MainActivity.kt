@@ -1,6 +1,7 @@
 package com.example.weather.screens.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -9,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
+import com.example.weather.data.weather.DailyWeatherMain
+import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
+import com.example.weather.screens.detail_weather.DailyDetailWeather
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
@@ -28,6 +32,7 @@ class MainActivity: BaseActivity() {
         const val LONTITUDE_EXTRA = "lontitude"
         const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
         const val defaultValue = 0.0
+        const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
     }
 
     override val layout: Int
@@ -66,7 +71,7 @@ class MainActivity: BaseActivity() {
         component.inject(this)
 
         adapterDailyDay =
-            MainAdapterDailyDay()
+            MainAdapterDailyDay(::onItemClick)
         recyclerViewDailyDay.adapter = adapterDailyDay
         adapterDailyHour =
             MainAdapterDailyHour()
@@ -98,8 +103,8 @@ class MainActivity: BaseActivity() {
                 description.text = current?.weatherIcon?.get(0)?.description
                 currentTemp.text = current?.temp?.roundToInt().toString()
 
-                sunriseTime.text = dateFormatter(current?.sunrise!!)
-                sunsetTime.text = dateFormatter(current.sunset!!)
+                sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
+                sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
                 pressureValue.text = current.pressure.toString()
                 humidityValue.text = current.humidity.toString()
                 feelsLikeValue.text = current.feelsLike.toString()
@@ -110,14 +115,15 @@ class MainActivity: BaseActivity() {
         })
     }
 
-    @SuppressLint("SimpleDateFormat")
-    private fun dateFormatter(unix: Int): String {
-        return SimpleDateFormat("HH:mm") // "HH:mm" hours:minutes from table of SimpleDateFormat
-            .format(Date(unix.toLong() * 1000))
-    }
 
     private fun locationFormatter(s: String): String {
         return s.substringAfter("/") // from: America/Los_Angeles
             .replace("_", " ") // to: Los Angeles
+    }
+
+    private fun onItemClick(day: DailyDayWeather) {
+        val intent = Intent(this, DailyDetailWeather::class.java)
+            .apply { putExtra(DailyDetailWeather.INST_EXTRA, day) }
+        startActivity(intent)
     }
 }

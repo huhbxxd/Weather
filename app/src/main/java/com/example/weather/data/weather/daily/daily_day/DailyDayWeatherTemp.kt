@@ -1,8 +1,9 @@
 package com.example.weather.data.weather.daily.daily_day
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class DailyDayWeatherTemp {
+class DailyDayWeatherTemp: Serializable {
 
     @SerializedName("day")
     val day: Double? = null

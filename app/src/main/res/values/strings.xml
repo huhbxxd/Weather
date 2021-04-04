@@ -43,7 +43,7 @@
     <string name="evening_temperature">Evening temperature</string>
     <string name="feels_like_day">Feels like (day)</string>
     <string name="feels_like_night">Feels like (night)</string>
-    <string name="wind_gust">Wind gust</string>
+    <string name="wind_gust">Wind direction</string>
     <string name="default_value">-</string>
     <string name="probability_of_precipitation">Probability of precipitation</string>
     <string name="atmospheric_pressure">Atmospheric pressure</string>

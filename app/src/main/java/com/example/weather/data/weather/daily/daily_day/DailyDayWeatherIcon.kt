@@ -1,8 +1,9 @@
 package com.example.weather.data.weather.daily.daily_day
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class DailyDayWeatherIcon {
+class DailyDayWeatherIcon: Serializable {
 
     @SerializedName("id")
     val id: Int? = null
