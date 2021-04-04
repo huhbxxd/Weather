@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.scroll_content.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity() {
@@ -95,7 +96,7 @@ class MainActivity: BaseActivity() {
                 }
 
                 description.text = current?.weatherIcon?.get(0)?.description
-                currentTemp.text = current?.temp.toString()
+                currentTemp.text = current?.temp?.roundToInt().toString()
 
                 sunriseTime.text = dateFormatter(current?.sunrise!!)
                 sunsetTime.text = dateFormatter(current.sunset!!)

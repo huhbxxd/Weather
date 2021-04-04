@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dayOfWeek"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:gravity="center|start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/detailFrameSunrise"
         android:layout_width="180dp"
         android:layout_height="120dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="70dp"
         android:background="@color/grey_back_framelayout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,7 +40,7 @@
             android:layout_gravity="center|top"/>
         <TextView
             android:id="@id/sunriseTime"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:textSize="28sp"
@@ -35,7 +53,7 @@
         android:id="@+id/detailFrameSunset"
         android:layout_width="180dp"
         android:layout_height="120dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="70dp"
         android:background="@color/grey_back_framelayout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,7 +67,7 @@
             android:layout_gravity="center|top"/>
         <TextView
             android:id="@id/sunsetTime"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:textSize="28sp"
@@ -67,7 +85,7 @@
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@id/detailFrameSunrise"
-        app:layout_constraintEnd_toStartOf="@+id/detailFrameSunset"
+        app:layout_constraintEnd_toStartOf="@+id/detailFrameTempNight"
         app:layout_constraintStart_toStartOf="parent">
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +97,7 @@
             android:gravity="center" />
         <TextView
             android:id="@+id/tempDayWeek"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
@@ -96,7 +114,7 @@
             android:gravity="center"/>
         <TextView
             android:id="@+id/mornTemperature"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|bottom"
             android:textSize="14sp"
@@ -112,7 +130,7 @@
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailFrameSunrise"
+        app:layout_constraintStart_toEndOf="@+id/detailFrameTempDay"
         app:layout_constraintTop_toBottomOf="@id/detailFrameSunset">
         <TextView
             android:layout_width="wrap_content"
@@ -124,7 +142,7 @@
             android:gravity="center" />
         <TextView
             android:id="@+id/tempNightWeek"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
@@ -141,7 +159,326 @@
             android:gravity="center"/>
         <TextView
             android:id="@+id/eveTemperature"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameFeelsDay"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameTempDay"
+        app:layout_constraintEnd_toStartOf="@+id/detailFrameFeelsNight"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/feels_like_day"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/tempFeelsDay"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textSize="14sp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Feels like (morning)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tempFeelsMorn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameFeelsNight"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/detailFrameFeelsDay"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameTempNight">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/feels_like_night"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/tempFeelsNight"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textSize="14sp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Feels like (evening)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tempFeelsEve"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameWindSpeed"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/detailFrameWindGust"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameFeelsDay">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/wind_speed"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/windSpeedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameWindGust"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailFrameWindSpeed"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameFeelsNight">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/wind_gust"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/windGustValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:text="@string/default_value"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameClouds"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/detailFrameUVi"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameWindSpeed">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/cloudiness"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/cloudinessValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameUVi"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailFrameClouds"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameWindGust">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/uv_index"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/uvIndexValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFramePop"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/detailFrameHum"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameClouds">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/probability_of_precipitation"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/popValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameHum"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailFramePop"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameUVi">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/humidity"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/humidityValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFramePressure"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/detailFrameDewPoint"
+        app:layout_constraintTop_toBottomOf="@id/detailFramePop"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/pressure"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/pressureValue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|bottom"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/detailFrameDewPoint"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/grey_back_framelayout"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/detailFramePressure"
+        app:layout_constraintTop_toBottomOf="@id/detailFrameHum"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:text="@string/atmospheric_pressure"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/dewPointValue"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|bottom"
             android:textSize="14sp"
@@ -150,3 +487,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
