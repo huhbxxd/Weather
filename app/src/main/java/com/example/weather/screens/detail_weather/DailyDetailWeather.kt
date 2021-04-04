@@ -41,8 +41,7 @@ class DailyDetailWeather: BaseActivity() {
 
         with(dayWeather) {
             dayOfWeek.text = dateFormatter(dt!!, PATTERN_DAY)
-
-
+            descriptionDay.text = weather!![0].description
 
             sunriseTime.text = dateFormatter(sunrise!!, PATTERN_TIME)
             sunsetTime.text = dateFormatter(sunset!!, PATTERN_TIME)

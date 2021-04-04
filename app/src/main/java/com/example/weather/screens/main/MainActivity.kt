@@ -12,7 +12,9 @@ import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.data.weather.DailyWeatherMain
 import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
+import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
 import com.example.weather.screens.detail_weather.DailyDetailWeather
+import com.example.weather.screens.detail_weather.HourlyDetailWeather
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
@@ -71,10 +73,10 @@ class MainActivity: BaseActivity() {
         component.inject(this)
 
         adapterDailyDay =
-            MainAdapterDailyDay(::onItemClick)
+            MainAdapterDailyDay(::onItemClickAdapterDay)
         recyclerViewDailyDay.adapter = adapterDailyDay
         adapterDailyHour =
-            MainAdapterDailyHour()
+            MainAdapterDailyHour(::onItemClickAdapterHourly)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
         if (!permissionState) {
@@ -121,9 +123,15 @@ class MainActivity: BaseActivity() {
             .replace("_", " ") // to: Los Angeles
     }
 
-    private fun onItemClick(day: DailyDayWeather) {
+    private fun onItemClickAdapterDay(day: DailyDayWeather) {
         val intent = Intent(this, DailyDetailWeather::class.java)
             .apply { putExtra(DailyDetailWeather.INST_EXTRA, day) }
+        startActivity(intent)
+    }
+
+    private fun onItemClickAdapterHourly(hour: HourlyWeather) {
+        val intent = Intent(this, HourlyDetailWeather::class.java)
+            .apply { putExtra(HourlyDetailWeather.INST_EXTRA, hour) }
         startActivity(intent)
     }
 }

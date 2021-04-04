@@ -37,6 +37,7 @@
                         android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".screens.detail_weather.DailyDetailWeather"/>
+        <activity android:name=".screens.detail_weather.HourlyDetailWeather"/>
     </application>
 
 </manifest>

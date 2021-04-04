@@ -13,14 +13,27 @@
     <TextView
         android:id="@+id/dayOfWeek"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:textStyle="bold"
         android:textSize="36sp"
+        android:textColor="@color/black"
         android:gravity="center|start"
+        android:shadowColor="@color/black_grey"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/descriptionDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detailFrameSunrise"/>
 
     <ImageView
         android:id="@+id/weatherDayView"
@@ -28,6 +41,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="17dp"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
@@ -54,6 +68,7 @@
             android:layout_marginBottom="7dp"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:textColor="@color/black_grey"
             android:gravity="center"
             android:layout_gravity="center|bottom"/>
     </FrameLayout>
@@ -81,6 +96,7 @@
             android:layout_marginBottom="7dp"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:textColor="@color/black_grey"
             android:gravity="center"
             android:layout_gravity="center|bottom"/>
     </FrameLayout>
@@ -103,6 +119,7 @@
             android:text="@string/day_temperature"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/tempDayWeek"
@@ -118,6 +135,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="@string/morning_temperature"
+            android:textColor="@color/black_grey"
             android:textSize="16sp"
             android:textStyle="bold"
             android:gravity="center"/>
@@ -146,6 +164,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center|top"
             android:text="@string/night_temperature"
+            android:textColor="@color/black_grey"
             android:textStyle="bold"
             android:textSize="16sp"
             android:gravity="center" />
@@ -165,6 +184,7 @@
             android:text="@string/evening_temperature"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/black_grey"
             android:gravity="center"/>
         <TextView
             android:id="@+id/eveTemperature"
@@ -193,6 +213,7 @@
             android:text="@string/feels_like_day"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/tempFeelsDay"
@@ -207,9 +228,10 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:text="Feels like (morning)"
+            android:text="@string/feels_like_morning"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/black_grey"
             android:gravity="center"/>
         <TextView
             android:id="@+id/tempFeelsMorn"
@@ -238,6 +260,7 @@
             android:text="@string/feels_like_night"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/tempFeelsNight"
@@ -252,9 +275,10 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:text="Feels like (evening)"
+            android:text="@string/feels_like_evening"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/black_grey"
             android:gravity="center"/>
         <TextView
             android:id="@+id/tempFeelsEve"
@@ -274,7 +298,7 @@
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/detailFrameWindGust"
+        app:layout_constraintEnd_toStartOf="@id/detailFrameWindDeg"
         app:layout_constraintTop_toBottomOf="@id/detailFrameFeelsDay">
         <TextView
             android:layout_width="wrap_content"
@@ -283,6 +307,7 @@
             android:text="@string/wind_speed"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/windSpeedValue"
@@ -294,7 +319,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/detailFrameWindGust"
+        android:id="@+id/detailFrameWindDeg"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginTop="15dp"
@@ -311,6 +336,7 @@
             android:text="@string/wind_gust"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/windDegValue"
@@ -339,6 +365,7 @@
             android:text="@string/cloudiness"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/cloudinessValue"
@@ -359,7 +386,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/detailFrameClouds"
-        app:layout_constraintTop_toBottomOf="@id/detailFrameWindGust">
+        app:layout_constraintTop_toBottomOf="@id/detailFrameWindDeg">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -367,6 +394,7 @@
             android:text="@string/uv_index"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/uvIndexValue"
@@ -395,6 +423,7 @@
             android:text="@string/probability_of_precipitation"
             android:textStyle="bold"
             android:textSize="14sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/popValue"
@@ -423,6 +452,7 @@
             android:text="@string/humidity"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/humidityValue"
@@ -453,6 +483,7 @@
             android:text="@string/pressure"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/pressureValue"
@@ -483,6 +514,7 @@
             android:text="@string/atmospheric_pressure"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/dewPointValue"

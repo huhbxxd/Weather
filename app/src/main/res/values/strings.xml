@@ -47,4 +47,7 @@
     <string name="default_value">-</string>
     <string name="probability_of_precipitation">Probability of precipitation</string>
     <string name="atmospheric_pressure">Atmospheric pressure</string>
+    <string name="feels_like_evening">Feels like (evening)</string>
+    <string name="feels_like_morning">Feels like (morning)</string>
+    <string name="visibility">Visibility</string>
 </resources>
