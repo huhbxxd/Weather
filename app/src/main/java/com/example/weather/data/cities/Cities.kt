@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 class Cities {
 
     @SerializedName("records")
-    val citiesRecords: ArrayList<CitiesRecord>? = null
+    val citiesRecords: List<CitiesRecord>? = null
 
 }

@@ -1,7 +1,9 @@
 package com.example.weather.screens.main
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
@@ -16,8 +18,17 @@ import kotlinx.android.synthetic.main.scroll_content.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
+import kotlin.properties.Delegates
 
 class MainActivity: BaseActivity() {
+
+    companion object {
+        const val LATITUDE_EXTRA = "latitude"
+        const val LONTITUDE_EXTRA = "lontitude"
+        const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
+        const val defaultValue = 0.0
+    }
 
     override val layout: Int
         get() = R.layout.activity_main
@@ -26,6 +37,7 @@ class MainActivity: BaseActivity() {
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
     private lateinit var adapterDailyHour: MainAdapterDailyHour
+    private var permissionState by Delegates.notNull<Boolean>()
 
     private val component by lazy {
         DaggerMainComponent.builder()
@@ -40,6 +52,11 @@ class MainActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        permissionState = ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
         linearLayoutManagerDailyDay = LinearLayoutManager(this)
         linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewDailyDay.layoutManager = linearLayoutManagerDailyDay
@@ -48,7 +65,6 @@ class MainActivity: BaseActivity() {
 
         component.inject(this)
 
-
         adapterDailyDay =
             MainAdapterDailyDay()
         recyclerViewDailyDay.adapter = adapterDailyDay
@@ -56,31 +72,42 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour()
         recyclerViewDailyHour.adapter = adapterDailyHour
 
+        if (!permissionState) {
+            with(intent) {
+                viewModel.lat = getDoubleExtra(LATITUDE_EXTRA, defaultValue)
+                viewModel.lon = getDoubleExtra(LONTITUDE_EXTRA, defaultValue)
+            }
+        } else {
+            viewModel.permissionState = permissionState
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
+        viewModel.weatherDailyLiveData.observe(this, Observer {
+            with(it) {
+                adapterDailyDay.listDailyDay = daily!!
+                adapterDailyHour.listDailyHour = hourly!!
 
-
-            viewModel.weatherDailyLiveData.observe(this, Observer {
-                with(it) {
-                    adapterDailyDay.listDailyDay = daily!!
-                    adapterDailyHour.listDailyHour = hourly!!
-
-                    cityName.text = locationFormatter(timezone!!)
-                    description.text = current?.weatherIcon?.get(0)?.description
-                    currentTemp.text = current?.temp.toString()
-
-                    sunriseTime.text = dateFormatter(current?.sunrise!!)
-                    sunsetTime.text = dateFormatter(current.sunset!!)
-                    pressureValue.text = current.pressure.toString()
-                    humidityValue.text = current.humidity.toString()
-                    feelsLikeValue.text = current.feelsLike.toString()
-                    cloudinessValue.text = current.clouds.toString()
-                    windSpeedValue.text = current.windSpeed.toString()
-                    uvIndexValue.text = current.uvi.toString()
+                when(permissionState) {
+                    true -> cityName.text = locationFormatter(timezone!!)
+                    false -> cityName.text = intent.getStringExtra(CITY_NAME_EXTRA)
                 }
-            })
+
+                description.text = current?.weatherIcon?.get(0)?.description
+                currentTemp.text = current?.temp?.roundToInt().toString()
+
+                sunriseTime.text = dateFormatter(current?.sunrise!!)
+                sunsetTime.text = dateFormatter(current.sunset!!)
+                pressureValue.text = current.pressure.toString()
+                humidityValue.text = current.humidity.toString()
+                feelsLikeValue.text = current.feelsLike.toString()
+                cloudinessValue.text = current.clouds.toString()
+                windSpeedValue.text = current.windSpeed.toString()
+                uvIndexValue.text = current.uvi.toString()
+            }
+        })
     }
 
     @SuppressLint("SimpleDateFormat")

@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:background="@color/white"
-        android:layout_height="330dp"
+        android:layout_height="349dp"
         android:layout_width="match_parent" >
 
         <include layout="@layout/motion_layout"/>

@@ -2,7 +2,7 @@ package com.example.weather.screens.cities
 
 import com.example.weather.core.base.BaseInteractor
 import com.example.weather.data.cities.Cities
-import com.example.weather.data.repositories.CitiesRepository
+import com.example.weather.data.repositories.cities.CitiesRepository
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

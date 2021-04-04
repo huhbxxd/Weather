@@ -1,9 +1,9 @@
-package com.example.weather.data.repositories
+package com.example.weather.data.repositories.location
 
 import android.location.Location
 import io.reactivex.Single
 
-interface CoordRepository {
+interface LocationRepository {
 
     fun getLocation(): Single<Location>
 }

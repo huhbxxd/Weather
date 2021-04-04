@@ -1,6 +1,6 @@
 package com.example.weather.core.network
 
-interface ServiceProvider {
+interface WeatherServiceProvider {
 
     fun <T>createService(service: Class<T>): T
 

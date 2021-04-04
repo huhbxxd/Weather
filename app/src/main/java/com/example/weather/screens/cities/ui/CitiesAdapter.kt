@@ -6,33 +6,55 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.cities.Cities
+import com.example.weather.data.cities.CitiesFields
+import com.example.weather.data.cities.CitiesRecord
+import com.example.weather.screens.cities.ui.viewholders.BaseViewHolder
+import com.example.weather.screens.cities.ui.viewholders.CitiesViewHolder
+import com.example.weather.screens.cities.ui.viewholders.LoadingViewHolder
 import kotlinx.android.synthetic.main.recyclerview_item_cities.view.*
+import java.lang.IllegalArgumentException
 
-class CitiesAdapter(): RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
+class CitiesAdapter(
+    private val onItemClick: (city: CitiesFields) -> Unit
+): RecyclerView.Adapter<BaseViewHolder>() {
 
-    var listCities = listOf<Cities>()
+    private companion object {
+        const val TYPE_CONTENT = 0
+        const val TYPE_LOADING = 1
+    }
+
+    var listCities = listOf<CitiesRecord>()
     set(value) {
         field = value
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recyclerview_item_cities, parent, false)
-        return ViewHolder(view)
+    var hasLoading = true
+
+    override fun getItemViewType(position: Int): Int {
+        return if (isLoadingPosition(position)) TYPE_LOADING else TYPE_CONTENT
     }
 
-    override fun getItemCount(): Int = listCities.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listCities[position])
-    }
-
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(item: Cities) = with(itemView) {
-            cityNameItem.text = item.citiesRecords!![0].cityFields?.cityName
-            countyNameItem.text = item.citiesRecords[0].cityFields?.countryCity
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when(viewType) {
+            TYPE_CONTENT -> CitiesViewHolder(inflater.inflate(R.layout.recyclerview_item_cities, parent, false))
+            TYPE_LOADING -> LoadingViewHolder(inflater.inflate(R.layout.item_loading, parent, false))
+            else -> throw(IllegalArgumentException())
         }
     }
+
+    override fun getItemCount(): Int = if(listCities.isEmpty()) 0 else getSize()
+
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        if(!isLoadingPosition(position)) {
+            holder.bind(listCities[position])
+            holder.itemView.setOnClickListener { onItemClick(listCities[position].cityFields!!) }
+        }
+    }
+
+    private fun getSize() = if(hasLoading) listCities.size + 1 else listCities.size
+
+    private fun isLoadingPosition(position: Int) = position == listCities.size
 
 }
