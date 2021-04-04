@@ -19,7 +19,7 @@ class MainAdapterDailyDay(
 ): RecyclerView.Adapter<MainAdapterDailyDay.ViewHolder>() {
 
     private companion object {
-        val ICON_URL = "http://openweathermap.org/img/wn/"
+        const val ICON_URL = "http://openweathermap.org/img/wn/"
     }
 
     var listDailyDay = listOf<DailyDayWeather>()
@@ -46,7 +46,11 @@ class MainAdapterDailyDay(
             dayWeek.text = dateFormatter(item.dt!!)
             tempMax.text = item.temperature?.max?.roundToInt().toString()
             tempMin.text = item.temperature?.min?.roundToInt().toString()
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageWeatherDaily)
+            Glide.with(context)
+                .load(ICON_URL
+                    + item.weather!![0].icon!!
+                    + ".png")
+                .into(imageWeatherDaily)
         }
     }
 

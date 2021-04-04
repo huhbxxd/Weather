@@ -11,6 +11,7 @@ import kotlin.math.roundToInt
 class DailyDetailWeather: BaseActivity() {
 
     companion object {
+        const val ICON_URL = "http://openweathermap.org/img/wn/"
         const val INST_EXTRA = "INST_EXTRA"
         const val PATTERN_DAY = "EEEE" // "EEEE" it's full name day of week from table of SimpleDateFormat
         const val PATTERN_TIME = "HH:mm"
@@ -32,9 +33,17 @@ class DailyDetailWeather: BaseActivity() {
         Glide.with(this)
             .load(R.drawable.sunset)
             .into(sunsetView)
+        Glide.with(this)
+            .load(ICON_URL
+                    + dayWeather.weather!![0].icon!!
+                    + ".png")
+            .into(weatherDayView)
 
         with(dayWeather) {
             dayOfWeek.text = dateFormatter(dt!!, PATTERN_DAY)
+
+
+
             sunriseTime.text = dateFormatter(sunrise!!, PATTERN_TIME)
             sunsetTime.text = dateFormatter(sunset!!, PATTERN_TIME)
 
