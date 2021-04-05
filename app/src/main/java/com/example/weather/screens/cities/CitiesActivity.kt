@@ -40,7 +40,7 @@ class CitiesActivity: BaseActivity(){
     private lateinit var adapterCities: CitiesAdapter
     private lateinit var queryText: String
     private lateinit var sharedPreferences: SharedPreferences
-
+    private val citiesList = hashSetOf<String>()
 
     private val component by lazy {
         DaggerCitiesComponent.builder()
@@ -118,15 +118,16 @@ class CitiesActivity: BaseActivity(){
             .apply { putExtra(MainActivity.LATITUDE_EXTRA, list[0])
                      putExtra(MainActivity.LONTITUDE_EXTRA, list[1])
                      putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
-        val cityFields = Gson().toJson(city)
-            saveCity("samara", cityFields)
+        // serializable gson to json to next time deserializable in ListCitiesActivity
+        citiesList.add(Gson().toJson(city))
+            saveCity(citiesList)
         startActivity(intent)
     }
 
     @SuppressLint("CommitPrefEdits")
-    private fun saveCity(key: String, value: String) {
+    private fun saveCity(value: HashSet<String>) {
         sharedPreferences.edit().apply{
-            putString(key, value)
+            putStringSet(MainActivity.LIST_CITIES, value)
             apply()
         }
     }

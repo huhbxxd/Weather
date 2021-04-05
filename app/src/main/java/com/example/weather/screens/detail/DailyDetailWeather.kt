@@ -1,10 +1,10 @@
-package com.example.weather.screens.detail_weather
+package com.example.weather.screens.detail
 
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
+import com.example.weather.data.weather.daily.day.DailyDayWeather
 import kotlinx.android.synthetic.main.activity_detail_weather_daily.*
 import kotlin.math.roundToInt
 

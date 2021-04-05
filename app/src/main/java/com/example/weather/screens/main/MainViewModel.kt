@@ -1,11 +1,7 @@
 package com.example.weather.screens.main
 
-import android.location.Location
 import androidx.lifecycle.*
-import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
 import com.example.weather.data.weather.DailyWeatherMain
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {

@@ -1,4 +1,4 @@
-package com.example.weather.data.weather.daily.daily_hour
+package com.example.weather.data.weather.daily.hour
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

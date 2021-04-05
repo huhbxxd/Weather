@@ -1,8 +1,8 @@
 package com.example.weather.data.weather
 
 import com.example.weather.data.weather.current.CurrentWeather
-import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
-import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
+import com.example.weather.data.weather.daily.day.DailyDayWeather
+import com.example.weather.data.weather.daily.hour.HourlyWeather
 import com.google.gson.annotations.SerializedName
 
 class DailyWeatherMain {

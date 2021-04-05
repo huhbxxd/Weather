@@ -36,9 +36,9 @@
             <meta-data android:name="android.app.searchable"
                         android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".screens.detail_weather.DailyDetailWeather"/>
-        <activity android:name=".screens.detail_weather.HourlyDetailWeather"/>
-        <activity android:name=".screens.list_cities.ListCitiesActivity"/>
+        <activity android:name=".screens.detail.DailyDetailWeather"/>
+        <activity android:name=".screens.detail.HourlyDetailWeather"/>
+        <activity android:name=".screens.list.ListCitiesActivity"/>
     </application>
 
 </manifest>

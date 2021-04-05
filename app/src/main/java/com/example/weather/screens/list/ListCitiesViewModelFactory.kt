@@ -1,4 +1,4 @@
-package com.example.weather.screens.list_cities
+package com.example.weather.screens.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

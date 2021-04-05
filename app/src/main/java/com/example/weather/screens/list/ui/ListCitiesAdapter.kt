@@ -1,4 +1,4 @@
-package com.example.weather.screens.list_cities.ui
+package com.example.weather.screens.list.ui
 
 import android.view.LayoutInflater
 import android.view.View
