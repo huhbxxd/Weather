@@ -33,9 +33,7 @@ class MainModule(private val activity: MainActivity) {
     @Provides
     @ActivityScope
     fun provideCoordRepository(applicationContext: Context): LocationRepository =
-        LocationRepositoryImpl(
-            applicationContext
-        )
+        LocationRepositoryImpl(applicationContext)
 
     @Provides
     @ActivityScope

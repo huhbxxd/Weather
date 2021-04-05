@@ -38,6 +38,7 @@
         </activity>
         <activity android:name=".screens.detail_weather.DailyDetailWeather"/>
         <activity android:name=".screens.detail_weather.HourlyDetailWeather"/>
+        <activity android:name=".screens.list_cities.ListCitiesActivity"/>
     </application>
 
 </manifest>

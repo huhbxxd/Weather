@@ -1,8 +1,10 @@
 package com.example.weather.screens.cities
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -20,6 +22,7 @@ import com.example.weather.screens.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.cities.ui.CitiesAdapter
 import com.example.weather.screens.main.MainActivity
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
 
@@ -27,6 +30,7 @@ class CitiesActivity: BaseActivity(){
 
     companion object {
         const val DIRECTION_BOT = 1
+        const val LIST_CITIES = "LIST_CITIES"
     }
 
     override val layout: Int
@@ -35,6 +39,8 @@ class CitiesActivity: BaseActivity(){
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapterCities: CitiesAdapter
     private lateinit var queryText: String
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     private val component by lazy {
         DaggerCitiesComponent.builder()
@@ -75,6 +81,7 @@ class CitiesActivity: BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences = getSharedPreferences(LIST_CITIES, Context.MODE_PRIVATE)
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewCities.layoutManager = linearLayoutManager
@@ -111,7 +118,17 @@ class CitiesActivity: BaseActivity(){
             .apply { putExtra(MainActivity.LATITUDE_EXTRA, list[0])
                      putExtra(MainActivity.LONTITUDE_EXTRA, list[1])
                      putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
+        val cityFields = Gson().toJson(city)
+            saveCity("samara", cityFields)
         startActivity(intent)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    private fun saveCity(key: String, value: String) {
+        sharedPreferences.edit().apply{
+            putString(key, value)
+            apply()
+        }
     }
 
 }
