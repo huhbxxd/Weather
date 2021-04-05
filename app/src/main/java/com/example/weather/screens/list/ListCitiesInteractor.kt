@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ListCitiesInteractor(private val citiesRepository: ListCitiesRepository): BaseInteractor() {
 
-    fun getListCities(onSuccess: (List<CitiesFields>) -> Unit, onError: (Throwable) -> Unit) {
+    fun getListCities(onSuccess: (MutableList<CitiesFields>) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(citiesRepository.getListCities()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

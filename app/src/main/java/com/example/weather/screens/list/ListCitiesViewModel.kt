@@ -8,14 +8,14 @@ class ListCitiesViewModel(private val interactor: ListCitiesInteractor): ViewMod
 
     val listCitiesLiveData by lazy {
         interactor.getListCities(::onSuccess, ::onError)
-        return@lazy MutableLiveData<List<CitiesFields>>()
+        return@lazy MutableLiveData<MutableList<CitiesFields>>()
     }
 
-    private fun onSuccess(list: List<CitiesFields>) {
-
+    private fun onSuccess(list: MutableList<CitiesFields>) {
+        listCitiesLiveData.postValue(list)
     }
 
     private fun onError(throwable: Throwable) {
-
+        // some events
     }
 }

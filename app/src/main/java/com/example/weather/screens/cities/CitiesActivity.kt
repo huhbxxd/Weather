@@ -30,7 +30,6 @@ class CitiesActivity: BaseActivity(){
 
     companion object {
         const val DIRECTION_BOT = 1
-        const val LIST_CITIES = "LIST_CITIES"
     }
 
     override val layout: Int
@@ -81,7 +80,7 @@ class CitiesActivity: BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = getSharedPreferences(LIST_CITIES, Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerViewCities.layoutManager = linearLayoutManager

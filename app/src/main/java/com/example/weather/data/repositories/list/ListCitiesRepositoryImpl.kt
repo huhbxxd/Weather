@@ -16,7 +16,7 @@ class ListCitiesRepositoryImpl(context: Context): ListCitiesRepository {
     private val listCities = mutableListOf<CitiesFields>()
 
 
-    override fun getListCities(): Single<List<CitiesFields>> {
+    override fun getListCities(): Single<MutableList<CitiesFields>> {
         return Single.create {
             listCities.clear()
             val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())

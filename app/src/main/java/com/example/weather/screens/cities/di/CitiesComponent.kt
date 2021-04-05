@@ -5,7 +5,6 @@ import com.example.weather.di.AppComponent
 import com.example.weather.screens.cities.CitiesActivity
 import dagger.Component
 
-
 @Component(modules = [CitiesModule::class], dependencies = [AppComponent::class])
 @ActivityScope
 interface CitiesComponent {

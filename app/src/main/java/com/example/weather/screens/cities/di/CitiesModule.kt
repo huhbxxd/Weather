@@ -17,7 +17,7 @@ class CitiesModule(private val activity: CitiesActivity) {
 
     @Provides
     @ActivityScope
-    fun provideCitiesViewModel(interactor: CitiesInteractor) =
+    fun provideViewModel(interactor: CitiesInteractor) =
         ViewModelProvider(activity, CitiesViewModelFactory(interactor)).get(CitiesViewModel::class.java)
 
     @Provides

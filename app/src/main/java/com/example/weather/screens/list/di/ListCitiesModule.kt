@@ -15,7 +15,6 @@ import dagger.Provides
 @Module
 class ListCitiesModule(private val activity: ListCitiesActivity) {
 
-
     @Provides
     @ActivityScope
     fun provideViewModel(interactor: ListCitiesInteractor) =
