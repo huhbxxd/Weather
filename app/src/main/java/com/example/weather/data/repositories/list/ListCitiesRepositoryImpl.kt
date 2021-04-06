@@ -10,22 +10,31 @@ import io.reactivex.Single
 
 class ListCitiesRepositoryImpl(context: Context): ListCitiesRepository {
 
-    private var sharedPreferences: SharedPreferences =
+    private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
     private val type = object : TypeToken<CitiesFields>(){}.type
-    private val listCities = mutableListOf<CitiesFields>()
+//    private val listCities = mutableListOf<CitiesFields>()
+//
+//
+//    // fromCalleble instead create
+//    override fun getListCities(): Single<MutableList<CitiesFields>> {
+//        return Single.create {emitter ->
+//            val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
+//                .apply {
+//                    this?.map { it -> listCities.add(
+//                        Gson().fromJson<CitiesFields>(it, type)
+//                    )}
+//                }
+//            emitter.onSuccess(listCities)
+//        }
+//    }
 
-
-    override fun getListCities(): Single<MutableList<CitiesFields>> {
-        return Single.create {
-            listCities.clear()
-            val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
-                .apply {
-                    this?.map { it -> listCities.add(
-                        Gson().fromJson<CitiesFields>(it, type)
-                    )}
-                }
-            it.onSuccess(listCities)
+    override fun getListCities(): Single<List<CitiesFields>> {
+        val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
+        return Single.fromCallable {
+            city?.map {
+                it -> Gson().fromJson<CitiesFields>(it, type)
+            }
         }
     }
 

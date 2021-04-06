@@ -2,21 +2,34 @@ package com.example.weather.screens.cities
 
 import com.example.weather.core.base.BaseInteractor
 import com.example.weather.data.cities.Cities
+import com.example.weather.data.cities.CitiesFields
+import com.example.weather.data.cities.CitiesRecord
 import com.example.weather.data.repositories.cities.CitiesRepository
+import com.example.weather.data.repositories.list.ListCitiesRepository
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
-class CitiesInteractor(private val repository: CitiesRepository): BaseInteractor() {
+class CitiesInteractor(
+    private val repository: CitiesRepository,
+    private val repositoryList: ListCitiesRepository
+): BaseInteractor() {
 
     companion object {
-        const val DELAY_TIME = 500L
+        const val DELAY_TIME = 300L
         const val PAGE_COUNT = 30
     }
 
     private val queryCitiesSubject = PublishSubject.create<Pair<String, Int>>()
+
+    fun getListCities(onComplete: (List<CitiesFields>) -> Unit, onError: (Throwable) -> Unit) {
+        disposable.add(repositoryList.getListCities()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(onComplete, onError))
+    }
 
     fun subscribeOnCitiesSearch(onSuccess: (Cities) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(queryCitiesSubject.debounce(DELAY_TIME, TimeUnit.MILLISECONDS)

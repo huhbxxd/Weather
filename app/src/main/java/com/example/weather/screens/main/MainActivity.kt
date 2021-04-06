@@ -11,9 +11,9 @@ import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.data.weather.daily.day.DailyDayWeather
 import com.example.weather.data.weather.daily.hour.HourlyWeather
+import com.example.weather.screens.cities.CitiesActivity
 import com.example.weather.screens.detail.DailyDetailWeather
 import com.example.weather.screens.detail.HourlyDetailWeather
-import com.example.weather.screens.list.ListCitiesActivity
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
@@ -78,6 +78,7 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour(::onItemClickAdapterHourly)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
+        // rework this
         if (!permissionState) {
             with(intent) {
                 viewModel.lat = getDoubleExtra(LATITUDE_EXTRA, defaultValue)
@@ -88,7 +89,7 @@ class MainActivity: BaseActivity() {
         }
 
         imageView.setOnClickListener {
-            val intent = Intent(this, ListCitiesActivity::class.java)
+            val intent = Intent(this, CitiesActivity::class.java)
             startActivity(intent)
         }
     }

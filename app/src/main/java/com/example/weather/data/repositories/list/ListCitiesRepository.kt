@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface ListCitiesRepository {
 
-    fun getListCities(): Single<MutableList<CitiesFields>>
+    fun getListCities(): Single<List<CitiesFields>>
 
 }
