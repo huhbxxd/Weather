@@ -11,7 +11,7 @@ import com.example.weather.screens.main.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class BaseActivity(): AppCompatActivity() {
+abstract class BaseActivity: AppCompatActivity() {
 
     companion object {
         const val UNIX_VALUE = 1000

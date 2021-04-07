@@ -7,10 +7,11 @@ class CitiesFields {
     @SerializedName("name")
     val cityName: String? = null
 
-    @SerializedName("country")
-    val countryCity: String? = null
+    @SerializedName("timezone")
+    val timeZone: String? = null
 
     @SerializedName("coordinates")
     val coordCity: List<Double>? = null
+
 
 }

@@ -8,7 +8,7 @@ class CitiesViewHolder(itemView: View): BaseViewHolder(itemView) {
 
     override fun bind(item: CitiesRecord) = with(itemView) {
         cityNameItem.text = item.cityFields?.cityName.toString()
-        countyNameItem.text = item.cityFields?.countryCity.toString()
+        countyNameItem.text = item.cityFields?.timeZone?.replace("_", " ")
     }
 
 }

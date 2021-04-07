@@ -1,6 +1,5 @@
 package com.example.weather.screens.main
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,19 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.data.weather.DailyWeatherMain
-import com.example.weather.data.weather.daily.daily_day.DailyDayWeather
-import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
-import com.example.weather.screens.detail_weather.DailyDetailWeather
-import com.example.weather.screens.detail_weather.HourlyDetailWeather
+import com.example.weather.data.weather.daily.day.DailyDayWeather
+import com.example.weather.data.weather.daily.hour.HourlyWeather
+import com.example.weather.screens.cities.CitiesActivity
+import com.example.weather.screens.detail.DailyDetailWeather
+import com.example.weather.screens.detail.HourlyDetailWeather
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
+import kotlinx.android.synthetic.main.bottom_bar.*
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 import kotlin.properties.Delegates
@@ -35,6 +33,7 @@ class MainActivity: BaseActivity() {
         const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
         const val defaultValue = 0.0
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
+        const val LIST_CITIES = "LIST_CITIES"
     }
 
     override val layout: Int
@@ -79,6 +78,7 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour(::onItemClickAdapterHourly)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
+        // rework this
         if (!permissionState) {
             with(intent) {
                 viewModel.lat = getDoubleExtra(LATITUDE_EXTRA, defaultValue)
@@ -88,6 +88,10 @@ class MainActivity: BaseActivity() {
             viewModel.permissionState = permissionState
         }
 
+        imageView.setOnClickListener {
+            val intent = Intent(this, CitiesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {

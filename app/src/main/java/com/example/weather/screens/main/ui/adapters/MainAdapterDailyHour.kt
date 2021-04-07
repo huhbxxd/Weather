@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
-import com.example.weather.data.weather.daily.daily_hour.HourlyWeather
+import com.example.weather.data.weather.daily.hour.HourlyWeather
 import kotlinx.android.synthetic.main.recyclerview_item_hourly.view.*
 import java.text.SimpleDateFormat
 import java.util.*

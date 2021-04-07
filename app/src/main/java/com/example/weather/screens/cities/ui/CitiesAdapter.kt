@@ -23,7 +23,7 @@ class CitiesAdapter(
         const val TYPE_LOADING = 1
     }
 
-    var listCities = listOf<CitiesRecord>()
+    var listCities = mutableListOf<CitiesRecord>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -56,5 +56,9 @@ class CitiesAdapter(
     private fun getSize() = if(hasLoading) listCities.size + 1 else listCities.size
 
     private fun isLoadingPosition(position: Int) = position == listCities.size
+
+    fun citiesClear() {
+        listCities.clear()
+    }
 
 }

@@ -3,6 +3,7 @@ package com.example.weather.screens.cities
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weather.data.cities.Cities
+import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.cities.CitiesRecord
 
 class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
@@ -11,15 +12,24 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
 
     private val citiesList = mutableListOf<CitiesRecord>()
 
-    val citiesViewModel by lazy {
+    val searchCitiesViewModel by lazy {
         interactor.subscribeOnCitiesSearch(::onSuccessCities, ::onError)
         return@lazy MutableLiveData<Pair<List<CitiesRecord>, Boolean>>()
+    }
+
+    val listCitiesViewModel by lazy {
+        interactor.getListCities(::onComplete, ::onError)
+        return@lazy MutableLiveData<List<CitiesFields>>()
     }
 
     private fun onSuccessCities(cities: Cities) {
         val hasLoading = cities.citiesRecords!!.size >= CitiesInteractor.PAGE_COUNT
         citiesList.addAll(cities.citiesRecords)
-        citiesViewModel.postValue(Pair(citiesList, hasLoading))
+        searchCitiesViewModel.postValue(Pair(citiesList, hasLoading))
+    }
+
+    private fun onComplete(list: List<CitiesFields>) {
+        listCitiesViewModel.postValue(list)
     }
 
     fun onSearch(query: String) {
