@@ -7,12 +7,19 @@ import com.example.weather.core.network.WeatherNetworkWeatherServiceProvider
 import com.example.weather.core.network.WeatherServiceProvider
 import com.example.weather.data.CitiesApi
 import com.example.weather.data.WeatherApi
+import com.example.weather.data.repositories.stored.StoredCitiesRepository
+import com.example.weather.data.repositories.stored.StoredCitiesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
 class AppModule(private val applicationContext: Context) {
+
+    @Provides
+    @Singleton
+    fun provideListCitiesRepository(applicationContext: Context): StoredCitiesRepository =
+        StoredCitiesRepositoryImpl(applicationContext)
 
     @Provides
     @Singleton

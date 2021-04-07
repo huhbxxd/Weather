@@ -34,6 +34,7 @@ class MainActivity: BaseActivity() {
         const val defaultValue = 0.0
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
         const val LIST_CITIES = "LIST_CITIES"
+        const val LAST_CITY = "LAST_CITY"
     }
 
     override val layout: Int
@@ -100,15 +101,12 @@ class MainActivity: BaseActivity() {
             with(it) {
                 adapterDailyDay.listDailyDay = daily!!
                 adapterDailyHour.listDailyHour = hourly!!
-
                 when(permissionState) {
                     true -> cityName.text = locationFormatter(timezone!!)
                     false -> cityName.text = intent.getStringExtra(CITY_NAME_EXTRA)
                 }
-
                 description.text = current?.weatherIcon?.get(0)?.description
                 currentTemp.text = current?.temp?.roundToInt().toString()
-
                 sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
                 sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
                 pressureValue.text = current.pressure.toString()

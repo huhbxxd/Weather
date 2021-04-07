@@ -22,7 +22,6 @@ class WeatherRepositoryImpl(private val service: WeatherApi):
         )
     }
 
-
     override fun loadWeatherDailyByLocation(location: Location): Single<DailyWeatherMain> {
         return service.getWeatherDailyByLocation(location.latitude, location.longitude,
             EXCLUDE,
@@ -30,6 +29,4 @@ class WeatherRepositoryImpl(private val service: WeatherApi):
             API_KEY
         )
     }
-
-
 }

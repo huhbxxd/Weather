@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -20,7 +21,7 @@ import com.example.weather.data.cities.CitiesRecord
 import com.example.weather.screens.cities.di.CitiesModule
 import com.example.weather.screens.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.cities.ui.CitiesAdapter
-import com.example.weather.screens.cities.ui.ListCitiesAdapter
+import com.example.weather.screens.cities.ui.StoredCitiesAdapter
 import com.example.weather.screens.main.MainActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_cities.*
@@ -40,10 +41,10 @@ class CitiesActivity: BaseActivity(){
     private lateinit var linearLayoutManagerSearchCities: LinearLayoutManager
     private lateinit var linearLayoutManagerListCities: LinearLayoutManager
     private lateinit var adapterSearchCities: CitiesAdapter
-    private lateinit var adapterListCities: ListCitiesAdapter
+    private lateinit var adapterStoredCities: StoredCitiesAdapter
     private lateinit var queryText: String
-    private lateinit var sharedPreferences: SharedPreferences
-    private val citiesList = hashSetOf<String>()
+    private lateinit var sharedPreferencesListCities: SharedPreferences
+    private lateinit var sharedPreferencesLastCity: SharedPreferences
 
     private val component by lazy {
         DaggerCitiesComponent.builder()
@@ -85,14 +86,15 @@ class CitiesActivity: BaseActivity(){
             adapterSearchCities.citiesClear()
             recyclerViewSearchCities.visibility = View.GONE
             recyclerViewListCities.visibility = View.VISIBLE
-            false
+            false // false -> override default setOnCloseListener
         }
         return true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
+        sharedPreferencesListCities = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
+        sharedPreferencesLastCity = getSharedPreferences(MainActivity.LAST_CITY, Context.MODE_PRIVATE)
 
         linearLayoutManagerSearchCities = LinearLayoutManager(this)
         linearLayoutManagerListCities = LinearLayoutManager(this)
@@ -101,19 +103,15 @@ class CitiesActivity: BaseActivity(){
 
         component.inject(this)
 
-
-
         adapterSearchCities = CitiesAdapter(::onItemClick)
         recyclerViewSearchCities.adapter = adapterSearchCities
-        adapterListCities = ListCitiesAdapter()
-        recyclerViewListCities.adapter = adapterListCities
+        adapterStoredCities = StoredCitiesAdapter(::onItemClick)
+        recyclerViewListCities.adapter = adapterStoredCities
 
         viewModel.searchCitiesViewModel.observe(this, Observer {
             adapterSearchCities.hasLoading = it.second
             adapterSearchCities.listCities = it.first as MutableList<CitiesRecord>
         })
-
-
 
         recyclerViewSearchCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -131,32 +129,40 @@ class CitiesActivity: BaseActivity(){
     override fun onResume() {
         super.onResume()
         viewModel.listCitiesViewModel.observe(this, Observer {
-            adapterListCities.listCities = it
+            adapterStoredCities.listCities = it
         })
     }
 
     private fun onItemClick(city: CitiesFields) {
         val list = city.coordCity!!
         val intent = Intent(this, MainActivity::class.java)
-            .apply { putExtra(MainActivity.LATITUDE_EXTRA, list[latitude_index])
-                     putExtra(MainActivity.LONTITUDE_EXTRA, list[lontitude_index])
-                     putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
+            .apply {addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+                    putExtra(MainActivity.LATITUDE_EXTRA, list[latitude_index])
+                    putExtra(MainActivity.LONTITUDE_EXTRA, list[lontitude_index])
+                    putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
         // serializable gson to json to next time deserializable in ListCitiesActivity
         val jsonCity = Gson().toJson(city)
             saveCity(jsonCity)
         startActivity(intent)
+        finish()
     }
 
     @SuppressLint("CommitPrefEdits")
     private fun saveCity(value: String) {
-        val setFromSharedPreferences = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
+        val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
         val copyOfSet = setFromSharedPreferences?.toMutableSet()
             .apply {
                 this?.add(value)
             }
-        sharedPreferences.edit().apply{
-            putStringSet(MainActivity.LIST_CITIES, copyOfSet)
-            apply()
+        sharedPreferencesListCities.edit()
+            .apply{
+                putStringSet(MainActivity.LIST_CITIES, copyOfSet)
+                apply()
+        }
+        sharedPreferencesLastCity.edit()
+            .apply(){
+                putString(MainActivity.LAST_CITY, value)
+                apply()
         }
     }
 
