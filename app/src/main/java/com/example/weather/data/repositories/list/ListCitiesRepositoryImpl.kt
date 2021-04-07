@@ -13,21 +13,6 @@ class ListCitiesRepositoryImpl(context: Context): ListCitiesRepository {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
     private val type = object : TypeToken<CitiesFields>(){}.type
-//    private val listCities = mutableListOf<CitiesFields>()
-//
-//
-//    // fromCalleble instead create
-//    override fun getListCities(): Single<MutableList<CitiesFields>> {
-//        return Single.create {emitter ->
-//            val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
-//                .apply {
-//                    this?.map { it -> listCities.add(
-//                        Gson().fromJson<CitiesFields>(it, type)
-//                    )}
-//                }
-//            emitter.onSuccess(listCities)
-//        }
-//    }
 
     override fun getListCities(): Single<List<CitiesFields>> {
         val city = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
@@ -35,6 +20,7 @@ class ListCitiesRepositoryImpl(context: Context): ListCitiesRepository {
             city?.map {
                 it -> Gson().fromJson<CitiesFields>(it, type)
             }
+
         }
     }
 

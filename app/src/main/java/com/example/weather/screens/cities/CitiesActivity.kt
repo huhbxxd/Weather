@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import androidx.lifecycle.Observer
@@ -23,7 +22,6 @@ import com.example.weather.screens.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.cities.ui.CitiesAdapter
 import com.example.weather.screens.cities.ui.ListCitiesAdapter
 import com.example.weather.screens.main.MainActivity
-import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
@@ -67,6 +65,10 @@ class CitiesActivity: BaseActivity(){
             .apply {
                 setSearchableInfo(searchManager.getSearchableInfo(componentName))
             }
+        searchView.setOnSearchClickListener {
+            recyclerViewSearchCities.visibility = View.VISIBLE
+            recyclerViewListCities.visibility = View.GONE
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 queryText = query!!
@@ -78,8 +80,13 @@ class CitiesActivity: BaseActivity(){
                 viewModel.onSearch(newText)
                 return true
             }
-
         })
+        searchView.setOnCloseListener {
+            adapterSearchCities.citiesClear()
+            recyclerViewSearchCities.visibility = View.GONE
+            recyclerViewListCities.visibility = View.VISIBLE
+            false
+        }
         return true
     }
 
@@ -94,6 +101,8 @@ class CitiesActivity: BaseActivity(){
 
         component.inject(this)
 
+
+
         adapterSearchCities = CitiesAdapter(::onItemClick)
         recyclerViewSearchCities.adapter = adapterSearchCities
         adapterListCities = ListCitiesAdapter()
@@ -101,8 +110,10 @@ class CitiesActivity: BaseActivity(){
 
         viewModel.searchCitiesViewModel.observe(this, Observer {
             adapterSearchCities.hasLoading = it.second
-            adapterSearchCities.listCities = it.first
+            adapterSearchCities.listCities = it.first as MutableList<CitiesRecord>
         })
+
+
 
         recyclerViewSearchCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -131,15 +142,20 @@ class CitiesActivity: BaseActivity(){
                      putExtra(MainActivity.LONTITUDE_EXTRA, list[lontitude_index])
                      putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
         // serializable gson to json to next time deserializable in ListCitiesActivity
-        citiesList.add(Gson().toJson(city))
-            saveCity(citiesList)
+        val jsonCity = Gson().toJson(city)
+            saveCity(jsonCity)
         startActivity(intent)
     }
 
     @SuppressLint("CommitPrefEdits")
-    private fun saveCity(value: HashSet<String>) {
+    private fun saveCity(value: String) {
+        val setFromSharedPreferences = sharedPreferences.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
+        val copyOfSet = setFromSharedPreferences?.toMutableSet()
+            .apply {
+                this?.add(value)
+            }
         sharedPreferences.edit().apply{
-            putStringSet(MainActivity.LIST_CITIES, value)
+            putStringSet(MainActivity.LIST_CITIES, copyOfSet)
             apply()
         }
     }
