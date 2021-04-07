@@ -3,9 +3,8 @@ package com.example.weather.screens.cities
 import com.example.weather.core.base.BaseInteractor
 import com.example.weather.data.cities.Cities
 import com.example.weather.data.cities.CitiesFields
-import com.example.weather.data.cities.CitiesRecord
 import com.example.weather.data.repositories.cities.CitiesRepository
-import com.example.weather.data.repositories.list.ListCitiesRepository
+import com.example.weather.data.repositories.stored.StoredCitiesRepository
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 class CitiesInteractor(
     private val repository: CitiesRepository,
-    private val repositoryList: ListCitiesRepository
+    private val repositoryStored: StoredCitiesRepository
 ): BaseInteractor() {
 
     companion object {
@@ -25,11 +24,13 @@ class CitiesInteractor(
     private val queryCitiesSubject = PublishSubject.create<Pair<String, Int>>()
 
     fun getListCities(onComplete: (List<CitiesFields>) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(repositoryList.getListCities()
+        disposable.add(repositoryStored.getListCities()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(onComplete, onError))
     }
+
+
 
     fun subscribeOnCitiesSearch(onSuccess: (Cities) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(queryCitiesSubject.debounce(DELAY_TIME, TimeUnit.MILLISECONDS)

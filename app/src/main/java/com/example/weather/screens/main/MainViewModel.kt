@@ -1,6 +1,7 @@
 package com.example.weather.screens.main
 
 import androidx.lifecycle.*
+import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.weather.DailyWeatherMain
 import kotlin.properties.Delegates
 
@@ -17,8 +18,16 @@ class MainViewModel(private val interactor: MainInteractor): ViewModel() {
             true -> interactor.subscribeOnWeatherDailyByLocation(::weatherDailyLoadedSuccess, ::loadedError)
             false -> interactor.subscribeOnWeatherDailyByCoord(lat, lon, ::weatherDailyLoadedSuccess, ::loadedError)
         }
-
         return@lazy MutableLiveData<DailyWeatherMain>()
+    }
+
+    val lastCityViewModel by lazy {
+        interactor.getLastCity(::onComplete, ::loadedError)
+        return@lazy MutableLiveData<CitiesFields>()
+    }
+
+    private fun onComplete(city: CitiesFields) {
+        lastCityViewModel.postValue(city)
     }
 
     private fun weatherDailyLoadedSuccess(weatherDaily: DailyWeatherMain) {

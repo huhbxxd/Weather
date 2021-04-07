@@ -2,7 +2,7 @@ package com.example.weather.screens.cities.ui.viewholders
 
 import android.view.View
 import com.example.weather.data.cities.CitiesRecord
-import kotlinx.android.synthetic.main.recyclerview_item_cities.view.*
+import kotlinx.android.synthetic.main.recyclerview_item_search_cities.view.*
 
 class CitiesViewHolder(itemView: View): BaseViewHolder(itemView) {
 

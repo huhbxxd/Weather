@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.weather.data.WeatherApi
 import com.example.weather.data.repositories.location.LocationRepository
 import com.example.weather.data.repositories.location.LocationRepositoryImpl
+import com.example.weather.data.repositories.stored.StoredCitiesRepository
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.repositories.weather.WeatherRepositoryImpl
 import com.example.weather.di.ActivityScope
@@ -26,9 +27,10 @@ class MainModule(private val activity: MainActivity) {
     @Provides
     @ActivityScope
     fun provideInteractor(repositoryWeather: WeatherRepository,
-                          repositoryLocation: LocationRepository
+                          repositoryLocation: LocationRepository,
+                          repositoryStored: StoredCitiesRepository
     ) =
-        MainInteractor(repositoryWeather, repositoryLocation)
+        MainInteractor(repositoryWeather, repositoryLocation, repositoryStored)
 
     @Provides
     @ActivityScope
