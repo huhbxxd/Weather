@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
+import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.weather.daily.day.DailyDayWeather
 import com.example.weather.data.weather.daily.hour.HourlyWeather
 import com.example.weather.screens.cities.CitiesActivity
@@ -28,9 +29,7 @@ import kotlin.properties.Delegates
 class MainActivity: BaseActivity() {
 
     companion object {
-        const val LATITUDE_EXTRA = "latitude"
-        const val LONTITUDE_EXTRA = "lontitude"
-        const val CITY_NAME_EXTRA = "CITY_NAME_EXTRA"
+        var CITY_FIELD = "CITY_FIELD"
         const val defaultValue = 0.0
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
         const val LIST_CITIES = "LIST_CITIES"
@@ -45,6 +44,7 @@ class MainActivity: BaseActivity() {
     private lateinit var adapterDailyDay: MainAdapterDailyDay
     private lateinit var adapterDailyHour: MainAdapterDailyHour
     private var permissionState by Delegates.notNull<Boolean>()
+    private lateinit var city: CitiesFields
 
     private val component by lazy {
         DaggerMainComponent.builder()
@@ -58,6 +58,7 @@ class MainActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        city = intent.getSerializableExtra(CITY_FIELD) as CitiesFields
 
         permissionState = ContextCompat.checkSelfPermission(
             this,
@@ -79,15 +80,20 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour(::onItemClickAdapterHourly)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
-        // rework this
-        if (!permissionState) {
-            with(intent) {
-                viewModel.lat = getDoubleExtra(LATITUDE_EXTRA, defaultValue)
-                viewModel.lon = getDoubleExtra(LONTITUDE_EXTRA, defaultValue)
-            }
-        } else {
-            viewModel.permissionState = permissionState
-        }
+        viewModel.lastCityViewModel.observe(this, Observer {
+            viewModel.city = it
+            city = it
+        })
+
+//        // rework this
+//        if (!permissionState) {
+//
+//        } else {
+//            viewModel.permissionState = permissionState
+//        }
+
+
+
 
         imageView.setOnClickListener {
             val intent = Intent(this, CitiesActivity::class.java)
@@ -103,7 +109,7 @@ class MainActivity: BaseActivity() {
                 adapterDailyHour.listDailyHour = hourly!!
                 when(permissionState) {
                     true -> cityName.text = locationFormatter(timezone!!)
-                    false -> cityName.text = intent.getStringExtra(CITY_NAME_EXTRA)
+                    false -> cityName.text = city.cityName!!
                 }
                 description.text = current?.weatherIcon?.get(0)?.description
                 currentTemp.text = current?.temp?.roundToInt().toString()

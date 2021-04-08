@@ -31,7 +31,6 @@ class CitiesInteractor(
     }
 
 
-
     fun subscribeOnCitiesSearch(onSuccess: (Cities) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(queryCitiesSubject.debounce(DELAY_TIME, TimeUnit.MILLISECONDS)
             .switchMapSingle { repository.getListCities(it.first, it.second) }

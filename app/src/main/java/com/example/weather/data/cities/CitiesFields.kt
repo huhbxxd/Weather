@@ -1,8 +1,9 @@
 package com.example.weather.data.cities
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class CitiesFields {
+class CitiesFields: Serializable {
 
     @SerializedName("name")
     val cityName: String? = null

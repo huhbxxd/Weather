@@ -31,8 +31,6 @@ class CitiesActivity: BaseActivity(){
 
     companion object {
         const val DIRECTION_BOT = 1
-        const val latitude_index = 0
-        const val lontitude_index = 1
     }
 
     override val layout: Int
@@ -134,17 +132,13 @@ class CitiesActivity: BaseActivity(){
     }
 
     private fun onItemClick(city: CitiesFields) {
-        val list = city.coordCity!!
         val intent = Intent(this, MainActivity::class.java)
             .apply {addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                    putExtra(MainActivity.LATITUDE_EXTRA, list[latitude_index])
-                    putExtra(MainActivity.LONTITUDE_EXTRA, list[lontitude_index])
-                    putExtra(MainActivity.CITY_NAME_EXTRA, city.cityName)}
+                    putExtra(MainActivity.CITY_FIELD, city)}
         // serializable gson to json to next time deserializable in ListCitiesActivity
         val jsonCity = Gson().toJson(city)
             saveCity(jsonCity)
         startActivity(intent)
-        finish()
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -160,7 +154,7 @@ class CitiesActivity: BaseActivity(){
                 apply()
         }
         sharedPreferencesLastCity.edit()
-            .apply(){
+            .apply {
                 putString(MainActivity.LAST_CITY, value)
                 apply()
         }
