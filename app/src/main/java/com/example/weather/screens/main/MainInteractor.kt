@@ -38,7 +38,4 @@ class MainInteractor(private val repository: WeatherRepository,
                 .doOnError(onError)
                 .subscribe{it.subscribe(onSuccess, onError)})
     }
-
-
-
 }

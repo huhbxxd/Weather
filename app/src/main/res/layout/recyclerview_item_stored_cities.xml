@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/cityNameListCites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:layout_marginTop="3dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cityTimeZone"
@@ -21,18 +21,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/viewLong"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cityNameListCites"
-        app:layout_constraintBottom_toBottomOf="@id/viewLong"/>
+        app:layout_constraintTop_toBottomOf="@id/cityNameListCites" />
 
     <View
         android:id="@+id/viewLong"
         android:layout_width="0dp"
         android:layout_height="0.5dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintWidth_percent="0.96"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

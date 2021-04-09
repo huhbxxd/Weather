@@ -111,6 +111,8 @@ class CitiesActivity: BaseActivity(){
             adapterSearchCities.listCities = it.first as MutableList<CitiesRecord>
         })
 
+
+
         recyclerViewSearchCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
