@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -124,6 +125,7 @@ class CitiesActivity: BaseActivity(){
             ) { isGranted ->
                 val intent = Intent(this, MainActivity::class.java)
                     .apply {
+                        addFlags(FLAG_ACTIVITY_CLEAR_TOP)
                         putExtra(MainActivity.STATE_LOAD, true)
                     }
                 if (isGranted) {
