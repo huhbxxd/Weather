@@ -31,25 +31,6 @@ class ChooseActivity: BaseActivity() {
         val TEXT_ALERT = "Allow Weather to access to provide local content"
         val NEGATIVE_ALLERT = "DON\'T ALLOW"
         val POSITIVE_ALLERT = "ALLOW"
-        val startedBefore = "startedBefore"
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // later dont forget about check list of cities and check Package Granted to need
-        //  to move activity
-/*
-        val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
-        if (!sharedPreferences.getBoolean(startedBefore, false)) {
-            sharedPreferences.edit()
-                .apply {
-                    putBoolean(startedBefore, true)
-                    apply()
-                }
-        } else {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } */
     }
 
     @SuppressLint("ShowToast")
@@ -58,11 +39,15 @@ class ChooseActivity: BaseActivity() {
 
         val intentToCities = Intent(this, CitiesActivity::class.java)
         val intentToMain = Intent(this, MainActivity::class.java)
+            .apply {
+                putExtra(MainActivity.STATE_LOAD, true)
+            }
 
         val  requestPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()
             ) { isGranted ->
                 if (isGranted) {
+                    onStartedBefore()
                     startActivity(intentToMain)
                     finish()
                 } else {
@@ -73,9 +58,9 @@ class ChooseActivity: BaseActivity() {
             }
 
         byLocation.setOnClickListener {
-            when {
+            when (PackageManager.PERMISSION_GRANTED) {
                 ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+                    Manifest.permission.ACCESS_COARSE_LOCATION) -> {
                     startActivity(intentToMain)
                     finish()
                 }
@@ -83,17 +68,15 @@ class ChooseActivity: BaseActivity() {
                     AlertDialog.Builder(this)
                         .setTitle(TITLE_ALLERT)
                         .setMessage(TEXT_ALERT)
-                        .setPositiveButton(POSITIVE_ALLERT, object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
-                            }
-                        })
-                        .setNegativeButton(NEGATIVE_ALLERT, object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                startActivity(intentToCities)
-                                finish()
-                            }
-                        })
+                        .setPositiveButton(POSITIVE_ALLERT
+                        ) {dialog, which ->
+                            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                        }
+                        .setNegativeButton(NEGATIVE_ALLERT
+                        ) { dialog, which ->
+                            startActivity(intentToCities)
+                            finish()
+                        }
                         .show()
                 }
             }

@@ -14,7 +14,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 class MainAdapterDailyHour(
-    private val onItemClick: (hour: HourlyWeather) -> Unit
+    private val testFunItem: (hour: HourlyWeather) -> Unit
 ): RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder>() {
 
     private companion object {
@@ -37,7 +37,7 @@ class MainAdapterDailyHour(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listDailyHour[position])
-        holder.itemView.setOnClickListener { onItemClick(listDailyHour[position]) }
+        holder.itemView.setOnClickListener { testFunItem(listDailyHour[position]) }
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {

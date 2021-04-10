@@ -1,15 +1,21 @@
 package com.example.weather.screens.cities
 
-import android.annotation.SuppressLint
+import android.Manifest
+import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +24,10 @@ import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.cities.CitiesRecord
+import com.example.weather.screens.choose.ChooseActivity
 import com.example.weather.screens.cities.di.CitiesModule
 import com.example.weather.screens.cities.di.DaggerCitiesComponent
-import com.example.weather.screens.cities.ui.CitiesAdapter
+import com.example.weather.screens.cities.ui.SearchCitiesAdapter
 import com.example.weather.screens.cities.ui.StoredCitiesAdapter
 import com.example.weather.screens.main.MainActivity
 import com.google.gson.Gson
@@ -38,7 +45,7 @@ class CitiesActivity: BaseActivity(){
 
     private lateinit var linearLayoutManagerSearchCities: LinearLayoutManager
     private lateinit var linearLayoutManagerListCities: LinearLayoutManager
-    private lateinit var adapterSearchCities: CitiesAdapter
+    private lateinit var adapterSearchSearchCities: SearchCitiesAdapter
     private lateinit var adapterStoredCities: StoredCitiesAdapter
     private lateinit var queryText: String
     private lateinit var sharedPreferencesListCities: SharedPreferences
@@ -81,7 +88,7 @@ class CitiesActivity: BaseActivity(){
             }
         })
         searchView.setOnCloseListener {
-            adapterSearchCities.citiesClear()
+            adapterSearchSearchCities.citiesClear()
             recyclerViewSearchCities.visibility = View.GONE
             recyclerViewListCities.visibility = View.VISIBLE
             false // false -> override default setOnCloseListener
@@ -101,24 +108,45 @@ class CitiesActivity: BaseActivity(){
 
         component.inject(this)
 
-        adapterSearchCities = CitiesAdapter(::onItemClick)
-        recyclerViewSearchCities.adapter = adapterSearchCities
+        adapterSearchSearchCities = SearchCitiesAdapter(::onItemClick)
+        recyclerViewSearchCities.adapter = adapterSearchSearchCities
         adapterStoredCities = StoredCitiesAdapter(::onItemClick)
         recyclerViewListCities.adapter = adapterStoredCities
 
         viewModel.searchCitiesViewModel.observe(this, Observer {
-            adapterSearchCities.hasLoading = it.second
-            adapterSearchCities.listCities = it.first as MutableList<CitiesRecord>
+            adapterSearchSearchCities.hasLoading = it.second
+            adapterSearchSearchCities.listCities = it.first as MutableList<CitiesRecord>
         })
+
+        val  requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                val intent = Intent(this, MainActivity::class.java)
+                    .apply {
+                        putExtra(MainActivity.STATE_LOAD, true)
+                    }
+                if (isGranted) {
+                    onStartedBefore()
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Location denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        fabLocation.setOnClickListener {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
 
         recyclerViewSearchCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(DIRECTION_BOT)
                     && newState == RecyclerView.SCROLL_STATE_IDLE
-                    && adapterSearchCities.hasLoading) {
+                    && adapterSearchSearchCities.hasLoading) {
                     viewModel.onNextPage(queryText)
-                    adapterSearchCities.hasLoading = false
+                    adapterSearchSearchCities.hasLoading = false
                 }
             }
         })
@@ -131,17 +159,20 @@ class CitiesActivity: BaseActivity(){
         })
     }
 
+    // user choose city from search list and click
     private fun onItemClick(city: CitiesFields) {
+        onStartedBefore()
         val intent = Intent(this, MainActivity::class.java)
-            .apply {addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                    putExtra(MainActivity.CITY_FIELD, city)}
-        // serializable gson to json to next time deserializable in ListCitiesActivity
+            .apply {
+                addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+                putExtra(MainActivity.STATE_LOAD, false)
+            }
+        // serializable gson to json to next time deserializable
         val jsonCity = Gson().toJson(city)
             saveCity(jsonCity)
         startActivity(intent)
     }
 
-    @SuppressLint("CommitPrefEdits")
     private fun saveCity(value: String) {
         val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
         val copyOfSet = setFromSharedPreferences?.toMutableSet()
@@ -150,14 +181,17 @@ class CitiesActivity: BaseActivity(){
             }
         sharedPreferencesListCities.edit()
             .apply{
-                putStringSet(MainActivity.LIST_CITIES, copyOfSet)
+                putStringSet(MainActivity.LIST_CITIES, copyOfSet) // save city to store
                 apply()
         }
         sharedPreferencesLastCity.edit()
             .apply {
-                putString(MainActivity.LAST_CITY, value)
+                putString(MainActivity.LAST_CITY, value) // save city like last city that was chosen before close app
                 apply()
         }
     }
+
+
+
 
 }
