@@ -39,6 +39,9 @@ class ChooseActivity: BaseActivity() {
 
         val intentToCities = Intent(this, CitiesActivity::class.java)
         val intentToMain = Intent(this, MainActivity::class.java)
+            .apply {
+                putExtra(MainActivity.STATE_LOAD, true)
+            }
 
         val  requestPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()

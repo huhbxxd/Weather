@@ -124,7 +124,7 @@ class CitiesActivity: BaseActivity(){
             ) { isGranted ->
                 val intent = Intent(this, MainActivity::class.java)
                     .apply {
-                        putExtra(MainActivity.FAB_CLICKED, true)
+                        putExtra(MainActivity.STATE_LOAD, true)
                     }
                 if (isGranted) {
                     onStartedBefore()
@@ -165,7 +165,7 @@ class CitiesActivity: BaseActivity(){
         val intent = Intent(this, MainActivity::class.java)
             .apply {
                 addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(MainActivity.FAB_CLICKED, false)
+                putExtra(MainActivity.STATE_LOAD, false)
             }
         // serializable gson to json to next time deserializable
         val jsonCity = Gson().toJson(city)

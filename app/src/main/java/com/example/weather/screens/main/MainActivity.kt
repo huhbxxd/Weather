@@ -36,7 +36,7 @@ import kotlin.properties.Delegates
 class MainActivity: BaseActivity() {
 
     companion object {
-        const val FAB_CLICKED = "FAB_CLICKED"
+        const val STATE_LOAD = "STATE_LOAD"
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
         const val LIST_CITIES = "LIST_CITIES"
         const val LAST_CITY = "LAST_CITY"
@@ -68,7 +68,7 @@ class MainActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        stateLoad = intent.getBooleanExtra(FAB_CLICKED, false)
+        stateLoad = intent.getBooleanExtra(STATE_LOAD, true)
 
         permissionLocation = ContextCompat.checkSelfPermission(
             this,
