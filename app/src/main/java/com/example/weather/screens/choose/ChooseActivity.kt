@@ -44,6 +44,7 @@ class ChooseActivity: BaseActivity() {
             registerForActivityResult(ActivityResultContracts.RequestPermission()
             ) { isGranted ->
                 if (isGranted) {
+                    onStartedBefore()
                     startActivity(intentToMain)
                     finish()
                 } else {
@@ -54,9 +55,9 @@ class ChooseActivity: BaseActivity() {
             }
 
         byLocation.setOnClickListener {
-            when {
+            when (PackageManager.PERMISSION_GRANTED) {
                 ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+                    Manifest.permission.ACCESS_COARSE_LOCATION) -> {
                     startActivity(intentToMain)
                     finish()
                 }
@@ -64,17 +65,15 @@ class ChooseActivity: BaseActivity() {
                     AlertDialog.Builder(this)
                         .setTitle(TITLE_ALLERT)
                         .setMessage(TEXT_ALERT)
-                        .setPositiveButton(POSITIVE_ALLERT, object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
-                            }
-                        })
-                        .setNegativeButton(NEGATIVE_ALLERT, object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                startActivity(intentToCities)
-                                finish()
-                            }
-                        })
+                        .setPositiveButton(POSITIVE_ALLERT
+                        ) {dialog, which ->
+                            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+                        }
+                        .setNegativeButton(NEGATIVE_ALLERT
+                        ) { dialog, which ->
+                            startActivity(intentToCities)
+                            finish()
+                        }
                         .show()
                 }
             }

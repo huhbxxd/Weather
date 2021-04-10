@@ -7,21 +7,35 @@ import kotlin.properties.Delegates
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
-    var permissionState = false
-
     val weatherThrowable = MutableLiveData<Throwable>()
 
-    val weatherDailyLiveData by lazy {
-        when(permissionState) {
-            true -> interactor.subscribeOnWeatherDailyByLocation(::weatherDailyLoadedSuccess, ::loadedError)
-            false -> interactor.subscribeOnWeatherDailyByCoord(::weatherDailyLoadedSuccess, ::loadedError)
-        }
+    val weatherLiveDataLocation by lazy {
+        interactor.subscribeOnWeatherDailyByLocation(::weatherLocationLoadedSuccess, ::loadedError)
         return@lazy MutableLiveData<DailyWeatherMain>()
     }
 
-    private fun weatherDailyLoadedSuccess(weatherDaily: DailyWeatherMain) {
-        weatherDailyLiveData.postValue(weatherDaily)
+    val weatherLiveDataByCity by lazy {
+        interactor.subscribeOnWeatherDailyByCoord(::weatherCityLoadedSuccess, ::loadedError)
+        return@lazy MutableLiveData<DailyWeatherMain>()
     }
+
+    val cityNameLiveData by lazy {
+        interactor.getLastCityName(::lastCityLoaded, ::loadedError)
+        return@lazy MutableLiveData<String>()
+    }
+
+    private fun weatherLocationLoadedSuccess(weatherDaily: DailyWeatherMain) {
+        weatherLiveDataLocation.postValue(weatherDaily)
+    }
+
+    private fun weatherCityLoadedSuccess(weatherDaily: DailyWeatherMain) {
+        weatherLiveDataByCity.postValue(weatherDaily)
+    }
+
+    private fun lastCityLoaded(city: CitiesFields) {
+        cityNameLiveData.postValue(city.cityName)
+    }
+
 
     private fun loadedError(throwable: Throwable) {
         weatherThrowable.postValue(throwable)

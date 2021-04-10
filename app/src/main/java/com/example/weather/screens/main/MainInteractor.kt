@@ -38,4 +38,11 @@ class MainInteractor(private val repository: WeatherRepository,
                 .doOnError(onError)
                 .subscribe{it.subscribe(onSuccess, onError)})
     }
+
+    fun getLastCityName(onComplete: (CitiesFields) -> Unit, onError: (Throwable) -> Unit) {
+        disposable.add(repositoryStored.getLastCity()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(onComplete, onError))
+    }
 }

@@ -36,8 +36,7 @@ import kotlin.properties.Delegates
 class MainActivity: BaseActivity() {
 
     companion object {
-        var CITY_FIELD = "CITY_FIELD"
-        const val defaultValue = 0.0
+        const val FAB_CLICKED = "FAB_CLICKED"
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
         const val LIST_CITIES = "LIST_CITIES"
         const val LAST_CITY = "LAST_CITY"
@@ -53,7 +52,8 @@ class MainActivity: BaseActivity() {
     private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
     private lateinit var adapterDailyHour: MainAdapterDailyHour
-    private var permissionState by Delegates.notNull<Boolean>()
+    private var permissionLocation by Delegates.notNull<Boolean>()
+    var stateLoad by Delegates.notNull<Boolean>()
     private lateinit var city: CitiesFields
 
     private val component by lazy {
@@ -68,11 +68,9 @@ class MainActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        stateLoad = intent.getBooleanExtra(FAB_CLICKED, false)
 
-
-//        city = intent.getSerializableExtra(CITY_FIELD) as CitiesFields
-
-        permissionState = ContextCompat.checkSelfPermission(
+        permissionLocation = ContextCompat.checkSelfPermission(
             this,
             android.Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
@@ -92,15 +90,6 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour(::onItemClick)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
-
-
-//        // rework this
-//        if (!permissionState) {
-//
-//        } else {
-//            viewModel.permissionState = permissionState
-//        }
-
         imageView.setOnClickListener {
             val intent = Intent(this, CitiesActivity::class.java)
             startActivity(intent)
@@ -110,13 +99,20 @@ class MainActivity: BaseActivity() {
     override fun onResume() {
         super.onResume()
         checkStartedBefore()
-        viewModel.weatherDailyLiveData.observe(this, Observer {
-                when(permissionState) {
-                    true -> cityName.text = locationFormatter(it.timezone!!)
-//                    false -> cityName.text = city.cityName!!
-                }
+        if(stateLoad && permissionLocation) {
+            viewModel.weatherLiveDataLocation.observe(this, Observer {
                 onLoadedWeather(it)
-        })
+                cityName.text = locationFormatter(it.timezone!!)
+            })
+        } else {
+            viewModel.weatherLiveDataByCity.observe(this, Observer {
+                onLoadedWeather(it)
+            })
+            viewModel.cityNameLiveData.observe(this, Observer {
+                cityName.text = it
+            })
+        }
+
     }
 
     private fun onLoadedWeather(weather: DailyWeatherMain) = with(weather) {
