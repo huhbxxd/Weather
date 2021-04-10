@@ -25,6 +25,7 @@ import com.example.weather.screens.main.ui.adapters.MainAdapterDailyDay
 import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_bar.*
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
@@ -90,7 +91,7 @@ class MainActivity: BaseActivity() {
             MainAdapterDailyHour(::onItemClick)
         recyclerViewDailyHour.adapter = adapterDailyHour
 
-        imageView.setOnClickListener {
+        floatingCitiesList.setOnClickListener {
             val intent = Intent(this, CitiesActivity::class.java)
             startActivity(intent)
         }
