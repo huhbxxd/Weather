@@ -1,7 +1,9 @@
 package com.example.weather.screens.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -15,6 +17,7 @@ import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.weather.DailyWeatherMain
 import com.example.weather.data.weather.daily.day.DailyDayWeather
 import com.example.weather.data.weather.daily.hour.HourlyWeather
+import com.example.weather.screens.choose.ChooseActivity
 import com.example.weather.screens.cities.CitiesActivity
 import com.example.weather.screens.detail.DailyDetailWeather
 import com.example.weather.screens.detail.HourlyDetailWeather
@@ -38,7 +41,10 @@ class MainActivity: BaseActivity() {
         const val PATTERN_TIME = "HH:mm" // "HH:mm" hours:minutes from table of SimpleDateFormat
         const val LIST_CITIES = "LIST_CITIES"
         const val LAST_CITY = "LAST_CITY"
+        const val STARTED_BEFORE = "STARTED_BEFORE"
     }
+
+
 
     override val layout: Int
         get() = R.layout.activity_main
@@ -62,6 +68,8 @@ class MainActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 //        city = intent.getSerializableExtra(CITY_FIELD) as CitiesFields
 
         permissionState = ContextCompat.checkSelfPermission(
@@ -101,31 +109,37 @@ class MainActivity: BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        checkStartedBefore()
         viewModel.weatherDailyLiveData.observe(this, Observer {
-            with(it) {
-                adapterDailyDay.listDailyDay = daily!!
-                adapterDailyHour.listDailyHour = hourly!!
                 when(permissionState) {
-                    true -> cityName.text = locationFormatter(timezone!!)
+                    true -> cityName.text = locationFormatter(it.timezone!!)
 //                    false -> cityName.text = city.cityName!!
                 }
-                description.text = current?.weatherIcon?.get(0)?.description
-                currentTemp.text = current?.temp?.roundToInt().toString()
-                sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
-                sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
-                pressureValue.text = current.pressure.toString()
-                humidityValue.text = current.humidity.toString()
-                feelsLikeValue.text = current.feelsLike.toString()
-                cloudinessValue.text = current.clouds.toString()
-                windSpeedValue.text = current.windSpeed.toString()
-                uvIndexValue.text = current.uvi.toString()
-            }
+                onLoadedWeather(it)
         })
     }
 
-    private fun locationFormatter(s: String): String {
-        return s.substringAfter("/") // from: America/Los_Angeles
-            .replace("_", " ") // to: Los Angeles
+    private fun onLoadedWeather(weather: DailyWeatherMain) = with(weather) {
+        adapterDailyDay.listDailyDay = daily!!
+        adapterDailyHour.listDailyHour = hourly!!
+        description.text = current?.weatherIcon?.get(0)?.description
+        currentTemp.text = current?.temp?.roundToInt().toString()
+        sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
+        sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
+        pressureValue.text = current.pressure.toString()
+        humidityValue.text = current.humidity.toString()
+        feelsLikeValue.text = current.feelsLike.toString()
+        cloudinessValue.text = current.clouds.toString()
+        windSpeedValue.text = current.windSpeed.toString()
+        uvIndexValue.text = current.uvi.toString()
+    }
+
+    private fun checkStartedBefore() {
+        val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        if (!sharedPreferences.getBoolean(STARTED_BEFORE, false)) {
+            startActivity(Intent(this, ChooseActivity::class.java))
+            finish()
+        }
     }
 
     private fun <T: Serializable> onItemClick(item: T) {
@@ -143,18 +157,10 @@ class MainActivity: BaseActivity() {
         startActivity(intent)
     }
 
-    private fun onLoadedWeather(weather: DailyWeatherMain) = with(weather) {
-        adapterDailyDay.listDailyDay = daily!!
-        adapterDailyHour.listDailyHour = hourly!!
-        description.text = current?.weatherIcon?.get(0)?.description
-        currentTemp.text = current?.temp?.roundToInt().toString()
-        sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
-        sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
-        pressureValue.text = current.pressure.toString()
-        humidityValue.text = current.humidity.toString()
-        feelsLikeValue.text = current.feelsLike.toString()
-        cloudinessValue.text = current.clouds.toString()
-        windSpeedValue.text = current.windSpeed.toString()
-        uvIndexValue.text = current.uvi.toString()
+    private fun locationFormatter(s: String): String {
+        return s.substringAfter("/") // from: America/Los_Angeles
+            .replace("_", " ") // to: Los Angeles
     }
+
+
 }

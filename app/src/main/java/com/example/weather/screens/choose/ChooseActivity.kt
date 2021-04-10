@@ -31,25 +31,6 @@ class ChooseActivity: BaseActivity() {
         val TEXT_ALERT = "Allow Weather to access to provide local content"
         val NEGATIVE_ALLERT = "DON\'T ALLOW"
         val POSITIVE_ALLERT = "ALLOW"
-        val startedBefore = "startedBefore"
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // later dont forget about check list of cities and check Package Granted to need
-        //  to move activity
-/*
-        val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
-        if (!sharedPreferences.getBoolean(startedBefore, false)) {
-            sharedPreferences.edit()
-                .apply {
-                    putBoolean(startedBefore, true)
-                    apply()
-                }
-        } else {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } */
     }
 
     @SuppressLint("ShowToast")

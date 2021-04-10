@@ -111,8 +111,6 @@ class CitiesActivity: BaseActivity(){
             adapterSearchCities.listCities = it.first as MutableList<CitiesRecord>
         })
 
-
-
         recyclerViewSearchCities.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -133,7 +131,9 @@ class CitiesActivity: BaseActivity(){
         })
     }
 
+    // user choose city from search list and click
     private fun onItemClick(city: CitiesFields) {
+        onStartedBefore()
         val intent = Intent(this, MainActivity::class.java)
             .apply {addFlags(FLAG_ACTIVITY_CLEAR_TOP)
                     putExtra(MainActivity.CITY_FIELD, city)}
@@ -143,7 +143,6 @@ class CitiesActivity: BaseActivity(){
         startActivity(intent)
     }
 
-    @SuppressLint("CommitPrefEdits")
     private fun saveCity(value: String) {
         val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
         val copyOfSet = setFromSharedPreferences?.toMutableSet()
@@ -152,14 +151,25 @@ class CitiesActivity: BaseActivity(){
             }
         sharedPreferencesListCities.edit()
             .apply{
-                putStringSet(MainActivity.LIST_CITIES, copyOfSet)
+                putStringSet(MainActivity.LIST_CITIES, copyOfSet) // save city to store
                 apply()
         }
         sharedPreferencesLastCity.edit()
             .apply {
-                putString(MainActivity.LAST_CITY, value)
+                putString(MainActivity.LAST_CITY, value) // save city like last city that was chosen before close app
                 apply()
         }
+    }
+
+    // this fun need to change preference when event itemClick will clicked
+    // it's need to when user restart app while choosing city main activity not started first
+    private fun onStartedBefore() {
+        val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .apply {
+                putBoolean(MainActivity.STARTED_BEFORE, true)
+                apply()
+            }
     }
 
 }
