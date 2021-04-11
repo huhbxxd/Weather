@@ -23,6 +23,8 @@ class CitiesInteractor(
 
     private val queryCitiesSubject = PublishSubject.create<Pair<String, Int>>()
 
+    // get cities list that saved cities that user chosen from search list
+    // get from local preferences
     fun getListCities(onComplete: (List<CitiesFields>) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(repositoryStored.getListCities()
             .subscribeOn(Schedulers.io())
@@ -30,7 +32,7 @@ class CitiesInteractor(
             .subscribe(onComplete, onError))
     }
 
-
+    // find all cities by query
     fun subscribeOnCitiesSearch(onSuccess: (Cities) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(queryCitiesSubject.debounce(DELAY_TIME, TimeUnit.MILLISECONDS)
             .switchMapSingle { repository.getListCities(it.first, it.second) }

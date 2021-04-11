@@ -12,6 +12,8 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
 
     private val citiesList = mutableListOf<CitiesRecord>()
 
+    val citesThrowable = MutableLiveData<Throwable>()
+
     val searchCitiesViewModel by lazy {
         interactor.subscribeOnCitiesSearch(::onSuccessCities, ::onError)
         return@lazy MutableLiveData<Pair<List<CitiesRecord>, Boolean>>()
@@ -22,8 +24,6 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
         return@lazy MutableLiveData<List<CitiesFields>>()
     }
 
-
-
     private fun onSuccessCities(cities: Cities) {
         val hasLoading = cities.citiesRecords!!.size >= CitiesInteractor.PAGE_COUNT
         citiesList.addAll(cities.citiesRecords)
@@ -33,8 +33,6 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
     private fun onComplete(list: List<CitiesFields>) {
         listCitiesViewModel.postValue(list)
     }
-
-
 
     fun onSearch(query: String) {
         page = 1
@@ -48,7 +46,7 @@ class CitiesViewModel(private val interactor: CitiesInteractor): ViewModel() {
     }
 
     private fun onError(t: Throwable) {
-        // some events
+        citesThrowable.postValue(t)
     }
 
     override fun onCleared() {

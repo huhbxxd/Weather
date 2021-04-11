@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/description"
         android:layout_marginStart="18dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/detailFrameSunrise"/>
 
@@ -50,7 +50,7 @@
         android:layout_width="180dp"
         android:layout_height="120dp"
         android:layout_marginTop="70dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toStartOf="@+id/detailFrameSunset"
@@ -78,7 +78,7 @@
         android:layout_width="180dp"
         android:layout_height="120dp"
         android:layout_marginTop="70dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,9 +104,9 @@
     <FrameLayout
         android:id="@+id/detailFrameTempDay"
         android:layout_width="180dp"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@id/detailFrameSunrise"
@@ -127,33 +127,34 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="@string/morning_temperature"
             android:textColor="@color/black_grey"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center"/>
         <TextView
             android:id="@+id/mornTemperature"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameTempNight"
         android:layout_width="180dp"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,15 +175,15 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:text="@string/evening_temperature"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black_grey"
             android:gravity="center"/>
@@ -190,8 +191,9 @@
             android:id="@+id/eveTemperature"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
@@ -200,7 +202,7 @@
         android:layout_width="180dp"
         android:layout_height="120dp"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@id/detailFrameTempDay"
@@ -221,15 +223,15 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="@string/feels_like_morning"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black_grey"
             android:gravity="center"/>
@@ -238,7 +240,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
@@ -247,7 +249,7 @@
         android:layout_width="180dp"
         android:layout_height="120dp"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -268,7 +270,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
@@ -276,7 +278,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="@string/feels_like_evening"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black_grey"
             android:gravity="center"/>
@@ -285,16 +287,16 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameWindSpeed"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -304,7 +306,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|top"
-            android:text="@string/wind_speed"
+            android:text="@string/wind_speed_detail"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/black_grey"
@@ -313,17 +315,18 @@
             android:id="@+id/windSpeedValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameWindDeg"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -342,17 +345,18 @@
             android:id="@+id/windDegValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameClouds"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -362,7 +366,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|top"
-            android:text="@string/cloudiness"
+            android:text="@string/cloudiness_detail"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/black_grey"
@@ -371,17 +375,18 @@
             android:id="@+id/cloudinessValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameUVi"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -400,17 +405,18 @@
             android:id="@+id/uvIndexValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFramePop"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -418,7 +424,7 @@
         app:layout_constraintTop_toBottomOf="@id/detailFrameClouds">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:text="@string/probability_of_precipitation"
             android:textStyle="bold"
@@ -430,16 +436,16 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameHum"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -449,7 +455,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|top"
-            android:text="@string/humidity"
+            android:text="@string/humidity_detail"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/black_grey"
@@ -458,18 +464,19 @@
             android:id="@+id/humidityValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="3dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFramePressure"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="50dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -480,7 +487,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center|top"
-            android:text="@string/pressure"
+            android:text="@string/pressure_detail"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/black_grey"
@@ -489,18 +496,19 @@
             android:id="@+id/pressureValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/detailFrameDewPoint"
         android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/cardview_height"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="50dp"
-        android:background="@color/grey_back_framelayout"
+        android:background="@color/grey_back_frame_layout"
         android:elevation="10dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -509,19 +517,20 @@
         app:layout_constraintBottom_toBottomOf="parent">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:text="@string/atmospheric_pressure"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/black_grey"
             android:gravity="center" />
         <TextView
             android:id="@+id/dewPointValue"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginBottom="6dp"
             android:layout_gravity="center|bottom"
-            android:textSize="@dimen/text_size_detail_weaher"
+            android:textSize="@dimen/text_size_detail_weather"
             android:gravity="center"/>
     </FrameLayout>
 

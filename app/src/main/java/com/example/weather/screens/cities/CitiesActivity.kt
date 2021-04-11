@@ -1,6 +1,7 @@
 package com.example.weather.screens.cities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
@@ -97,6 +98,7 @@ class CitiesActivity: BaseActivity(){
         return true
     }
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferencesListCities = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
@@ -137,6 +139,8 @@ class CitiesActivity: BaseActivity(){
                 }
             }
 
+        // fab uses to moving to main activity with location ( if permission to provide location was accept )
+        // else show permission request
         fabLocation.setOnClickListener {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
@@ -151,6 +155,9 @@ class CitiesActivity: BaseActivity(){
                     adapterSearchSearchCities.hasLoading = false
                 }
             }
+        })
+        viewModel.citesThrowable.observe(this, Observer {
+            Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT)
         })
     }
 
