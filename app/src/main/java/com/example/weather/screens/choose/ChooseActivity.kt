@@ -57,6 +57,7 @@ class ChooseActivity: BaseActivity() {
                 }
             }
 
+        // continue button that provide location
         byLocation.setOnClickListener {
             when (PackageManager.PERMISSION_GRANTED) {
                 ContextCompat.checkSelfPermission(this,

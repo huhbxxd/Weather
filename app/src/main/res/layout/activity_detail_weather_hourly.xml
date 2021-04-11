@@ -102,7 +102,7 @@
         <FrameLayout
             android:id="@+id/detailFrameWindSpeed"
             android:layout_width="180dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:background="@color/grey_back_framelayout"
             android:elevation="10dp"
@@ -123,6 +123,7 @@
                 android:id="@+id/windSpeedHourValue"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginBottom="6dp"
                 android:layout_gravity="center|bottom"
                 android:textSize="@dimen/text_size_detail_weaher"
                 android:gravity="center"/>
@@ -131,7 +132,7 @@
         <FrameLayout
             android:id="@+id/detailFrameWindDeg"
             android:layout_width="180dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:background="@color/grey_back_framelayout"
             android:elevation="10dp"
@@ -152,6 +153,7 @@
                 android:id="@+id/windDegHourValue"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginBottom="6dp"
                 android:layout_gravity="center|bottom"
                 android:textSize="@dimen/text_size_detail_weaher"
                 android:gravity="center"/>
@@ -218,7 +220,7 @@
         <FrameLayout
             android:id="@+id/detailFramePop"
             android:layout_width="180dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:background="@color/grey_back_framelayout"
             android:elevation="10dp"
@@ -228,7 +230,7 @@
             app:layout_constraintTop_toBottomOf="@id/detailFrameClouds">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
                 android:text="@string/probability_of_precipitation"
                 android:textStyle="bold"
@@ -247,7 +249,7 @@
         <FrameLayout
             android:id="@+id/detailFrameHum"
             android:layout_width="180dp"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="15dp"
             android:background="@color/grey_back_framelayout"
             android:elevation="10dp"
@@ -268,6 +270,7 @@
                 android:id="@+id/humidityHourValue"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginBottom="6dp"
                 android:layout_gravity="center|bottom"
                 android:textSize="@dimen/text_size_detail_weaher"
                 android:gravity="center"/>

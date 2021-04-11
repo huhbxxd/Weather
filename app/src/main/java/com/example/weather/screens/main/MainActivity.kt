@@ -3,6 +3,8 @@ package com.example.weather.screens.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -55,7 +57,6 @@ class MainActivity: BaseActivity() {
     private lateinit var adapterDailyHour: MainAdapterDailyHour
     private var permissionLocation by Delegates.notNull<Boolean>()
     var stateLoad by Delegates.notNull<Boolean>()
-    private lateinit var city: CitiesFields
 
     private val component by lazy {
         DaggerMainComponent.builder()
@@ -67,10 +68,13 @@ class MainActivity: BaseActivity() {
     @Inject
     lateinit var viewModel: MainViewModel
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // default true to try load by location ( if permission was accept )
+        // else loading city from search list
+        // look onResume to this
         stateLoad = intent.getBooleanExtra(STATE_LOAD, true)
-
         permissionLocation = ContextCompat.checkSelfPermission(
             this,
             android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -93,18 +97,26 @@ class MainActivity: BaseActivity() {
 
         floatingCitiesList.setOnClickListener {
             val intent = Intent(this, CitiesActivity::class.java)
+                .apply { addFlags(FLAG_ACTIVITY_CLEAR_TOP) }
             startActivity(intent)
         }
+
+        viewModel.weatherThrowable.observe(this, Observer {
+            Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT)
+        })
     }
 
     override fun onResume() {
         super.onResume()
         checkStartedBefore()
+        // if permission was denied restart application loading last chosen city
+        // try load by location
         if(stateLoad && permissionLocation) {
             viewModel.weatherLiveDataLocation.observe(this, Observer {
                 onLoadedWeather(it)
                 cityName.text = locationFormatter(it.timezone!!)
             })
+        // else load by city from search list or stored list
         } else {
             viewModel.weatherLiveDataByCity.observe(this, Observer {
                 onLoadedWeather(it)
