@@ -28,7 +28,6 @@ import com.example.weather.screens.main.ui.adapters.MainAdapterDailyHour
 import com.example.weather.screens.main.di.DaggerMainComponent
 import com.example.weather.screens.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.bottom_bar.*
 import kotlinx.android.synthetic.main.motion_layout.*
 import kotlinx.android.synthetic.main.scroll_content.*
 import java.io.Serializable
@@ -121,6 +120,8 @@ class MainActivity: BaseActivity() {
             viewModel.weatherLiveDataByCity.observe(this, Observer {
                 onLoadedWeather(it)
             })
+            // loading name from local storage (stored cities, last city)
+            // because weather api give not correct city name by location
             viewModel.cityNameLiveData.observe(this, Observer {
                 cityName.text = it
             })

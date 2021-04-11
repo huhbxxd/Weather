@@ -3,6 +3,6 @@
     <dimen name="text_description">14sp</dimen>
     <dimen name="description_value">18sp</dimen>
     <dimen name="viewLongHeight" format="float">0.7dp</dimen>
-    <dimen name="text_size_detail_weaher">18sp</dimen>
+    <dimen name="text_size_detail_weather">18sp</dimen>
     <dimen name="cardview_height">70dp</dimen>
 </resources>

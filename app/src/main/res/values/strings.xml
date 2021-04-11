@@ -1,15 +1,7 @@
 <resources>
     <string name="default_value">—</string>
     <string name="app_name">Weather</string>
-    <string name="temperature">Temperature</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hour_date">Hour</string>
-    <string name="hour_temperature">TempHour</string>
-    <string name="temp_day">1</string>
-    <string name="temp_night">-1</string>
-    <string name="day_week">Monday</string>
-    <string name="hour">22</string>
-    <string name="temp_hour">5</string>
+    <!-- main activity -->
     <string name="city">City</string>
     <string name="description">description</string>
     <string name="sunrise">Sunrise</string>
@@ -19,28 +11,33 @@
     <string name="humidity">Humidity</string>
     <string name="percent">%</string>
     <string name="feels_like">Feels like</string>
-    <!--celsius - \u00B0-->
-    <string name="degree">°</string>
+    <string name="degree">°</string> <!--celsius - \u00B0-->
     <string name="cloudiness">Cloudiness</string>
     <string name="wind_speed">Wind speed</string>
     <string name="metre_sec">m/s</string>
     <string name="uv_index">UV-Index</string>
     <string name="by_location">Continue</string>
-    <string name="text_location_perm">Allow weather to provide you with the most accurate forecast by allowing us to use your device location</string>
+    <!-- permission -->
+    <string name="text_location_perm">Allow weather to provide you with the most
+        accurate forecast by allowing us to use your device location</string>
     <!-- searchable -->
     <string name="search_hint">Search city</string>
-    <string name="country">country</string>
-    <string name="day_temperature">Day temperature</string>
-    <string name="morning_temperature">Morning temperature</string>
-    <string name="night_temperature">Night temperature</string>
-    <string name="evening_temperature">Evening temperature</string>
-    <string name="feels_like_day">Feels like (day)</string>
-    <string name="feels_like_night">Feels like (night)</string>
-    <string name="wind_gust">Wind direction</string>
-    <string name="probability_of_precipitation">Probability of precipitation</string>
-    <string name="atmospheric_pressure">Atmospheric pressure</string>
-    <string name="feels_like_evening">Feels like (evening)</string>
-    <string name="feels_like_morning">Feels like (morning)</string>
-    <string name="visibility">Visibility</string>
-    <string name="my_location">My location</string>
+    <!-- detail weather -->
+    <string name="day_temperature">Day temperature, °C</string>
+    <string name="morning_temperature">Morning temperature, °C</string>
+    <string name="night_temperature">Night temperature, °C</string>
+    <string name="evening_temperature">Evening temperature, °C</string>
+    <string name="feels_like_detail">Feels like, °C</string>
+    <string name="feels_like_day">Feels like (day), °C</string>
+    <string name="feels_like_night">Feels like (night), °C</string>
+    <string name="pressure_detail">Pressure, hPa</string>
+    <string name="wind_gust">Wind direction, rad</string>
+    <string name="wind_speed_detail">Wind speed, m/s</string>
+    <string name="humidity_detail">Humidity, %</string>
+    <string name="cloudiness_detail">Cloudiness, %</string>
+    <string name="probability_of_precipitation">Probability of precipitation, %</string>
+    <string name="atmospheric_pressure">Atmospheric pressure, hPa</string>
+    <string name="feels_like_evening">Feels like (evening), °C</string>
+    <string name="feels_like_morning">Feels like (morning), °C</string>
+    <string name="visibility_detail">Visibility, m</string>
 </resources>

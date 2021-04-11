@@ -139,7 +139,7 @@ class CitiesActivity: BaseActivity(){
                 }
             }
 
-        // fab move to main activity with location ( if permission to provide location was accept )
+        // fab uses to moving to main activity with location ( if permission to provide location was accept )
         // else show permission request
         fabLocation.setOnClickListener {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
