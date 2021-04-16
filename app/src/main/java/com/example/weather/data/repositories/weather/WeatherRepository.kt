@@ -6,8 +6,6 @@ import io.reactivex.Single
 
 interface WeatherRepository {
 
-    fun loadWeatherDailyByCoord(lat: Double, lon: Double): Single<DailyWeatherMain>
-
-    fun loadWeatherDailyByLocation(location: Location): Single<DailyWeatherMain>
+    fun loadWeather(lat: Double, lon: Double): Single<DailyWeatherMain>
 
 }

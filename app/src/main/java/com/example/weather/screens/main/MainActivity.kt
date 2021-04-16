@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
-import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.weather.DailyWeatherMain
 import com.example.weather.data.weather.daily.day.DailyDayWeather
 import com.example.weather.data.weather.daily.hour.HourlyWeather
