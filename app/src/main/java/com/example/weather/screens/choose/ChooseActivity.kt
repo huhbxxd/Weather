@@ -3,23 +3,17 @@ package com.example.weather.screens.choose
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.screens.cities.CitiesActivity
 import com.example.weather.screens.main.MainActivity
 import kotlinx.android.synthetic.main.activity_choose.*
-import java.security.Permissions
-
 
 class ChooseActivity: BaseActivity() {
 

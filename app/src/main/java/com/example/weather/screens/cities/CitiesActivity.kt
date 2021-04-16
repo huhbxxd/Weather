@@ -2,22 +2,17 @@ package com.example.weather.screens.cities
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
-import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +21,6 @@ import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.cities.CitiesRecord
-import com.example.weather.screens.choose.ChooseActivity
 import com.example.weather.screens.cities.di.CitiesModule
 import com.example.weather.screens.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.cities.ui.SearchCitiesAdapter

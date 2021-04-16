@@ -3,7 +3,6 @@ package com.example.weather.screens.main
 import androidx.lifecycle.*
 import com.example.weather.data.cities.CitiesFields
 import com.example.weather.data.weather.DailyWeatherMain
-import kotlin.properties.Delegates
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 

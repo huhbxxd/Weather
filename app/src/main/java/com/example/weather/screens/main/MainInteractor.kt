@@ -18,7 +18,7 @@ class MainInteractor(private val repository: WeatherRepository,
     fun subscribeOnWeatherDailyByLocation(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(Maybe.fromCallable {
             locationRepository.getLocation()
-                .flatMap { repository.loadWeatherDailyByLocation(it)
+                .flatMap { repository.loadWeather(it.latitude, it.longitude)
                 .subscribeOn(Schedulers.io()) }
         } // network call must not be in a main thread
             .subscribeOn(Schedulers.io())
@@ -30,7 +30,7 @@ class MainInteractor(private val repository: WeatherRepository,
     fun subscribeOnWeatherDailyByCoord(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
         disposable.add(Maybe.fromCallable {
             repositoryStored.getLastCity()
-                .flatMap { repository.loadWeatherDailyByCoord(it.coordCity?.get(0)!!, it.coordCity[1])
+                .flatMap { repository.loadWeather(it.coordCity?.get(0)!!, it.coordCity[1])
                 .subscribeOn(Schedulers.io()) }
             }
                 .subscribeOn(Schedulers.io())
