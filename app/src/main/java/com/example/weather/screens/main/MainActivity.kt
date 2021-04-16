@@ -108,7 +108,7 @@ class MainActivity: BaseActivity() {
     override fun onResume() {
         super.onResume()
         checkStartedBefore()
-        // if permission was denied restart application loading last chosen city
+        // if permission was denied, starting application load last chosen city
         // try load by location
         if(stateLoad && permissionLocation) {
             viewModel.weatherLiveDataLocation.observe(this, Observer {
