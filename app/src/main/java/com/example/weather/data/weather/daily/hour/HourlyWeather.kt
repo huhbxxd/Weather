@@ -4,48 +4,25 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
-class HourlyWeather: Serializable {
-
-    @SerializedName("dt")
-    val dt: Int? = null
-
+data class HourlyWeather (
+    val dt: Int,
+    val pressure: Int,
+    val humidity: Int,
+    val uvi: Double,
+    val clouds: Int,
+    val visibility: Int,
+    val weather: List<HourlyWeatherIcon>,
+    val pop: Double,
     @SerializedName("temp")
-    val temperature: Double? = null
-
+    val temperature: Double,
     @SerializedName("feels_like")
-    val feelsLike: Double? = null
-
-    @SerializedName("pressure")
-    val pressure: Int? = null
-
-    @SerializedName("humidity")
-    val humidity: Int? = null
-
-    @SerializedName("dew_point")
-    val dewPoint: Double? = null
-
-    @SerializedName("uvi")
-    val uvi: Double? = null
-
-    @SerializedName("clouds")
-    val clouds: Int? = null
-
-    @SerializedName("visibility")
-    val visibility: Int? = null
-
+    val feelsLike: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double? = null
-
+    val windSpeed: Double,
     @SerializedName("wind_deg")
-    val windDeg: Int? = null
-
+    val windDeg: Int,
     @SerializedName("wind_gust")
-    val windGust: Double? = null
-
-    @SerializedName("weather")
-    val weather: List<HourlyWeatherIcon>? = null
-
-    @SerializedName("pop")
-    val pop: Double? = null
-
-}
+    val windGust: Double,
+    @SerializedName("dew_point")
+    val dewPoint: Double
+): Serializable

@@ -1,12 +1,10 @@
 package com.example.weather.screens.cities.di
 
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather.data.CitiesApi
 import com.example.weather.data.repositories.cities.CitiesRepository
 import com.example.weather.data.repositories.cities.CitiesRepositoryImpl
 import com.example.weather.data.repositories.stored.StoredCitiesRepository
-import com.example.weather.data.repositories.stored.StoredCitiesRepositoryImpl
 import com.example.weather.di.ActivityScope
 import com.example.weather.screens.cities.CitiesActivity
 import com.example.weather.screens.cities.CitiesInteractor

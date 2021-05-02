@@ -29,25 +29,25 @@ class HourlyDetailWeather: BaseActivity() {
         Glide.with(this)
             .load(
                 ICON_URL
-                    + hourWeather.weather!![0].icon!!
+                    + hourWeather.weather[0].icon
                     + ".png")
             .into(weatherHourView)
 
 
         with(hourWeather) {
-            hourOfDay.text = dateFormatter(dt!!, PATTERN_TIME)
-            descriptionHour.text = weather!![0].description
+            hourOfDay.text = dateFormatter(dt, PATTERN_TIME)
+            descriptionHour.text = weather[0].description
 
-            feelsLikeHourValue.text = feelsLike?.roundToInt().toString()
-            visibilityHourValue.text = visibility?.toString()
-            windSpeedHourValue.text = windSpeed?.toString()
-            windDegHourValue.text = windDeg?.toString()
-            cloudinessHourValue.text = clouds?.toString()
-            uvIndexHourValue.text = uvi?.toString()
-            popHourValue.text = pop?.toString()
-            humidityHourValue.text = humidity?.toString()
-            pressureHourValue.text = pressure?.toString()
-            dewPointHourValue.text = dewPoint?.toString()
+            feelsLikeHourValue.text = feelsLike.roundToInt().toString()
+            visibilityHourValue.text = visibility.toString()
+            windSpeedHourValue.text = windSpeed.toString()
+            windDegHourValue.text = windDeg.toString()
+            cloudinessHourValue.text = clouds.toString()
+            uvIndexHourValue.text = uvi.toString()
+            popHourValue.text = pop.toString()
+            humidityHourValue.text = humidity.toString()
+            pressureHourValue.text = pressure.toString()
+            dewPointHourValue.text = dewPoint.toString()
         }
     }
 }

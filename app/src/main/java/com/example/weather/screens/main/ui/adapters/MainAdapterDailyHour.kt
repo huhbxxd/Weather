@@ -18,7 +18,7 @@ class MainAdapterDailyHour(
 ): RecyclerView.Adapter<MainAdapterDailyHour.ViewHolder>() {
 
     private companion object {
-        val ICON_URL = "http://openweathermap.org/img/wn/"
+        const val ICON_URL = "http://openweathermap.org/img/wn/"
     }
 
     var listDailyHour = listOf<HourlyWeather>()
@@ -42,9 +42,9 @@ class MainAdapterDailyHour(
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(item: HourlyWeather) = with(itemView) {
-            dailyHour.text = dateFormatter(item.dt!!)
-            Glide.with(context).load(ICON_URL + item.weather!![0].icon!! + ".png").into(imageHourlyIcon)
-            dailyHourTemp.text = item.temperature?.roundToInt().toString()
+            dailyHour.text = dateFormatter(item.dt)
+            Glide.with(context).load(ICON_URL + item.weather[0].icon + ".png").into(imageHourlyIcon)
+            dailyHourTemp.text = item.temperature.roundToInt().toString()
         }
     }
 

@@ -5,27 +5,13 @@ import com.example.weather.data.weather.daily.day.DailyDayWeather
 import com.example.weather.data.weather.daily.hour.HourlyWeather
 import com.google.gson.annotations.SerializedName
 
-class DailyWeatherMain {
-
-    @SerializedName("lat")
-    val lat: Double? = null
-
-    @SerializedName("lon")
-    val lon: Double? = null
-
-    @SerializedName("timezone")
-    val timezone: String? = null
-
+data class DailyWeatherMain (
+    val lat: Double,
+    val lon: Double,
+    val timezone: String,
+    val current: CurrentWeather,
+    val daily: List<DailyDayWeather>,
+    val hourly: List<HourlyWeather>,
     @SerializedName("timezone_offset")
-    val timezoneOffset: Int? = null
-
-    @SerializedName("current")
-    val current: CurrentWeather? = null
-
-    @SerializedName("daily")
-    val daily: List<DailyDayWeather>? = null
-
-    @SerializedName("hourly")
-    val hourly: List<HourlyWeather>? = null
-
-}
+    val timezoneOffset: Int
+)

@@ -42,13 +42,9 @@ class MainActivity: BaseActivity() {
         const val STARTED_BEFORE = "STARTED_BEFORE"
     }
 
-
-
     override val layout: Int
         get() = R.layout.activity_main
 
-    private lateinit var linearLayoutManagerDailyDay: LinearLayoutManager
-    private lateinit var linearLayoutManagerDailyHour: LinearLayoutManager
     private lateinit var adapterDailyDay: MainAdapterDailyDay
     private lateinit var adapterDailyHour: MainAdapterDailyHour
     private var permissionLocation by Delegates.notNull<Boolean>()
@@ -76,11 +72,11 @@ class MainActivity: BaseActivity() {
             android.Manifest.permission.ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
-        linearLayoutManagerDailyDay = LinearLayoutManager(this)
-        linearLayoutManagerDailyHour = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewDailyDay.layoutManager = linearLayoutManagerDailyDay
+        recyclerViewDailyDay.layoutManager =
+            LinearLayoutManager(this)
         recyclerViewDailyDay.suppressLayout(true)
-        recyclerViewDailyHour.layoutManager = linearLayoutManagerDailyHour
+        recyclerViewDailyHour.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         component.inject(this)
 
@@ -127,12 +123,12 @@ class MainActivity: BaseActivity() {
     }
 
     private fun onLoadedWeather(weather: DailyWeatherMain) = with(weather) {
-        adapterDailyDay.listDailyDay = daily!!
-        adapterDailyHour.listDailyHour = hourly!!
-        description.text = current?.weatherIcon?.get(0)?.description
-        currentTemp.text = current?.temp?.roundToInt().toString()
-        sunriseTime.text = dateFormatter(current?.sunrise!!, PATTERN_TIME)
-        sunsetTime.text = dateFormatter(current.sunset!!, PATTERN_TIME)
+        adapterDailyDay.listDailyDay = daily
+        adapterDailyHour.listDailyHour = hourly
+        description.text = current.weatherIcon[0].description
+        currentTemp.text = current.temp.roundToInt().toString()
+        sunriseTime.text = dateFormatter(current.sunrise, PATTERN_TIME)
+        sunsetTime.text = dateFormatter(current.sunset, PATTERN_TIME)
         pressureValue.text = current.pressure.toString()
         humidityValue.text = current.humidity.toString()
         feelsLikeValue.text = current.feelsLike.toString()
