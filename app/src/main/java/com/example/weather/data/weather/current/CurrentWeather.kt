@@ -1,49 +1,26 @@
 package com.example.weather.data.weather.current
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class CurrentWeather {
-
-    @SerializedName("dt")
-    val dt: Int? = null
-
-    @SerializedName("sunrise")
-    val sunrise: Int? = null
-
-    @SerializedName("sunset")
-    val sunset: Int? = null
-
-    @SerializedName("temp")
-    val temp: Double? = null
-
+data class CurrentWeather(
+    val dt: Int,
+    val sunrise: Int,
+    val sunset: Int,
+    val temp: Double,
+    val pressure: Double,
+    val humidity: Int,
+    val uvi: Double,
+    val clouds: Int,
+    val visibility: Int,
     @SerializedName("feels_like")
-    val feelsLike: Double? = null
-
-    @SerializedName("pressure")
-    val pressure: Double? = null
-
-    @SerializedName("humidity")
-    val humidity: Int? = null
-
+    val feelsLike: Double,
     @SerializedName("dew_point")
-    val dewPoint: Double? = null
-
-    @SerializedName("uvi")
-    val uvi: Double? = null
-
-    @SerializedName("clouds")
-    val clouds: Int? = null
-
-    @SerializedName("visibility")
-    val visibility: Int? = null
-
+    val dewPoint: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double? = null
-
+    val windSpeed: Double,
     @SerializedName("wind_deg")
-    val windDeg: Int? = null
-
+    val windDeg: Int,
     @SerializedName("weather")
-    val weatherIcon: List<CurrentWeatherIcon>? = null
-
-}
+    val weatherIcon: List<CurrentWeatherIcon>
+    ): Serializable

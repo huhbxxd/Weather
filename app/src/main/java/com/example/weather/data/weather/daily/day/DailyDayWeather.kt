@@ -3,50 +3,24 @@ package com.example.weather.data.weather.daily.day
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-
-class DailyDayWeather: Serializable {
-
-    @SerializedName("dt")
-    val dt: Int? = null
-
-    @SerializedName("sunrise")
-    val sunrise: Int? = null
-
-    @SerializedName("sunset")
-    val sunset: Int? = null
-
+data class DailyDayWeather (
+    val dt: Int,
+    val sunrise: Int,
+    val sunset: Int,
+    val pressure: Int,
+    val humidity: Int,
+    val weather: List<DailyDayWeatherIcon>,
+    val clouds: Int,
+    val pop: Double,
+    val uvi: Double,
     @SerializedName("temp")
-    val temperature: DailyDayWeatherTemp? = null
-
+    val temperature: DailyDayWeatherTemp,
     @SerializedName("feels_like")
-    val feelsLike: DailyDayWeatherFeelsLike? = null
-
-    @SerializedName("pressure")
-    val pressure: Int? = null
-
-    @SerializedName("humidity")
-    val humidity: Int? = null
-
+    val feelsLike: DailyDayWeatherFeelsLike,
     @SerializedName("dew_point")
-    val dewPoint: Double? = null
-
+    val dewPoint: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Double? = null
-
+    val windSpeed: Double,
     @SerializedName("wind_deg")
-    val windDeg: Double? = null
-
-    @SerializedName("weather")
-    val weather: List<DailyDayWeatherIcon>? = null
-
-    @SerializedName("clouds")
-    val clouds: Int? = null
-
-    @SerializedName("pop")
-    val pop: Double? = null
-
-    @SerializedName("uvi")
-    val uvi: Double? = null
-
-
-}
+    val windDeg: Double
+): Serializable

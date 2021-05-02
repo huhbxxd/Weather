@@ -1,7 +1,6 @@
 package com.example.weather.data.repositories.stored
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.example.weather.data.cities.CitiesFields
 import com.example.weather.screens.main.MainActivity
 import com.google.gson.Gson

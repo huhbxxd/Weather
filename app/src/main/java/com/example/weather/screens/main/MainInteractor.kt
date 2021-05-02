@@ -16,27 +16,25 @@ class MainInteractor(private val repository: WeatherRepository,
 ): BaseInteractor() {
 
     fun subscribeOnWeatherDailyByLocation(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(Maybe.fromCallable {
+        disposable.add(
             locationRepository.getLocation()
-                .flatMap { repository.loadWeather(it.latitude, it.longitude)
-                .subscribeOn(Schedulers.io()) }
-        } // network call must not be in a main thread
+                .flatMap { repository.loadWeather(it.latitude, it.longitude) }
             .subscribeOn(Schedulers.io())
-            .doOnError(onError)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {it.subscribe(onSuccess, onError)})
+            .subscribe(onSuccess, onError))
     }
 
     fun subscribeOnWeatherDailyByCoord(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(Maybe.fromCallable {
+        disposable.add(
             repositoryStored.getLastCity()
-                .flatMap { repository.loadWeather(it.coordCity?.get(0)!!, it.coordCity[1])
-                .subscribeOn(Schedulers.io()) }
-            }
+                .flatMap {
+                    it.coordCity?.let { coordList ->
+                        repository.loadWeather(coordList[0], coordList[1])
+                    }
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(onError)
-                .subscribe{it.subscribe(onSuccess, onError)})
+                .subscribe(onSuccess, onError))
     }
 
     fun getLastCityName(onComplete: (CitiesFields) -> Unit, onError: (Throwable) -> Unit) {

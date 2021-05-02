@@ -11,7 +11,7 @@ import com.example.weather.screens.cities.ui.viewholders.CitiesViewHolder
 import com.example.weather.screens.cities.ui.viewholders.LoadingViewHolder
 import java.lang.IllegalArgumentException
 
-class SearchCitiesAdapter(
+class   SearchCitiesAdapter(
     private val onItemClick: (CitiesFields) -> Unit
 ): RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -54,8 +54,6 @@ class SearchCitiesAdapter(
 
     private fun isLoadingPosition(position: Int) = position == listCities.size
 
-    fun citiesClear() {
-        listCities.clear()
-    }
+    fun citiesClear()  = listCities.clear()
 
 }

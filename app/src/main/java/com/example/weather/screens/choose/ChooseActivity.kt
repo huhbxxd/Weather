@@ -21,10 +21,10 @@ class ChooseActivity: BaseActivity() {
         get() = R.layout.activity_choose
 
     private companion object {
-        val TITLE_ALLERT = "Allow Weather to access your location?"
-        val TEXT_ALERT = "Allow Weather to access to provide local content"
-        val NEGATIVE_ALLERT = "DON\'T ALLOW"
-        val POSITIVE_ALLERT = "ALLOW"
+        const val TITLE_ALLERT = "Allow Weather to access your location?"
+        const val TEXT_ALERT = "Allow Weather to access to provide local content"
+        const val NEGATIVE_ALLERT = "DON\'T ALLOW"
+        const val POSITIVE_ALLERT = "ALLOW"
     }
 
     @SuppressLint("ShowToast")

@@ -39,8 +39,6 @@ class CitiesActivity: BaseActivity(){
     override val layout: Int
         get() = R.layout.activity_cities
 
-    private lateinit var linearLayoutManagerSearchCities: LinearLayoutManager
-    private lateinit var linearLayoutManagerListCities: LinearLayoutManager
     private lateinit var adapterSearchSearchCities: SearchCitiesAdapter
     private lateinit var adapterStoredCities: StoredCitiesAdapter
     private lateinit var queryText: String
@@ -98,10 +96,8 @@ class CitiesActivity: BaseActivity(){
         sharedPreferencesListCities = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
         sharedPreferencesLastCity = getSharedPreferences(MainActivity.LAST_CITY, Context.MODE_PRIVATE)
 
-        linearLayoutManagerSearchCities = LinearLayoutManager(this)
-        linearLayoutManagerListCities = LinearLayoutManager(this)
-        recyclerViewSearchCities.layoutManager = linearLayoutManagerSearchCities
-        recyclerViewListCities.layoutManager = linearLayoutManagerListCities
+        recyclerViewSearchCities.layoutManager = LinearLayoutManager(this)
+        recyclerViewListCities.layoutManager = LinearLayoutManager(this)
 
         component.inject(this)
 
