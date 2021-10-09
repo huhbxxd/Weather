@@ -1,7 +1,7 @@
 package com.example.weather.data.repositories.stored
 
 import android.content.Context
-import com.example.weather.data.cities.CitiesFields
+import com.example.weather.data.response.cities.CitiesFields
 import com.example.weather.screens.main.MainActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

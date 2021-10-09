@@ -21,16 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screens.choose.ChooseActivity"/>
-        <activity android:name=".screens.cities.CitiesActivity">
+        <activity android:name="com.example.weather.screens.fragments.choose.ChooseActivity"/>
+        <activity android:name="com.example.weather.screens.fragments.cities.CitiesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                         android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".screens.detail.DailyDetailWeather"/>
-        <activity android:name=".screens.detail.HourlyDetailWeather"/>
+        <activity android:name="com.example.weather.screens.fragments.detail.DailyDetailWeather"/>
+        <activity android:name="com.example.weather.screens.fragments.detail.HourlyDetailWeather"/>
     </application>
 
 </manifest>

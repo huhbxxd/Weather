@@ -1,8 +1,8 @@
 package com.example.weather.screens.main
 
 import androidx.lifecycle.*
-import com.example.weather.data.cities.CitiesFields
-import com.example.weather.data.weather.DailyWeatherMain
+import com.example.weather.data.response.cities.CitiesFields
+import com.example.weather.data.response.weather.DailyWeatherMain
 
 class MainViewModel(private val interactor: MainInteractor): ViewModel() {
 
