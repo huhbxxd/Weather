@@ -25,7 +25,7 @@ import com.example.weather.screens.fragments.cities.di.CitiesModule
 import com.example.weather.screens.fragments.cities.di.DaggerCitiesComponent
 import com.example.weather.screens.fragments.cities.ui.SearchCitiesAdapter
 import com.example.weather.screens.fragments.cities.ui.StoredCitiesAdapter
-import com.example.weather.screens.main.MainActivity
+import com.example.weather.screens.main.MainActivityOld
 import com.google.gson.Gson
 import javax.inject.Inject
 
@@ -92,8 +92,8 @@ class CitiesActivity: BaseActivity(){
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferencesListCities = getSharedPreferences(MainActivity.LIST_CITIES, Context.MODE_PRIVATE)
-        sharedPreferencesLastCity = getSharedPreferences(MainActivity.LAST_CITY, Context.MODE_PRIVATE)
+        sharedPreferencesListCities = getSharedPreferences(MainActivityOld.LIST_CITIES, Context.MODE_PRIVATE)
+        sharedPreferencesLastCity = getSharedPreferences(MainActivityOld.LAST_CITY, Context.MODE_PRIVATE)
 
         recyclerViewSearchCities.layoutManager = LinearLayoutManager(this)
         recyclerViewListCities.layoutManager = LinearLayoutManager(this)
@@ -114,10 +114,10 @@ class CitiesActivity: BaseActivity(){
             registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
             ) { isGranted ->
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivityOld::class.java)
                     .apply {
                         addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                        putExtra(MainActivity.STATE_LOAD, true)
+                        putExtra(MainActivityOld.STATE_LOAD, true)
                     }
                 if (isGranted) {
                     onStartedBefore()
@@ -160,10 +160,10 @@ class CitiesActivity: BaseActivity(){
     // user choose city from search list and click
     private fun onItemClick(city: CitiesFields) {
         onStartedBefore()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivityOld::class.java)
             .apply {
                 addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(MainActivity.STATE_LOAD, false)
+                putExtra(MainActivityOld.STATE_LOAD, false)
             }
         // serializable gson to json to next time deserializable
         val jsonCity = Gson().toJson(city)
@@ -172,19 +172,19 @@ class CitiesActivity: BaseActivity(){
     }
 
     private fun saveCity(value: String) {
-        val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivity.LIST_CITIES, mutableSetOf())
+        val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivityOld.LIST_CITIES, mutableSetOf())
         val copyOfSet = setFromSharedPreferences?.toMutableSet()
             .apply {
                 this?.add(value)
             }
         sharedPreferencesListCities.edit()
             .apply{
-                putStringSet(MainActivity.LIST_CITIES, copyOfSet) // save city to store
+                putStringSet(MainActivityOld.LIST_CITIES, copyOfSet) // save city to store
                 apply()
         }
         sharedPreferencesLastCity.edit()
             .apply {
-                putString(MainActivity.LAST_CITY, value) // save city like last city that was chosen before close app
+                putString(MainActivityOld.LAST_CITY, value) // save city like last city that was chosen before close app
                 apply()
         }
     }

@@ -3,8 +3,9 @@ package com.example.weather.data.repositories.weather
 import com.example.weather.data.WeatherApi
 import com.example.weather.data.response.weather.DailyWeatherMain
 import io.reactivex.Single
+import javax.inject.Inject
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val service: WeatherApi
 ) : WeatherRepository {
 

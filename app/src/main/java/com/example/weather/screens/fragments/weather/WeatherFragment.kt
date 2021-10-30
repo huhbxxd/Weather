@@ -1,8 +1,6 @@
-package com.example.weather.screens.fragments.main
+package com.example.weather.screens.fragments.weather
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.example.weather.core.base.BaseFragment
 import com.example.weather.databinding.FragmentWeatherBinding

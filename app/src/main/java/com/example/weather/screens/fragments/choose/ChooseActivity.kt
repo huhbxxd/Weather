@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.screens.fragments.cities.CitiesActivity
-import com.example.weather.screens.main.MainActivity
+import com.example.weather.screens.main.MainActivityOld
 
 class ChooseActivity: BaseActivity() {
 
@@ -31,9 +31,9 @@ class ChooseActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
 
         val intentToCities = Intent(this, CitiesActivity::class.java)
-        val intentToMain = Intent(this, MainActivity::class.java)
+        val intentToMain = Intent(this, MainActivityOld::class.java)
             .apply {
-                putExtra(MainActivity.STATE_LOAD, true)
+                putExtra(MainActivityOld.STATE_LOAD, true)
             }
 
         val  requestPermissionLauncher =
@@ -51,30 +51,30 @@ class ChooseActivity: BaseActivity() {
             }
 
         // continue button that provide location
-        byLocation.setOnClickListener {
-            when (PackageManager.PERMISSION_GRANTED) {
-                ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) -> {
-                    startActivity(intentToMain)
-                    finish()
-                }
-                else -> {
-                    AlertDialog.Builder(this)
-                        .setTitle(TITLE_ALLERT)
-                        .setMessage(TEXT_ALERT)
-                        .setPositiveButton(POSITIVE_ALLERT
-                        ) {dialog, which ->
-                            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
-                        }
-                        .setNegativeButton(NEGATIVE_ALLERT
-                        ) { dialog, which ->
-                            startActivity(intentToCities)
-                            finish()
-                        }
-                        .show()
-                }
-            }
-        }
+//        byLocation.setOnClickListener {
+//            when (PackageManager.PERMISSION_GRANTED) {
+//                ContextCompat.checkSelfPermission(this,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION) -> {
+//                    startActivity(intentToMain)
+//                    finish()
+//                }
+//                else -> {
+//                    AlertDialog.Builder(this)
+//                        .setTitle(TITLE_ALLERT)
+//                        .setMessage(TEXT_ALERT)
+//                        .setPositiveButton(POSITIVE_ALLERT
+//                        ) {dialog, which ->
+//                            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+//                        }
+//                        .setNegativeButton(NEGATIVE_ALLERT
+//                        ) { dialog, which ->
+//                            startActivity(intentToCities)
+//                            finish()
+//                        }
+//                        .show()
+//                }
+//            }
+//        }
     }
 
 }

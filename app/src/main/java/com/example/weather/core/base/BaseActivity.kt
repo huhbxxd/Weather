@@ -1,19 +1,15 @@
 package com.example.weather.core.base
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.example.weather.R
-import com.example.weather.screens.main.MainActivity
+import com.example.weather.screens.main.MainActivityOld
+import dagger.android.support.DaggerAppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity: DaggerAppCompatActivity() {
 
     companion object {
         const val UNIX_VALUE = 1000
@@ -38,7 +34,7 @@ abstract class BaseActivity: AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .apply {
-                putBoolean(MainActivity.STARTED_BEFORE, true)
+                putBoolean(MainActivityOld.STARTED_BEFORE, true)
                 apply()
             }
     }

@@ -3,8 +3,9 @@ package com.example.weather.domain
 import com.example.weather.core.coroutines.CoroutineUseCase
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.response.weather.DailyWeatherMain
+import javax.inject.Inject
 
-class WeatherInteractor(
+class WeatherInteractor @Inject constructor(
     private val repository: WeatherRepository
 ): CoroutineUseCase<DailyWeatherMain?, WeatherInteractor.Params>() {
 
