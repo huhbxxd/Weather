@@ -32,14 +32,6 @@ class MainModule(private val activity: MainActivity) {
     ) =
         MainInteractor(repositoryWeather, repositoryLocation, repositoryStored)
 
-    @Provides
-    @ActivityScope
-    fun provideCoordRepository(applicationContext: Context): LocationRepository =
-        LocationRepositoryImpl(applicationContext)
 
-    @Provides
-    @ActivityScope
-    fun provideWeatherRepository(api: WeatherApi): WeatherRepository =
-        WeatherRepositoryImpl(api)
 
 }

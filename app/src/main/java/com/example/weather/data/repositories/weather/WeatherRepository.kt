@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface WeatherRepository {
 
-    fun loadWeather(lat: Double, lon: Double): Single<DailyWeatherMain>
+    suspend fun loadWeather(lat: Double, lon: Double): DailyWeatherMain
 
 }

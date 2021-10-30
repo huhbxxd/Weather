@@ -4,7 +4,9 @@ import android.content.Context
 import com.example.weather.App
 import com.example.weather.data.CitiesApi
 import com.example.weather.data.WeatherApi
+import com.example.weather.data.repositories.location.LocationRepository
 import com.example.weather.data.repositories.stored.StoredCitiesRepository
+import com.example.weather.data.repositories.weather.WeatherRepository
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,5 +23,10 @@ interface AppComponent {
     fun provideCitiesApi(): CitiesApi
 
     fun provideApplicationContext(): Context
+
+    fun provideWeatherRepository(): WeatherRepository
+
+    fun provideCoordRepository(applicationContext: Context): LocationRepository
+
 
 }

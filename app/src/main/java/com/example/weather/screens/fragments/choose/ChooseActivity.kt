@@ -13,7 +13,6 @@ import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
 import com.example.weather.screens.fragments.cities.CitiesActivity
 import com.example.weather.screens.main.MainActivity
-import kotlinx.android.synthetic.main.activity_choose.*
 
 class ChooseActivity: BaseActivity() {
 

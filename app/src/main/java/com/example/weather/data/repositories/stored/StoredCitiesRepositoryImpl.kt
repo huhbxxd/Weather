@@ -19,7 +19,7 @@ class StoredCitiesRepositoryImpl(context: Context): StoredCitiesRepository {
         context.getSharedPreferences(MainActivity.LAST_CITY, Context.MODE_PRIVATE)
     private val type = object : TypeToken<CitiesFields>(){}.type
 
-    override fun getListCities(): Single<List<CitiesFields>> {
+    override suspend fun getListCities(): Single<List<CitiesFields>> {
         val cities = sharedPreferencesListCities.getStringSet(MainActivity.LIST_CITIES, HashSet<String>())
         return Single.fromCallable {
             cities?.map {
@@ -28,7 +28,7 @@ class StoredCitiesRepositoryImpl(context: Context): StoredCitiesRepository {
         }
     }
 
-    override fun getLastCity(): Single<CitiesFields> {
+    override suspend fun getLastCity(): Single<CitiesFields> {
         val city = sharedPreferencesLastCity.getString(MainActivity.LAST_CITY, DEFAULT_VALUE)
         return Single.fromCallable {
             Gson().fromJson<CitiesFields>(city, type)

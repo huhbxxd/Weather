@@ -5,8 +5,8 @@ import io.reactivex.Single
 
 interface StoredCitiesRepository {
 
-    fun getListCities(): Single<List<CitiesFields>>
+    suspend fun getListCities(): Single<List<CitiesFields>>
 
-    fun getLastCity(): Single<CitiesFields>
+    suspend fun getLastCity(): Single<CitiesFields>
 
 }
