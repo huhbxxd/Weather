@@ -9,6 +9,7 @@ import com.example.weather.data.repositories.location.LocationRepository
 import com.example.weather.data.repositories.stored.StoredCitiesRepository
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.screens.activity.di.MainActivityBuilder
+import com.example.weather.screens.activity.di.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -21,7 +22,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         MainActivityBuilder::class,
-        ApiModule::class
+        ApiModule::class,
+        MainModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {
@@ -33,18 +35,5 @@ interface AppComponent : AndroidInjector<App> {
             @BindsInstance apiModule: ApiModule
         ): AppComponent
     }
-
-    fun provideListCitiesRepository(): StoredCitiesRepository
-
-    fun provideWeatherApi(): WeatherApi
-
-    fun provideCitiesApi(): CitiesApi
-
-    fun provideApplicationContext(): Context
-
-    fun provideWeatherRepository(): WeatherRepository
-
-    fun provideCoordRepository(): LocationRepository
-
 
 }

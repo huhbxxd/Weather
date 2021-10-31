@@ -1,5 +1,7 @@
 package com.example.weather.core.network.di
 
+import com.example.weather.data.CitiesApi
+import com.example.weather.data.WeatherApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -28,15 +30,33 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit.Builder {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create())
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi(retrofit: Retrofit.Builder): WeatherApi {
+        return retrofit
+            .baseUrl(WEATHER_URL)
             .build()
+            .create(WeatherApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCitiesApi(retrofit: Retrofit.Builder): CitiesApi {
+        return retrofit
+            .baseUrl(CITIES_URL)
+            .build()
+            .create(CitiesApi::class.java)
     }
 
     companion object {
+        const val WEATHER_URL = "https://api.openweathermap.org"
+        const val CITIES_URL = "https://public.opendatasoft.com/"
         const val API_READ_TIME_OUT = 10L
         const val API_CONNECT_TIME_OUT = 10L
     }

@@ -1,4 +1,4 @@
-package com.example.weather.domain
+package com.example.weather.domain.weather
 
 import com.example.weather.core.coroutines.CoroutineUseCase
 import com.example.weather.data.repositories.weather.WeatherRepository

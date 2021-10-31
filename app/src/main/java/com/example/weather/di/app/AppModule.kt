@@ -31,10 +31,10 @@ abstract class AppModule {
         fun providerListCitiesRepository(applicationContext: Context): StoredCitiesRepository =
             StoredCitiesRepositoryImpl(applicationContext)
 
-        @Provides
-        @Singleton
-        fun provideWeatherRepository(api: WeatherApi): WeatherRepository =
-            WeatherRepositoryImpl(api)
+//        @Provides
+//        @Singleton
+//        fun provideWeatherRepository(api: WeatherApi): WeatherRepository =
+//            WeatherRepositoryImpl(api)
 
         @Provides
         @Singleton
