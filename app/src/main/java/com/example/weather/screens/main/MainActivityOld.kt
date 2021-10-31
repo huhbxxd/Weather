@@ -29,16 +29,6 @@ class MainActivityOld: BaseActivity() {
     private var permissionLocation by Delegates.notNull<Boolean>()
     var stateLoad by Delegates.notNull<Boolean>()
 
-    private val component by lazy {
-        DaggerMainComponent.builder()
-//            .appComponent((application as App))
-            .mainModule(ActiivMod(this))
-            .build()
-    }
-
-    @Inject
-    lateinit var viewModel: MainViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        // default true to try load by location ( if permission was accept )

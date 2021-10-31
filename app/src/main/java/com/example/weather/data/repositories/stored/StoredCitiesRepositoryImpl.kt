@@ -21,18 +21,20 @@ class StoredCitiesRepositoryImpl(context: Context): StoredCitiesRepository {
 
     override suspend fun getListCities(): List<CitiesFields> {
         val cities = sharedPreferencesListCities.getStringSet(MainActivityOld.LIST_CITIES, HashSet<String>())
-        return Single.fromCallable {
-            cities?.map {
-                it -> Gson().fromJson<CitiesFields>(it, type)
-            }
-        }
+//        return Single.fromCallable {
+//            cities?.map {
+//                it -> Gson().fromJson<CitiesFields>(it, type)
+//            }
+//        }
+        return TODO()
     }
 
     override suspend fun getLastCity(): CitiesFields {
-        val city = sharedPreferencesLastCity.getString(MainActivityOld.LAST_CITY, DEFAULT_VALUE)
-        return Single.fromCallable {
-            Gson().fromJson<CitiesFields>(city, type)
-        }
+//        val city = sharedPreferencesLastCity.getString(MainActivityOld.LAST_CITY, DEFAULT_VALUE)
+//        return Single.fromCallable {
+//            Gson().fromJson<CitiesFields>(city, type)
+//        }
+        return TODO()
     }
 
 }

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
 import com.example.weather.data.response.weather.daily.hour.HourlyWeather
-import kotlinx.android.synthetic.main.recyclerview_item_hourly.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -42,9 +41,9 @@ class MainAdapterDailyHour(
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(item: HourlyWeather) = with(itemView) {
-            dailyHour.text = dateFormatter(item.dt)
-            Glide.with(context).load(ICON_URL + item.weather[0].icon + ".png").into(imageHourlyIcon)
-            dailyHourTemp.text = item.temperature.roundToInt().toString()
+//            dailyHour.text = dateFormatter(item.dt)
+//            Glide.with(context).load(ICON_URL + item.weather[0].icon + ".png").into(imageHourlyIcon)
+//            dailyHourTemp.text = item.temperature.roundToInt().toString()
         }
     }
 

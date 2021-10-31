@@ -15,31 +15,31 @@ class MainInteractor(private val repository: WeatherRepository,
 ): BaseInteractor() {
 
     fun subscribeOnWeatherDailyByLocation(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(
-            locationRepository.getLocation()
-                .flatMap { repository.loadWeather(it.latitude, it.longitude) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(onSuccess, onError))
+//        disposable.add(
+//            locationRepository.getLocation()
+//                .flatMap { repository.loadWeather(it.latitude, it.longitude) }
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(onSuccess, onError))
     }
 
     fun subscribeOnWeatherDailyByCoord(onSuccess: (DailyWeatherMain) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(
-            repositoryStored.getLastCity()
-                .flatMap {
-                    it.coordCity?.let { coordList ->
-                        repository.loadWeather(coordList[0], coordList[1])
-                    }
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onSuccess, onError))
+//        disposable.add(
+//            repositoryStored.getLastCity()
+//                .flatMap {
+//                    it.coordCity?.let { coordList ->
+//                        repository.loadWeather(coordList[0], coordList[1])
+//                    }
+//                }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(onSuccess, onError))
     }
 
     fun getLastCityName(onComplete: (CitiesFields) -> Unit, onError: (Throwable) -> Unit) {
-        disposable.add(repositoryStored.getLastCity()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(onComplete, onError))
+//        disposable.add(repositoryStored.getLastCity()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(onComplete, onError))
     }
 }
