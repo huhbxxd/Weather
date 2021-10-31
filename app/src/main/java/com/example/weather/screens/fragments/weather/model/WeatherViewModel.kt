@@ -4,6 +4,12 @@ import androidx.lifecycle.ViewModel
 import com.example.weather.domain.weather.WeatherInteractor
 import javax.inject.Inject
 
-class WeatherViewModel @Inject constructor(private val weatherUseCase: WeatherInteractor): ViewModel() {
+class WeatherViewModel @Inject constructor(
+    private val weatherUseCase: WeatherInteractor
+) : ViewModel() {
+
+    init {
+
+    }
 
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import com.example.weather.R
-import com.example.weather.screens.main.MainActivityOld
 import dagger.android.support.DaggerAppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,13 +27,11 @@ abstract class BaseActivity: DaggerAppCompatActivity() {
             .format(Date(unix.toLong() * UNIX_VALUE))
     }
 
-    // this fun need to change preference when event itemClick will clicked
-    // it's need to when user restart app while choosing city main activity not started first
     open fun onStartedBefore() {
         val sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .apply {
-                putBoolean(MainActivityOld.STARTED_BEFORE, true)
+//                putBoolean(MainActivityOld.STARTED_BEFORE, true)
                 apply()
             }
     }

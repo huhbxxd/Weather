@@ -40,4 +40,9 @@
     <string name="feels_like_evening">Feels like (evening), °C</string>
     <string name="feels_like_morning">Feels like (morning), °C</string>
     <string name="visibility_detail">Visibility, m</string>
+
+    <string name="allow_location_title">"Allow Weather to access your location?"</string>
+    <string name="provide_location">Allow Weather to access to provide local content</string>
+    <string name="allow">Allow</string>
+    <string name="not_allow">Don\'t allow</string>
 </resources>

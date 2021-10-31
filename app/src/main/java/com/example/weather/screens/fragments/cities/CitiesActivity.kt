@@ -1,21 +1,13 @@
 package com.example.weather.screens.fragments.cities
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.data.response.cities.CitiesFields
 import com.example.weather.screens.fragments.cities.ui.SearchCitiesAdapter
 import com.example.weather.screens.fragments.cities.ui.StoredCitiesAdapter
-import com.example.weather.screens.main.MainActivityOld
-import com.google.gson.Gson
 
 class CitiesActivity: BaseActivity(){
 
@@ -24,7 +16,7 @@ class CitiesActivity: BaseActivity(){
     }
 
     override val layout: Int
-        get() = R.layout.activity_cities
+        get() = R.layout.fragment_cities
 
     private lateinit var adapterSearchSearchCities: SearchCitiesAdapter
     private lateinit var adapterStoredCities: StoredCitiesAdapter
@@ -136,36 +128,36 @@ class CitiesActivity: BaseActivity(){
     }
 
     // user choose city from search list and click
-    private fun onItemClick(city: CitiesFields) {
-        onStartedBefore()
-        val intent = Intent(this, MainActivityOld::class.java)
-            .apply {
-                addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(MainActivityOld.STATE_LOAD, false)
-            }
-        // serializable gson to json to next time deserializable
-        val jsonCity = Gson().toJson(city)
-            saveCity(jsonCity)
-        startActivity(intent)
-    }
+//    private fun onItemClick(city: CitiesFields) {
+//        onStartedBefore()
+//        val intent = Intent(this, MainActivityOld::class.java)
+//            .apply {
+//                addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+//                putExtra(MainActivityOld.STATE_LOAD, false)
+//            }
+//        // serializable gson to json to next time deserializable
+//        val jsonCity = Gson().toJson(city)
+//            saveCity(jsonCity)
+//        startActivity(intent)
+//    }
 
-    private fun saveCity(value: String) {
-        val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivityOld.LIST_CITIES, mutableSetOf())
-        val copyOfSet = setFromSharedPreferences?.toMutableSet()
-            .apply {
-                this?.add(value)
-            }
-        sharedPreferencesListCities.edit()
-            .apply{
-                putStringSet(MainActivityOld.LIST_CITIES, copyOfSet) // save city to store
-                apply()
-        }
-        sharedPreferencesLastCity.edit()
-            .apply {
-                putString(MainActivityOld.LAST_CITY, value) // save city like last city that was chosen before close app
-                apply()
-        }
-    }
+//    private fun saveCity(value: String) {
+//        val setFromSharedPreferences = sharedPreferencesListCities.getStringSet(MainActivityOld.LIST_CITIES, mutableSetOf())
+//        val copyOfSet = setFromSharedPreferences?.toMutableSet()
+//            .apply {
+//                this?.add(value)
+//            }
+//        sharedPreferencesListCities.edit()
+//            .apply{
+//                putStringSet(MainActivityOld.LIST_CITIES, copyOfSet) // save city to store
+//                apply()
+//        }
+//        sharedPreferencesLastCity.edit()
+//            .apply {
+//                putString(MainActivityOld.LAST_CITY, value) // save city like last city that was chosen before close app
+//                apply()
+//        }
+//    }
 
 
 

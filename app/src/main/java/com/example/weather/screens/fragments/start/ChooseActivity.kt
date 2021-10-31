@@ -1,23 +1,14 @@
-package com.example.weather.screens.fragments.choose
+package com.example.weather.screens.fragments.start
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.example.weather.R
 import com.example.weather.core.base.BaseActivity
-import com.example.weather.screens.fragments.cities.CitiesActivity
-import com.example.weather.screens.main.MainActivityOld
 
 class ChooseActivity: BaseActivity() {
 
     override val layout: Int
-        get() = R.layout.activity_choose
+        get() = R.layout.fragment_start
 
     private companion object {
         const val TITLE_ALLERT = "Allow Weather to access your location?"
@@ -30,25 +21,25 @@ class ChooseActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val intentToCities = Intent(this, CitiesActivity::class.java)
-        val intentToMain = Intent(this, MainActivityOld::class.java)
-            .apply {
-                putExtra(MainActivityOld.STATE_LOAD, true)
-            }
+//        val intentToCities = Intent(this, CitiesActivity::class.java)
+//        val intentToMain = Intent(this, MainActivityOld::class.java)
+//            .apply {
+//                putExtra(MainActivityOld.STATE_LOAD, true)
+//            }
 
-        val  requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()
-            ) { isGranted ->
-                if (isGranted) {
-                    onStartedBefore()
-                    startActivity(intentToMain)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Location denied", Toast.LENGTH_SHORT).show()
-                    startActivity(intentToCities)
-                    finish()
-                }
-            }
+//        val  requestPermissionLauncher =
+//            registerForActivityResult(ActivityResultContracts.RequestPermission()
+//            ) { isGranted ->
+//                if (isGranted) {
+//                    onStartedBefore()
+//                    startActivity(intentToMain)
+//                    finish()
+//                } else {
+//                    Toast.makeText(this, "Location denied", Toast.LENGTH_SHORT).show()
+//                    startActivity(intentToCities)
+//                    finish()
+//                }
+//            }
 
         // continue button that provide location
 //        byLocation.setOnClickListener {
