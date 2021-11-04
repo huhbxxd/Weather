@@ -3,6 +3,8 @@ package com.example.weather.screens.fragments.cities.model
 import androidx.lifecycle.*
 import com.example.weather.data.response.cities.Cities
 import com.example.weather.domain.cities.CitiesInteractor
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CitiesViewModel @Inject constructor(
@@ -19,7 +21,16 @@ class CitiesViewModel @Inject constructor(
     }
 
     init {
-
+        viewModelScope.launch {
+            mutQueryCityLiveData.asFlow().collect {
+                citiesUseCase.execute(
+                    params = CitiesInteractor.Params(
+                        query = it,
+                        page = PAGE_COUNT
+                    )
+                )
+            }
+        }
     }
 
     fun setQuery(value: String) {
