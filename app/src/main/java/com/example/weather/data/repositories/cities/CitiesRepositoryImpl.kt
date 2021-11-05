@@ -2,7 +2,6 @@ package com.example.weather.data.repositories.cities
 
 import com.example.weather.data.CitiesApi
 import com.example.weather.data.response.cities.Cities
-import io.reactivex.Single
 import javax.inject.Inject
 
 

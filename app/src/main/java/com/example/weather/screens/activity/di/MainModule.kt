@@ -6,6 +6,7 @@ import com.example.weather.data.repositories.cities.CitiesRepository
 import com.example.weather.data.repositories.cities.CitiesRepositoryImpl
 import com.example.weather.data.repositories.weather.WeatherRepository
 import com.example.weather.data.repositories.weather.WeatherRepositoryImpl
+import com.example.weather.domain.cities.CitiesInteractor
 import com.example.weather.domain.weather.WeatherInteractor
 import dagger.Module
 import dagger.Provides
@@ -31,4 +32,10 @@ internal object MainModule {
     @JvmStatic
     fun provideWeatherInteractor(repository: WeatherRepository): WeatherInteractor =
         WeatherInteractor(repository)
+
+    @Singleton
+    @Provides
+    @JvmStatic
+    fun provideCitiesInteractor(repository: CitiesRepository): CitiesInteractor =
+        CitiesInteractor(repository)
 }

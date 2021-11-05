@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.example.weather.R
 import com.example.weather.core.base.BaseFragment
+import com.example.weather.core.base.BaseVMFragment
 import com.example.weather.databinding.FragmentStartBinding
 import com.example.weather.view.dialog.LocationDialogFragment
 
@@ -24,6 +25,8 @@ class StartFragment : BaseFragment<FragmentStartBinding>() {
             requireActivity().registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                 if (isGranted)
                     findNavController().navigate(R.id.action_startFragment_to_weatherFragment)
+                else
+                    findNavController().navigate(R.id.action_startFragment_to_citiesFragment)
             }
 
     }
@@ -53,6 +56,6 @@ class StartFragment : BaseFragment<FragmentStartBinding>() {
     }
 
     private fun negativeLocationCallback() {
-
+        findNavController().navigate(R.id.action_startFragment_to_citiesFragment)
     }
 }

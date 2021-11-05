@@ -1,7 +1,6 @@
 package com.example.weather.data.repositories.cities
 
 import com.example.weather.data.response.cities.Cities
-import io.reactivex.Single
 
 interface CitiesRepository {
 

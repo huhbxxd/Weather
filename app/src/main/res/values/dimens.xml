@@ -10,4 +10,5 @@
     <dimen name="medium_spacing">24dp</dimen>
     <dimen name="large_spacing">32dp</dimen>
     <dimen name="big_spacing">40dp</dimen>
+    <dimen name="height_search">38dp</dimen>
 </resources>

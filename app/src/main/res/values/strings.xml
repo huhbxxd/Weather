@@ -45,4 +45,6 @@
     <string name="provide_location">Allow Weather to access to provide local content</string>
     <string name="allow">Allow</string>
     <string name="not_allow">Don\'t allow</string>
+    <string name="share_location">Share location</string>
+    <string name="start_typing_to_search_city">Start typing to search city</string>
 </resources>

@@ -11,20 +11,16 @@ import com.example.weather.screens.fragments.cities.ui.viewholders.CitiesViewHol
 import com.example.weather.screens.fragments.cities.ui.viewholders.LoadingViewHolder
 import java.lang.IllegalArgumentException
 
-class   SearchCitiesAdapter(
+class SearchCitiesAdapter(
     private val onItemClick: (CitiesFields) -> Unit
-): RecyclerView.Adapter<BaseViewHolder>() {
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private companion object {
         const val TYPE_CONTENT = 0
         const val TYPE_LOADING = 1
     }
 
-    var listCities = mutableListOf<CitiesRecord>()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+    private var listCities = mutableListOf<CitiesRecord>()
 
     var hasLoading = true
 
@@ -34,26 +30,43 @@ class   SearchCitiesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when(viewType) {
-            TYPE_CONTENT -> CitiesViewHolder(inflater.inflate(R.layout.recyclerview_item_search_cities, parent, false))
-            TYPE_LOADING -> LoadingViewHolder(inflater.inflate(R.layout.item_loading, parent, false))
+        return when (viewType) {
+            TYPE_CONTENT -> CitiesViewHolder(
+                inflater.inflate(
+                    R.layout.recyclerview_item_search_cities,
+                    parent,
+                    false
+                )
+            )
+            TYPE_LOADING -> LoadingViewHolder(
+                inflater.inflate(
+                    R.layout.item_loading,
+                    parent,
+                    false
+                )
+            )
             else -> throw(IllegalArgumentException())
         }
     }
 
-    override fun getItemCount(): Int = if(listCities.isEmpty()) 0 else getSize()
+    override fun getItemCount(): Int = if (listCities.isEmpty()) 0 else getSize()
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        if(!isLoadingPosition(position)) {
+        if (!isLoadingPosition(position)) {
             holder.bind(listCities[position])
             holder.itemView.setOnClickListener { onItemClick(listCities[position].cityFields!!) }
         }
     }
 
-    private fun getSize() = if(hasLoading) listCities.size + 1 else listCities.size
+    private fun getSize() = if (hasLoading) listCities.size + 1 else listCities.size
 
     private fun isLoadingPosition(position: Int) = position == listCities.size
 
-    fun citiesClear()  = listCities.clear()
+    fun setCities(list: List<CitiesRecord>) {
+        listCities.addAll(list)
+        notifyItemRangeChanged(listCities.size, list.size)
+    }
+
+    fun citiesClear() = listCities.clear()
 
 }

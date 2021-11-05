@@ -33,8 +33,8 @@ class CitiesViewModel @Inject constructor(
         }
     }
 
-    fun setQuery(value: String) {
-        mutQueryCityLiveData.value = value
+    fun setQuery(value: String?) {
+        mutQueryCityLiveData.value = value ?: EMPTY_STRING
     }
 
 

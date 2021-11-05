@@ -9,7 +9,7 @@ import com.example.weather.screens.fragments.cities.ui.viewholders.StoredCitiesV
 
 class StoredCitiesAdapter(
     private val onItemClick: (CitiesFields) -> Unit
-): RecyclerView.Adapter<StoredCitiesViewHolder>() {
+) : RecyclerView.Adapter<StoredCitiesViewHolder>() {
 
     var listCities = listOf<CitiesFields>()
         set(value) {
