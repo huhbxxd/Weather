@@ -4,14 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.example.weather.di.vm.ViewModelFactory
-import com.example.weather.utils.getViewModel
 import dagger.android.support.DaggerFragment
 import java.lang.NullPointerException
-import javax.inject.Inject
 
 abstract class BaseFragment<VB: ViewBinding>: DaggerFragment() {
 

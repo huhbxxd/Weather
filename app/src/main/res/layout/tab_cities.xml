@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/normal_spacing"
         android:layout_marginTop="@dimen/normal_spacing"
+        android:hint="@string/start_typing_to_search_city"
         app:startIconDrawable="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +22,6 @@
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/start_typing_to_search_city"
             tools:text="Search"/>
     </com.google.android.material.textfield.TextInputLayout>
 

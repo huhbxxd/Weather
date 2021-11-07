@@ -13,6 +13,7 @@ import com.example.weather.databinding.FragmentCitiesBinding
 import com.example.weather.screens.fragments.cities.model.CitiesViewModel
 import com.example.weather.screens.fragments.cities.ui.SearchCitiesAdapter
 import com.example.weather.utils.log
+import kotlin.reflect.KClass
 
 class CitiesFragment : BaseVMFragment<FragmentCitiesBinding, CitiesViewModel>() {
 
@@ -20,6 +21,9 @@ class CitiesFragment : BaseVMFragment<FragmentCitiesBinding, CitiesViewModel>() 
         SearchCitiesAdapter(::onClickCity)
     }
     private var queryText = ""
+
+    override val makeViewModel: Class<CitiesViewModel>
+        get() = CitiesViewModel::class.java
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -65,7 +69,6 @@ class CitiesFragment : BaseVMFragment<FragmentCitiesBinding, CitiesViewModel>() 
     companion object {
         private const val DIRECTION_BOT = 1
     }
-
 
 
 }
