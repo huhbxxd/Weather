@@ -1,7 +1,7 @@
 package com.example.weather.core.network.di
 
-import com.example.weather.data.CitiesApi
-import com.example.weather.data.WeatherApi
+import com.example.weather.data.api.CitiesApi
+import com.example.weather.data.api.WeatherApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

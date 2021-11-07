@@ -1,6 +1,6 @@
 package com.example.weather.data.repositories.weather
 
-import com.example.weather.data.WeatherApi
+import com.example.weather.data.api.WeatherApi
 import com.example.weather.data.response.weather.DailyWeatherMain
 import javax.inject.Inject
 

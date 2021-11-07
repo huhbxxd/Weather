@@ -2,10 +2,6 @@ package com.example.weather.di.app
 
 import android.content.Context
 import com.example.weather.App
-import com.example.weather.data.CitiesApi
-import com.example.weather.data.WeatherApi
-import com.example.weather.data.repositories.location.LocationRepository
-import com.example.weather.data.repositories.location.LocationRepositoryImpl
 import com.example.weather.data.repositories.stored.StoredCitiesRepository
 import com.example.weather.data.repositories.stored.StoredCitiesRepositoryImpl
 import dagger.Binds
