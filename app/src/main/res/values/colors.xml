@@ -11,4 +11,5 @@
     <color name="grey">#A6A6A6</color>
     <color name="grey_back_frame_layout">#F3F3F3</color>
     <color name="fab_color">#EB6E4B</color>
+    <color name="icon_background">#FFD5C9</color>
 </resources>

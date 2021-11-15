@@ -5,4 +5,10 @@
     <dimen name="viewLongHeight" format="float">0.7dp</dimen>
     <dimen name="text_size_detail_weather">18sp</dimen>
     <dimen name="cardview_height">70dp</dimen>
+
+    <dimen name="normal_spacing">16dp</dimen>
+    <dimen name="medium_spacing">24dp</dimen>
+    <dimen name="large_spacing">32dp</dimen>
+    <dimen name="big_spacing">40dp</dimen>
+    <dimen name="height_search">38dp</dimen>
 </resources>

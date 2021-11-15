@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weather.R
-import com.example.weather.data.weather.daily.day.DailyDayWeather
-import kotlinx.android.synthetic.main.recyclerview_item_daily_day.view.*
+import com.example.weather.data.response.weather.daily.day.DailyDayWeather
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -43,14 +42,14 @@ class MainAdapterDailyDay(
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(item: DailyDayWeather) = with(itemView) {
-            dayWeek.text = dateFormatter(item.dt!!)
-            tempMax.text = item.temperature?.max?.roundToInt().toString()
-            tempMin.text = item.temperature?.min?.roundToInt().toString()
-            Glide.with(context)
-                .load(ICON_URL
-                    + item.weather!![0].icon!!
-                    + ".png")
-                .into(imageWeatherDaily)
+//            dayWeek.text = dateFormatter(item.dt!!)
+//            tempMax.text = item.temperature?.max?.roundToInt().toString()
+//            tempMin.text = item.temperature?.min?.roundToInt().toString()
+//            Glide.with(context)
+//                .load(ICON_URL
+//                    + item.weather!![0].icon!!
+//                    + ".png")
+//                .into(imageWeatherDaily)
         }
     }
 

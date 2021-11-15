@@ -1,12 +1,11 @@
 package com.example.weather.data.repositories.stored
 
-import com.example.weather.data.cities.CitiesFields
-import io.reactivex.Single
+import com.example.weather.data.response.cities.CitiesFields
 
 interface StoredCitiesRepository {
 
-    fun getListCities(): Single<List<CitiesFields>>
+    suspend fun getListCities(): List<CitiesFields>
 
-    fun getLastCity(): Single<CitiesFields>
+    suspend fun getLastCity(): CitiesFields
 
 }

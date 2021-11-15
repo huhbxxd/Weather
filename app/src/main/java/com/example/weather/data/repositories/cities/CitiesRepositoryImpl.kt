@@ -1,23 +1,17 @@
 package com.example.weather.data.repositories.cities
 
-import com.example.weather.data.CitiesApi
-import com.example.weather.data.cities.Cities
-import io.reactivex.Single
+import com.example.weather.data.api.CitiesApi
+import com.example.weather.data.response.cities.Cities
+import javax.inject.Inject
 
 
-class CitiesRepositoryImpl(private val service: CitiesApi):
-    CitiesRepository {
+class CitiesRepositoryImpl @Inject constructor(
+    private val service: CitiesApi
+) : CitiesRepository {
 
-    private companion object {
-        val DATASET = "geonames-all-cities-with-a-population-1000"
-        val ROWS = 30
-    }
-
-    override fun getListCities(q: String, page: Int): Single<Cities> {
-
+    override suspend fun getListCities(q: String, page: Int): Cities {
         return service.getCities(
-            DATASET, q, page,
-            ROWS
+            query = q, page = page
         )
     }
 

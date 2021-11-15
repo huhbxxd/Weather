@@ -15,22 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Weather"
         android:usesCleartextTraffic="true">
-        <activity android:name=".screens.main.MainActivity">
+
+        <activity
+            android:name=".screens.activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screens.choose.ChooseActivity"/>
-        <activity android:name=".screens.cities.CitiesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                        android:resource="@xml/searchable" />
-        </activity>
-        <activity android:name=".screens.detail.DailyDetailWeather"/>
-        <activity android:name=".screens.detail.HourlyDetailWeather"/>
     </application>
 
 </manifest>

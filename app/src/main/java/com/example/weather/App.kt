@@ -1,23 +1,14 @@
 package com.example.weather
 
-import android.app.Application
-import com.example.weather.di.AppComponent
-import com.example.weather.di.AppModule
-import com.example.weather.di.DaggerAppComponent
+import com.example.weather.core.network.di.ApiModule
+import com.example.weather.di.app.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class App: Application() {
-
-    lateinit var appComponent: AppComponent
-
-    override fun onCreate() {
-        super.onCreate()
-        initDaggerAppComponent()
+class App : DaggerApplication() {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent
+            .factory()
+            .create(this, ApiModule())
     }
-
-    private fun initDaggerAppComponent() {
-        appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .build()
-    }
-
 }

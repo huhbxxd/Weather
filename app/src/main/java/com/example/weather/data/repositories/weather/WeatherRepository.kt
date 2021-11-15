@@ -1,10 +1,9 @@
 package com.example.weather.data.repositories.weather
 
-import com.example.weather.data.weather.DailyWeatherMain
-import io.reactivex.Single
+import com.example.weather.data.response.weather.DailyWeatherMain
 
 interface WeatherRepository {
 
-    fun loadWeather(lat: Double, lon: Double): Single<DailyWeatherMain>
+    suspend fun loadWeather(lat: Double, lon: Double): DailyWeatherMain
 
 }

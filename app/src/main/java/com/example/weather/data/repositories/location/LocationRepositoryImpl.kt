@@ -8,14 +8,11 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
-import io.reactivex.Single
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 
 
 class LocationRepositoryImpl(private val context: Context) : LocationRepository, AppCompatActivity() {
-
-    private companion object {
-        val DISTANCE = 5000 // in meters
-    }
 
     private lateinit var fusedLocation: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
@@ -27,31 +24,47 @@ class LocationRepositoryImpl(private val context: Context) : LocationRepository,
             ) == PackageManager.PERMISSION_GRANTED) startLocationUpdate()
     }
 
-    @SuppressLint("MissingPermission")
-    override fun getLocation(): Single<Location> {
-        fusedLocation = LocationServices.getFusedLocationProviderClient(context)
-        return Single.create<Location> { emitter ->
-                fusedLocation.lastLocation.addOnSuccessListener { location ->
-                    if (location == null || location.accuracy > DISTANCE) {
-                        locationCallback = object : LocationCallback() {
-                            override fun onLocationResult(locationResult: LocationResult?) {
-                                locationResult ?: return
-                                for (it in locationResult.locations) {
-                                    emitter.onSuccess(location)
-                                }
-                            }
-                        }
-                    } else {
-                        emitter.onSuccess(location)
-                    }
-            }
-        }
-    }
+//    @SuppressLint("MissingPermission")
+//    override fun getLocation(): Single<Location> {
+//        fusedLocation = LocationServices.getFusedLocationProviderClient(context)
+////        flow<Location> {
+////            fusedLocation.lastLocation.addOnSuccessListener { location ->
+////                    if (location == null || location.accuracy > DISTANCE) {
+////                        locationCallback = object : LocationCallback() {
+////                            override fun onLocationResult(locationResult: LocationResult?) {
+////                                locationResult ?: return
+////                                for (it in locationResult.locations) {
+////                                    emit(it)
+////                                }
+////                            }
+////                        }
+////                    } else {
+////                        emit(location)
+////                    }
+////            }
+////        }
+//        return Single.create<Location> { emitter ->
+//                fusedLocation.lastLocation.addOnSuccessListener { location ->
+//                    if (location == null || location.accuracy > DISTANCE) {
+//                        locationCallback = object : LocationCallback() {
+//                            override fun onLocationResult(locationResult: LocationResult?) {
+//                                locationResult ?: return
+//                                for (it in locationResult.locations) {
+//                                    emitter.onSuccess(location)
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        emitter.onSuccess(location)
+//                    }
+//            }
+//        }
+//    }
 
     private fun locationRequest(): LocationRequest? {
         return LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
+            interval = INTERVAL
+            fastestInterval = FASTEST_INTERVAL
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
@@ -72,5 +85,10 @@ class LocationRepositoryImpl(private val context: Context) : LocationRepository,
         stopLocationUpdate()
     }
 
+    companion object {
+        private const val DISTANCE = 5000 // in meters
+        private const val INTERVAL = 10000L
+        private const val FASTEST_INTERVAL = 5000L
+    }
 
 }
